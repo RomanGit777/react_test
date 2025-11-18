@@ -1,5 +1,15 @@
 import {createRoot} from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {MoviesPage} from "./pages/MoviesPage.tsx";
+import {MoviesList} from "./components/MoviesList.tsx";
 
-createRoot(document.getElementById('root')!).render(<App/>)
+export const routes = createBrowserRouter([
+    {path:'/', element: <MoviesPage/>, children: [
+            {index:true, element: <MoviesList/>}
+        ]}
+])
+
+createRoot(document.getElementById('root')!).render(
+    <RouterProvider router={routes}/>
+)
