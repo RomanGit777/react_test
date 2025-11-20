@@ -5,7 +5,7 @@ import {Header} from "../components/Header/Header.tsx";
 function MainLayout() {
 
   return (
-    <div>
+    <div className={'container'}>
       <Header/>
       <Outlet/>
     </div>

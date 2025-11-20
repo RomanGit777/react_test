@@ -1,0 +1,21 @@
+.header{
+    width: 100vw;
+    height: 55px;
+    background-color: #020B26;
+    display: flex;
+}
+.header>h2{
+    color: #148BB5;
+    font-size: 26px;
+    font-family: 'Poppins', sans-serif;
+}
+.header>button{
+    color: #AAB3C0;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+}
+.header>input{
+    width: 180px;
+    height: 25px;
+    background-color: #2A334B;
+}
