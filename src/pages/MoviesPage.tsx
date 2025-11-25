@@ -1,5 +1,9 @@
+import {MoviesList} from "../components/MoviesList/MoviesList.tsx";
+
 export const MoviesPage = () => {
     return (
-        <div></div>
+        <div>
+            <MoviesList/>
+        </div>
     );
 };
