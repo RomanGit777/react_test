@@ -1,0 +1,40 @@
+.carousel {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.arrow {
+    background-color: #333;
+    color: white;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.grid-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* More than visible cards */
+    gap: 10px;
+    transition: transform 0.3s ease;
+    justify-items: center;
+}
+
+.film {
+    background-color: purple;
+    height: 150px;
+    width: 200px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
