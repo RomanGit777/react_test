@@ -1,40 +1,61 @@
+.film-section {
+    margin-top: 30px;
+}
+
+.film-section h2 {
+    font-family: 'Roboto Thin', sans-serif;
+    color: #0B658C;
+    font-size: 20px;
+    margin: 10px 10px;
+}
+
 .carousel {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    width: 100%;
 }
 
 .arrow {
-    background-color: #333;
-    color: white;
+    background-color: #434953;
     border: none;
-    font-size: 2em;
     cursor: pointer;
-    padding: 10px;
+    width: 30px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow svg {
+    color: #2C2C2C;
 }
 
 .grid-container {
     overflow: hidden;
-    width: 100%;
+    width: auto;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* More than visible cards */
-    gap: 10px;
-    transition: transform 0.3s ease;
-    justify-items: center;
+    grid-template-columns: repeat(4, 200px);
+    gap: 145px;
 }
 
 .film {
-    background-color: purple;
+    background-color: #9230D9;
     height: 150px;
     width: 200px;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.film span {
+    background-color: #232323;
     color: white;
     font-weight: bold;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 5px 10px;
+    font-size: 14px;
 }
