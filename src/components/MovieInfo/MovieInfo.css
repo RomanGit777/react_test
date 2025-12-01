@@ -1,0 +1,38 @@
+.movie-info-container{
+    margin: 50px 100px;
+}
+.movie-info-container h2{
+    font-family: "Ribeye", serif;
+    color: #cfc4c4;
+    font-size: 42px;
+    letter-spacing: 4px;
+    padding-bottom: 5px;
+}
+.movie-info-container svg{
+    height: 20px;
+    width: 20px;
+
+}
+.movie-info-container span{
+    font-size: 20px;
+    color: #cfc4c4;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+
+}
+.movie-info-container p{
+    width: 400px;
+    color: #cfc4c4;
+    margin-bottom: 15px;
+    font-family: "Poppins", sans-serif;
+}
+.movie-info-container button{
+    background-color: #0088B3;
+    color: #efe9e9;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 180px;
+    height: 40px;
+    font-family: "Roboto Thin", sans-serif;
+}
