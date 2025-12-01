@@ -1,5 +1,5 @@
-import './MoviesListCard.css'
-export const MoviesListCard = () => {
+import './MovieCard.css'
+export const MovieCard = () => {
     return (
         <div className={'movies-cards-wrapper'}>
             <div className="film-section 1">
