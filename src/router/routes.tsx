@@ -1,9 +1,11 @@
 import {createBrowserRouter} from "react-router-dom";
 import MainLayout from "../layout/MainLayout.tsx";
 import {MoviesPage} from "../pages/MoviesPage.tsx";
+import {MovieInfo} from "../components/MovieInfo/MovieInfo.tsx";
 
 export const routes = createBrowserRouter([
     {path:'/', element: <MainLayout/>, children:[
-            {path: 'movies', element: <MoviesPage/>}
+            {index: true, element: <MoviesPage/>},
+            {path: 'movie/:id', element: <MovieInfo/>}
         ]}
 ])

@@ -46,7 +46,9 @@
 }
 
 .rating {
-    font-weight: 800;
+    width: 15px;
+    height: 15px;
+    display: flex;
 }
 
 .overlay-title {

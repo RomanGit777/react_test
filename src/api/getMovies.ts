@@ -7,3 +7,8 @@ export const getMovies = async (): Promise<IMovie[]> => {
     (`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
     return data.results
 }
+export const getMovieById = async (id: string): Promise<IMovie> => {
+    const {data} = await axios.get
+    (`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
+    return data
+}
