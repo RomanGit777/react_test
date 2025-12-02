@@ -37,10 +37,8 @@ export const MoviesPage = () => {
 
     return (
         <div>
-            {/* Movies grid */}
             <MoviesList movies={currentMovies} />
 
-            {/* Pagination buttons */}
             <div
                 className="pagination"
                 style={{
