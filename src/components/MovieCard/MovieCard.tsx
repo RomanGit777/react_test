@@ -1,7 +1,7 @@
 import './MovieCard.css'
 import {useEffect, useState} from "react";
 import type {IMovie} from "../../models/IMovie.ts";
-import {getMovies} from "../../api/movieSeries.ts";
+import {getMovies} from "../../api/getMovies.ts";
 
 
 export const MovieCard = () => {
