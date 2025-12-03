@@ -7,7 +7,7 @@ export const MoviesPage = () => {
     const [movies, setMovies] = useState<IMovie[]>([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
-    const moviesPerPage = 8;
+    const moviesPerPage = 6;
 
     useEffect(() => {
         getMovies()
