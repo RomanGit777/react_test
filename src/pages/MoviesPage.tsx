@@ -3,12 +3,15 @@ import { useState, useEffect } from "react";
 import type { IMovie } from "../models/IMovie";
 import { MoviesList } from "../components/MoviesList/MoviesList.tsx";
 import { getMovies } from "../api/getMovies.ts";
+import {useSearchParams} from "react-router-dom";
 
 export const MoviesPage = () => {
     const [movies, setMovies] = useState<IMovie[]>([]);
     const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
     const moviesPerPage = 6;
+    const [searchParams, setSearchParams] = useSearchParams();
+    const initialPage = Number(searchParams.get("page") || 1);
+    const [currentPage, setCurrentPage] = useState(initialPage);
 
     useEffect(() => {
         getMovies()
@@ -17,8 +20,7 @@ export const MoviesPage = () => {
             .finally(() => setLoading(false));
     }, []);
 
-    if (loading) return <div>Loading...</div>;
-    if (!movies.length) return <div>No movies found</div>;
+
 
     // Pagination logic
     const indexOfLastMovie = currentPage * moviesPerPage;
@@ -26,9 +28,13 @@ export const MoviesPage = () => {
     const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
     const totalPages = Math.ceil(movies.length / moviesPerPage);
 
+    if (loading) return <div>Loading...</div>;
+    if (!movies.length) return <div>No movies found</div>;
+
     const goToPage = (page: number) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
+            setSearchParams({page: String(page)})
 
             // Scroll to top smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
