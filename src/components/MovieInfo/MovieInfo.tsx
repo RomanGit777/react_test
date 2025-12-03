@@ -35,7 +35,7 @@ export const MovieInfo = () => {
                 </svg>
                     <span>{movie.vote_average}</span>
                 </p>
-                <p><strong>Description:</strong> {movie.overview}</p>
+                <p className={'description'}><strong>Description:</strong> {movie.overview}</p>
             </div>
         </div>
     );
