@@ -20,6 +20,9 @@
     width: 20px;
 
 }
+.info-wrapper img{
+    border-radius: 8px;
+}
 .info-wrapper span{
     font-size: 20px;
     color: #cfc4c4;
@@ -34,15 +37,7 @@
     margin-bottom: 15px;
     font-family: "Poppins", sans-serif;
 }
-.info-wrapper button{
-    background-color: #0088B3;
-    color: #efe9e9;
-    border-radius: 5px;
-    font-size: 18px;
-    width: 180px;
-    height: 40px;
-    font-family: "Roboto Thin", sans-serif;
-}
+
 .rating svg{
     width: 25px;
     height: 25px;
