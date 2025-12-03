@@ -33,9 +33,9 @@
 
 .overlay-top {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
+    gap: 25px
 }
 
 .badge {
@@ -43,8 +43,6 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    margin: 0 0 6px;
-
 }
 
 .rating{

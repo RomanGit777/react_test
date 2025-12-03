@@ -5,10 +5,12 @@ import {Header} from "../components/Header/Header.tsx";
 function MainLayout() {
 
   return (
-    <div className={'container'}>
-      <Header/>
-      <Outlet/>
-    </div>
+      <>
+          <Header/>
+        <div className={'page-content'}>
+          <Outlet/>
+        </div>
+      </>
   )
 }
 
