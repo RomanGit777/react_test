@@ -25,7 +25,7 @@ let navigate = useNavigate();
 
                 <div className="overlay">
                         <div className="overlay-top">
-                           <span className={'badge'}> {movie.genre_ids.map(id => (
+                           <span className={'badge'}> {movie.genre_ids!.map(id => (
                                <Badge key={id} color="info" className="me-1">
                                     {GENRE_MAP[id]}
                                 </Badge>
