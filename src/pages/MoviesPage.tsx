@@ -8,10 +8,10 @@ import {useSearchParams} from "react-router-dom";
 export const MoviesPage = () => {
     const [movies, setMovies] = useState<IMovie[]>([]);
     const [loading, setLoading] = useState(true);
-    const moviesPerPage = 6;
     const [searchParams, setSearchParams] = useSearchParams();
     const initialPage = Number(searchParams.get("page") || 1);
     const [currentPage, setCurrentPage] = useState(initialPage);
+    const moviesPerPage = 6;
 
     useEffect(() => {
         getMovies()
@@ -46,35 +46,7 @@ export const MoviesPage = () => {
         <div className={'movies-page-container'}>
             <MoviesList movies={currentMovies} />
 
-            <div
-                className="pagination"
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: "8px",
-                    marginTop: "20px",
-                }}
-            >
 
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                    <button
-                        key={page}
-                        onClick={() => goToPage(page)}
-                        style={{
-                            fontWeight: page === currentPage ? "bold" : "normal",
-                            backgroundColor: page === currentPage ? "#ff4500" : "#111",
-                            color: "#fff",
-                            border: "none",
-                            borderRadius: "6px",
-                            padding: "6px 12px",
-                            cursor: "pointer",
-                        }}
-                    >
-                        {page}
-                    </button>
-                ))}
-
-            </div>
         </div>
     );
 };
