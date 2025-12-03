@@ -1,3 +1,4 @@
+import './MoviesPage.css'
 import { useState, useEffect } from "react";
 import type { IMovie } from "../models/IMovie";
 import { MoviesList } from "../components/MoviesList/MoviesList.tsx";
@@ -36,7 +37,7 @@ export const MoviesPage = () => {
 
 
     return (
-        <div>
+        <div className={'movies-page-container'}>
             <MoviesList movies={currentMovies} />
 
             <div
@@ -48,12 +49,6 @@ export const MoviesPage = () => {
                     marginTop: "20px",
                 }}
             >
-                <button
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                >
-                    Prev
-                </button>
 
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                     <button
@@ -73,12 +68,6 @@ export const MoviesPage = () => {
                     </button>
                 ))}
 
-                <button
-                    onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                >
-                    Next
-                </button>
             </div>
         </div>
     );
