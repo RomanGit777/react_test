@@ -43,3 +43,11 @@
     height: 40px;
     font-family: "Roboto Thin", sans-serif;
 }
+.rating svg{
+    width: 25px;
+    height: 25px;
+}
+.rating{
+    display: flex;
+    justify-content: flex-start;
+}
