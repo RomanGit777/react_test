@@ -10,7 +10,7 @@
 }
 .info-wrapper h2{
     font-family: "Ribeye", serif;
-    color: #cfc4c4;
+    color: #dfd8d8;
     font-size: 42px;
     letter-spacing: 4px;
     padding-bottom: 5px;
@@ -25,15 +25,14 @@
 }
 .info-wrapper span{
     font-size: 20px;
-    color: #cfc4c4;
     margin-bottom: 5px;
     display: flex;
     align-items: center;
-
 }
+
 .info-wrapper p{
     width: 400px;
-    color: #cfc4c4;
+    color: #dfd8d8;
     margin-bottom: 15px;
     font-family: "Poppins", sans-serif;
 }
