@@ -9,7 +9,6 @@ export interface PaginationProps {
 export const Pagination: React.FC<PaginationProps> = ({currentPage, totalPages, goToPage }) => {
     if (currentPage < 1) return null;
     return (
-        <>
             <div
                 className="pagination"
                 style={{
@@ -39,7 +38,5 @@ export const Pagination: React.FC<PaginationProps> = ({currentPage, totalPages, 
                     ))}
 
             </div>
-        </>
-
     );
 };
