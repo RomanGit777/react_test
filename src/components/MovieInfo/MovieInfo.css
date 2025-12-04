@@ -21,8 +21,9 @@
     height: 20px;
     width: 20px;
 }
-.info-wrapper img{
+.info-img{
     border-radius: 8px;
+    width: 300px;
 }
 .info-wrapper span{
     font-size: 20px;

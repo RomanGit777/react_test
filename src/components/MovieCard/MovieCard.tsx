@@ -3,6 +3,7 @@ import type {IMovie} from "../../models/IMovie.ts";
 import {useNavigate} from "react-router-dom";
 import {Badge} from "reactstrap";
 import {GENRE_MAP} from "../../constants/genres.ts";
+import {PosterPreview} from "../PosterPreview/PosterPreview.tsx";
 
 
 interface MovieCardProps {
@@ -11,9 +12,6 @@ interface MovieCardProps {
 
 export const MovieCard = ({movie}: MovieCardProps) => {
 let navigate = useNavigate();
-    const posterUrl = movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : "/assets/placeholder.jpg";
 
     const shortOverview = movie.overview ? movie.overview.slice(0, 80) + "…" : "";
 
@@ -21,7 +19,7 @@ let navigate = useNavigate();
     return (
             <div className="card" role="button" tabIndex={0} aria-label={movie.title}
                  onClick={() => navigate(`/movie/${movie.id}`)} >
-                    <img className="card-img" src={posterUrl} alt={movie.title} />
+                    <PosterPreview title={movie.title} posterPath={movie.poster_path} className={'card-img'} />
 
                 <div className="overlay">
                         <div className="overlay-top">

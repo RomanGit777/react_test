@@ -4,6 +4,7 @@ import type {IMovie} from '../../models/IMovie';
 import {getMovieById} from "../../api/getMovies.ts";
 import {useParams} from "react-router-dom";
 import {Badge} from "reactstrap";
+import {PosterPreview} from "../PosterPreview/PosterPreview.tsx";
 
 export const MovieInfo = () => {
     let {id} = useParams();
@@ -13,15 +14,12 @@ export const MovieInfo = () => {
     }, [id])
 
     if(!movie) return <div>Loading movie...</div>;
-    const posterUrl = movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : "/assets/placeholder.jpg";
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     return (
         <div className={'info-wrapper'}>
-            <img src={posterUrl} alt={movie.title} width={300} />
+            <PosterPreview posterPath={movie.poster_path} title={movie.title} className={'info-img'} />
             <div>
                 <h2>{movie.title}</h2>
                 <span className={'badges'}> {movie.genres?.map(genre => (
