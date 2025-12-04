@@ -1,10 +1,10 @@
 import './MovieCard.css'
 import type {IMovie} from "../../models/IMovie.ts";
 import {useNavigate} from "react-router-dom";
-import {Badge} from "reactstrap";
 import {GENRE_MAP} from "../../constants/genres.ts";
 import {PosterPreview} from "../PosterPreview/PosterPreview.tsx";
 import {StarsRating} from "../StarsRating/StarsRating.tsx";
+import {GenreBadge} from "../GenreBadge/GenreBadge.tsx";
 
 
 interface MovieCardProps {
@@ -24,11 +24,11 @@ let navigate = useNavigate();
 
                 <div className="overlay">
                         <div className="overlay-top">
-                           <span className={'badge'}> {movie.genre_ids!.map(id => (
-                               <Badge key={id} color="info" className="me-1">
-                                    {GENRE_MAP[id]}
-                                </Badge>
-                            ))}</span>
+                            <span className={'badge'}>
+                                {movie.genre_ids!.map(id => (
+                                    <GenreBadge key={id} id={id} label={GENRE_MAP[id]} className="me-1"/>
+                                ))}
+                            </span>
                             <StarsRating rating={movie.vote_average} className={'rating'}/>
                         </div>
 
