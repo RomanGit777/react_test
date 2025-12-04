@@ -4,6 +4,7 @@ import type { IMovie } from "../models/IMovie";
 import { MoviesList } from "../components/MoviesList/MoviesList.tsx";
 import { getMovies } from "../api/getMovies.ts";
 import {useSearchParams} from "react-router-dom";
+import {Pagination} from "../components/Pagination/Pagination.tsx";
 
 export const MoviesPage = () => {
     const [movies, setMovies] = useState<IMovie[]>([]);
@@ -45,7 +46,7 @@ export const MoviesPage = () => {
     return (
         <div className={'movies-page-container'}>
             <MoviesList movies={currentMovies} />
-
+            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage}/>
 
         </div>
     );
