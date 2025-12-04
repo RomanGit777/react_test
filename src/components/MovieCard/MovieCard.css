@@ -48,6 +48,7 @@
 .rating{
     display: flex;
     justify-content: center;
+    color: #dfd8d8;
 }
 .rating span{
     display: flex;
