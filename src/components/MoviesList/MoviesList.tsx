@@ -1,6 +1,6 @@
 import './MoviesList.css'
-import { MovieCard } from "../MovieCard/MovieCard.tsx";
-import type { IMovie } from "../../models/IMovie.ts";
+import {MovieCard} from "../MovieCard/MovieCard.tsx";
+import type {IMovie} from "../../models/IMovie.ts";
 
 interface MoviesListProps {
     movies: IMovie[];
