@@ -3,12 +3,14 @@ import {UserInfo} from "../UserInfo/UserInfo.tsx";
 import {useEffect, useState} from "react";
 import {getGenres} from "../../api/getMovies.ts";
 import type {IGenres} from "../../models/IGenres.ts";
+import {useNavigate} from "react-router-dom";
 export const Header = () => {
     const [showGenres, setShowGenres] = useState(false)
     const [genres, setGenres] = useState<IGenres[]>([])
     useEffect(() => {
         getGenres().then(res => setGenres(res.genres))
     }, []);
+    const navigateToGenres = useNavigate();
 
     return (
         <div className={'header'}>
@@ -23,7 +25,8 @@ export const Header = () => {
                     {showGenres && (
                         <ul className={'genres-container'}>
                             {genres.map(g => (
-                                <li key={g.id}>{g.name}</li>
+                                <li key={g.id} onClick={() => navigateToGenres(`/genres/${g.id}`)}>
+                                    {g.name}</li>
                             ))}
                         </ul>
                     )}
