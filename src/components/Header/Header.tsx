@@ -1,11 +1,27 @@
 import './Header.css'
 import {UserInfo} from "../UserInfo/UserInfo.tsx";
+import {useEffect, useState} from "react";
+import {getGenres} from "../../api/getMovies.ts";
+import type {IGenres} from "../../models/IGenres.ts";
 export const Header = () => {
+    const [showGenres, setShowGenres] = useState(false)
+    const [genres, setGenres] = useState<IGenres[]>([])
+    useEffect(() => {
+        getGenres().then(res => setGenres(res.genres))
+    }, []);
+
     return (
         <div className={'header'}>
             <h2>Logo</h2>
             <div className={'btn-input'}>
-                <button>Genres</button>
+                <button className={'genres-container'} onClick={() => setShowGenres(prev => !prev)}>Genres</button>
+                {showGenres && (
+                    <ul>
+                        {genres.map(g => (
+                            <li key={g.id}>{g.name}</li>
+                        ))}
+                    </ul>
+                )}
                     <div className={'search-wrapper'}>
                         <input placeholder={'Search'}></input>
                         <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
