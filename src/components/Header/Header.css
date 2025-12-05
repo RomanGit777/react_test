@@ -72,3 +72,13 @@
     display: flex;
     gap: 250px;
 }
+.genres-container{
+}
+.genres-container>ul{
+    width: 200px;
+    height: 200px;
+}
+.genres-container>ul>li{
+    background-color: #393737;
+    color: white;
+}
