@@ -14,12 +14,18 @@ export const MoviesPage = () => {
     const [currentPage, setCurrentPage] = useState(initialPage);
     const moviesPerPage = 6;
 
+
+
     useEffect(() => {
         getMovies()
             .then((data) => setMovies(data))
             .catch((err) => console.log("Failed to load movies", err))
             .finally(() => setLoading(false));
     }, []);
+    useEffect(() => {
+        const page = Number(searchParams.get("page") || 1);
+        setCurrentPage(page);
+    }, [searchParams]);
 
 
 
