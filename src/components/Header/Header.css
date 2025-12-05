@@ -16,9 +16,9 @@
     font-family: 'Poppins', sans-serif;
     margin-left: 35px;
 }
-.header>.btn-input>button{
-    color: #AAB3C0;
-    font-size: 18px;
+.header>.btn-input>.genres-wrapper>button{
+    color: #148BB5;
+    font-size: 20px;
     font-family: 'Poppins', sans-serif;
 }
 .search-wrapper {
@@ -72,13 +72,21 @@
     display: flex;
     gap: 250px;
 }
+.genres-wrapper{
+    position: relative;
+}
+
 .genres-container{
-}
-.genres-container>ul{
-    width: 200px;
-    height: 200px;
-}
-.genres-container>ul>li{
-    background-color: #393737;
-    color: white;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 500px;
+    background-color: #167293;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    color: #f1eeee;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 10;
+    gap: 5px;
 }
