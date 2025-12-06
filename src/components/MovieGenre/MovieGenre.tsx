@@ -1,14 +1,19 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import type {IGenres} from "../../models/IGenres.ts";
+import {getMoviesByGenre} from "../../api/getMovies.ts";
+import type {IMovie} from "../../models/IMovie.ts";
+import {MoviesList} from "../MoviesList/MoviesList.tsx";
+
 
 export const MovieGenre = () => {
     const {id} = useParams();
-    const [movie, setMovie] = useState<IGenres>()
+    const [movie, setMovie] = useState<IMovie[]>([])
     useEffect(() => {
-        if (id) setMovie(movie);
-    })
+        getMoviesByGenre(String(id)).then(mg => setMovie(mg))
+    }, [id])
     return (
-        <>fddffdfdfdfd</>
+        <div>
+            <MoviesList movies={movie} />
+        </div>
     );
 };

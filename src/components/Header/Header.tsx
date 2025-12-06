@@ -20,7 +20,6 @@ export const Header = () => {
                      onMouseEnter={() => setShowGenres(true)}
                      onMouseLeave={() => setShowGenres(false)}
                 >
-
                     <button>Genres</button>
                     {showGenres && (
                         <ul className={'genres-container'}>

@@ -8,6 +8,6 @@ export const routes = createBrowserRouter([
     {path:'/', element: <MainLayout/>, children:[
             {index: true, element: <MoviesPage/>},
             {path: 'movie/:id', element: <MovieInfo/>},
-            {path: 'genre/:id', element: <MovieGenre/>}
+            {path: 'genres/:id', element: <MovieGenre/>}
         ]}
 ])
