@@ -80,7 +80,8 @@
     position: absolute;
     top: 100%;
     left: 0;
-    width: 500px;
+    width: 700px;
+    height: 200px;
     background-color: #167293;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -89,4 +90,15 @@
     border-radius: 8px;
     z-index: 10;
     gap: 5px;
+}
+.genres-list{
+    cursor: pointer;
+    max-width: 155px;
+    transition: 90ms;
+    padding-left: 15px;
+    padding-top: 2px;
+}
+.genres-list:hover{
+    transition: ease-in-out;
+    background-color: #4c86b5;
 }

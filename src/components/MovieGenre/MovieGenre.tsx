@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {getMoviesByGenre} from "../../api/getMovies.ts";
 import type {IMovie} from "../../models/IMovie.ts";
 import {MoviesList} from "../MoviesList/MoviesList.tsx";
+import {Pagination} from "../Pagination/Pagination.tsx";
 
 
 export const MovieGenre = () => {
@@ -14,6 +15,7 @@ export const MovieGenre = () => {
     return (
         <div>
             <MoviesList movies={movie} />
+            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage}/>
         </div>
     );
 };
