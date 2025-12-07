@@ -15,6 +15,7 @@ export const Header = () => {
     return (
         <div className={'header'}>
             <h2>Logo</h2>
+
             <div className={'btn-input'}>
                 <div className={'genres-wrapper'}
                      onMouseEnter={() => setShowGenres(true)}
@@ -24,7 +25,7 @@ export const Header = () => {
                     {showGenres && (
                         <ul className={'genres-container'}>
                             {genres.map(g => (
-                                <li key={g.id} onClick={() => navigateToGenres(`/genres/${g.id}`)}>
+                                <li className={'genres-list'} key={g.id} onClick={() => navigateToGenres(`/genres/${g.id}`)}>
                                     {g.name}</li>
                             ))}
                         </ul>
