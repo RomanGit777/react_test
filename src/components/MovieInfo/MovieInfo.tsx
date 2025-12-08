@@ -2,14 +2,15 @@ import './MovieInfo.css'
 import {useEffect, useState} from "react";
 import type {IMovie} from '../../models/IMovie';
 import {getMovieById} from "../../api/getMovies.ts";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {PosterPreview} from "../PosterPreview/PosterPreview.tsx";
 import {StarsRating} from "../StarsRating/StarsRating.tsx";
 import {GenreBadge} from "../GenreBadge/GenreBadge.tsx";
 
 export const MovieInfo = () => {
     let {id} = useParams();
-    const [movie, setMovie] = useState<IMovie | null>(null)
+    const [movie, setMovie] = useState<IMovie | null>(null);
+    const navigate = useNavigate();
     useEffect(() => {
         if (id) getMovieById(id).then(setMovie);
     }, [id])
@@ -25,7 +26,7 @@ export const MovieInfo = () => {
                 <h2>{movie.title}</h2>
                 <span className={'badges'}>
                     {movie.genres?.map(genre => (
-                        <GenreBadge key={genre.id} id={genre.id} label={genre.name} className="me-1" />
+                        <GenreBadge key={genre.id} id={genre.id} label={genre.name} className="me-1" onClick={() => navigate(`/genres/${genre.id}`)} />
                     ))}
                 </span>
                 <StarsRating rating={movie.vote_average} className={'rating'}/>
