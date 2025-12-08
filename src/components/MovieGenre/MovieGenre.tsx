@@ -16,7 +16,7 @@ export const MovieGenre = () => {
     const {currentPage,totalPages,goToPage} = usePagination(movie);
 
     return (
-        <div>
+        <div className={'genres-page-wrapper'}>
             <MoviesList movies={movie} />
             <Pagination  goToPage={goToPage} totalPages={totalPages} currentPage={currentPage} />
         </div>
