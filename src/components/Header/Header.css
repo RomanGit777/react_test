@@ -16,7 +16,12 @@
     font-family: 'Poppins', sans-serif;
     margin-left: 35px;
 }
-.header>.btn-input>.genres-wrapper>button{
+.header>.nav>.btn-input>.genres-wrapper>button{
+    color: #148BB5;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+.home-page{
     color: #148BB5;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
@@ -70,7 +75,12 @@
 
 .btn-input{
     display: flex;
-    gap: 250px;
+    gap: 150px;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+    gap: 150px;
 }
 .genres-wrapper{
     position: relative;
