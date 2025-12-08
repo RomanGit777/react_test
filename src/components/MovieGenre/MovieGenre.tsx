@@ -9,15 +9,20 @@ import {Pagination} from "../Pagination/Pagination.tsx";
 
 export const MovieGenre = () => {
     const {id} = useParams();
-    const [movie, setMovie] = useState<IMovie[]>([])
+    const [movies, setMovies] = useState<IMovie[]>([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
-        getMoviesByGenre(String(id)).then(mg => setMovie(mg))
+        getMoviesByGenre(String(id)).then(mg => setMovies(mg))
+        .catch((err) => console.log("Failed to load movies", err))
+        .finally(() => setLoading(false));
     }, [id])
-    const {currentPage,totalPages,goToPage} = usePagination(movie);
 
+    const {currentPage,totalPages,goToPage,currentItems} = usePagination(movies);
+    if (loading) return <div>Loading...</div>;
+    if (!movies.length) return <div>No movies found</div>;
     return (
         <div className={'genres-page-wrapper'}>
-            <MoviesList movies={movie} />
+            <MoviesList movies={currentItems} />
             <Pagination  goToPage={goToPage} totalPages={totalPages} currentPage={currentPage} />
         </div>
     );
