@@ -10,14 +10,13 @@ export const Header = () => {
     useEffect(() => {
         getGenres().then(res => setGenres(res.genres))
     }, []);
-    const navigateToGenres = useNavigate();
+    const navigate = useNavigate();
 
     return (
         <div className={'header'}>
             <h2>Logo</h2>
             <nav className={'nav'}>
-                <button className={'home-page'}>Home Page</button>
-                <div className={'btn-input'}>
+                <button className={'home-page-btn'} onClick={() => navigate('/')}>Home Page</button>
                     <div className={'genres-wrapper'}
                          onMouseEnter={() => setShowGenres(true)}
                          onMouseLeave={() => setShowGenres(false)}
@@ -26,7 +25,7 @@ export const Header = () => {
                         {showGenres && (
                             <ul className={'genres-container'}>
                                 {genres.map(g => (
-                                    <li className={'genres-list'} key={g.id} onClick={() => navigateToGenres(`/genres/${g.id}`)}>
+                                    <li className={'genres-list'} key={g.id} onClick={() => navigate(`/genres/${g.id}`)}>
                                         {g.name}</li>
                                 ))}
                             </ul>
@@ -46,7 +45,6 @@ export const Header = () => {
                             </defs>
                             </svg>
                         </div>
-                </div>
             </nav>
             <UserInfo/>
         </div>
