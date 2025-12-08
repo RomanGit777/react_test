@@ -2,6 +2,7 @@ import {useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getMoviesBySearch} from "../api/getMovies.ts";
 import type {IMovieSearch} from "../models/IMovieSearch.ts";
+import {PosterPreview} from "../components/PosterPreview/PosterPreview.tsx";
 
 export const SearchPage = () => {
    const [params] = useSearchParams();
@@ -23,7 +24,10 @@ export const SearchPage = () => {
     return (
         <div>
             {loading && <div>Loading...</div>}
-            {!loading && movies.map((movie) => <div key={movie.id}>{movie.title}</div>)}
+            {!loading && movies.map((movie) =>
+                <div key={movie.id}>{movie.title}
+                    <PosterPreview title={movie.title} posterPath={movie.poster_path}/>
+                </div>)}
         </div>
     );
 };
