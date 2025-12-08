@@ -25,7 +25,8 @@ export const SearchPage = () => {
         <div>
             {loading && <div>Loading...</div>}
             {!loading && movies.map((movie) =>
-                <div key={movie.id}>{movie.title}
+                <div key={movie.id}>
+                    {movie.title}
                     <PosterPreview title={movie.title} posterPath={movie.poster_path}/>
                 </div>)}
         </div>
