@@ -29,6 +29,5 @@ export const getMoviesByGenre = async (genre_ids: string): Promise<IMovie[]> => 
 export const getMoviesBySearch = async (query: string) : Promise<IMovieSearch[]> => {
     const {data} = await axios.get<IMovieSearchResponse>
     (`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${query}`);
-    console.log(data.results)
     return data.results
 }
