@@ -33,9 +33,11 @@
 
 .overlay-top {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
-    gap: 25px
+    gap: 5px;
+    max-width: 350px;
 }
 
 .badge {
@@ -43,6 +45,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
+    max-width: 130px;
 }
 
 .rating{
