@@ -8,12 +8,16 @@ import {Pagination} from "../components/Pagination/Pagination.tsx";
 import {SearchMovieList} from "../components/SearchMovieList/SearchMovieList.tsx";
 
 export const SearchPage = () => {
-   const [params] = useSearchParams();
+   const [params, setSearchParams] = useSearchParams();
    const query = params.get("query") ?? "";
 
     const [movies, setMovies] = useState<IMovieSearch[]>([]);
     const {currentPage,totalPages,goToPage, currentItems} = usePagination(movies);
 
+    // 🔥 Reset pagination when new items arrive
+    useEffect(() => {
+        setSearchParams({ query, page: "1" });
+    }, [query]);
     useEffect(() => {
         if(!query.trim()) {
             setMovies([]);

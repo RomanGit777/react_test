@@ -17,11 +17,7 @@ export function usePagination<T>(items: T[], itemsPerPage: number = 6) {
         setCurrentPage(page);
     }, [searchParams]);
 
-    // 🔥 Reset pagination when new items arrive
-    useEffect(() => {
-        setCurrentPage(1);
-        setSearchParams({ page: "1" });
-    }, [items]);
+
 
     const goToPage = (page: number) => {
         if (page < 1 || page > totalPages) return;
