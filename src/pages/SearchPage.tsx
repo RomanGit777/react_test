@@ -12,7 +12,6 @@ export const SearchPage = () => {
    const query = params.get("query") ?? "";
 
     const [movies, setMovies] = useState<IMovieSearch[]>([]);
-    const [loading, setLoading] = useState(false);
     const {currentPage,totalPages,goToPage, currentItems} = usePagination(movies);
 
     useEffect(() => {
@@ -20,10 +19,8 @@ export const SearchPage = () => {
             setMovies([]);
             return;
         }
-        setLoading(true);
         getMoviesBySearch(query)
             .then(setMovies)
-            .finally(() => setLoading(false));
     }, [query])
     return (
     <div className={'search-page-wrapper'}>
