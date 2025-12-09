@@ -1,5 +1,5 @@
 import './SearchPage.css'
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getMoviesBySearch} from "../api/getMovies.ts";
 import type {IMovieSearch} from "../models/IMovieSearch.ts";
@@ -8,16 +8,18 @@ import {Pagination} from "../components/Pagination/Pagination.tsx";
 import {SearchMovieList} from "../components/SearchMovieList/SearchMovieList.tsx";
 
 export const SearchPage = () => {
-   const [params, setSearchParams] = useSearchParams();
+   const [params] = useSearchParams();
    const query = params.get("query") ?? "";
 
     const [movies, setMovies] = useState<IMovieSearch[]>([]);
     const {currentPage,totalPages,goToPage, currentItems} = usePagination(movies);
 
-    // 🔥 Reset pagination when new items arrive
+    const navigate = useNavigate();
+
     useEffect(() => {
-        setSearchParams({ query, page: "1" });
+        navigate(`/search?query=${query}&page=1`, { replace: true });
     }, [query]);
+
     useEffect(() => {
         if(!query.trim()) {
             setMovies([]);
