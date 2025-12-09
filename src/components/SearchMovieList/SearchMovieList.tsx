@@ -1,3 +1,4 @@
+import './SearchMovieList.css'
 import {SearchMovieCard} from "../SearchMovieCard/SearchMovieCard.tsx";
 import type {IMovieSearch} from "../../models/IMovieSearch.ts";
 
