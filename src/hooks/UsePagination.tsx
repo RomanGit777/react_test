@@ -11,17 +11,23 @@ export function usePagination<T>(items: T[], itemsPerPage: number = 6) {
     const firstIndex = (currentPage - 1) * itemsPerPage;
     const currentItems = items.slice(firstIndex, firstIndex + itemsPerPage);
 
+    // 🔥 Sync state with URL
     useEffect(() => {
         const page = Number(searchParams.get("page") || 1);
         setCurrentPage(page);
     }, [searchParams]);
+
+    // 🔥 Reset pagination when new items arrive
+    useEffect(() => {
+        setCurrentPage(1);
+        setSearchParams({ page: "1" });
+    }, [items]);
 
     const goToPage = (page: number) => {
         if (page < 1 || page > totalPages) return;
         setSearchParams({ page: String(page) });
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
-
 
     return { currentPage, totalPages, currentItems, goToPage };
 }
