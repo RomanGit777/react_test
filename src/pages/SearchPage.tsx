@@ -1,3 +1,4 @@
+import './SearchPage.css'
 import {useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getMoviesBySearch} from "../api/getMovies.ts";
@@ -22,7 +23,7 @@ export const SearchPage = () => {
             .finally(() => setLoading(false));
     }, [query])
     return (
-        <div>
+        <div className={'search-page-wrapper'}>
             {loading && <div>Loading...</div>}
             {!loading && movies.map((movie) =>
                 <div key={movie.id}>
