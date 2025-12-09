@@ -7,6 +7,8 @@ import {PosterPreview} from "../components/PosterPreview/PosterPreview.tsx";
 import {GenreBadge} from "../components/GenreBadge/GenreBadge.tsx";
 import {GENRE_MAP} from "../constants/genres.ts";
 import {StarsRating} from "../components/StarsRating/StarsRating.tsx";
+import {usePagination} from "../hooks/UsePagination.tsx";
+import {Pagination} from "../components/Pagination/Pagination.tsx";
 
 export const SearchPage = () => {
    const [params] = useSearchParams();
@@ -15,6 +17,7 @@ export const SearchPage = () => {
 
     const [movies, setMovies] = useState<IMovieSearch[]>([]);
     const [loading, setLoading] = useState(false);
+    const {currentPage,totalPages,goToPage} = usePagination(movies);
 
     useEffect(() => {
         if(!query.trim()) {
@@ -69,5 +72,7 @@ export const SearchPage = () => {
                     </div>
                 </div>
             ))}
+            <Pagination  goToPage={goToPage} totalPages={totalPages} currentPage={currentPage} />
+
         </div>
     )};
