@@ -8,11 +8,17 @@ import {Pagination} from "../components/Pagination/Pagination.tsx";
 import {SearchMovieList} from "../components/SearchMovieList/SearchMovieList.tsx";
 
 export const SearchPage = () => {
-   const [params] = useSearchParams();
+   const [params, setSearchParams] = useSearchParams();
    const query = params.get("query") ?? "";
 
     const [movies, setMovies] = useState<IMovieSearch[]>([]);
-    const {currentPage,totalPages,goToPage, currentItems} = usePagination(movies);
+    const {currentPage,totalPages, currentItems} = usePagination(movies);
+    const goToPage = (page: number) => {
+        if (!query) return;
+        setSearchParams({ query, page: String(page) });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
 
     const navigate = useNavigate();
 
