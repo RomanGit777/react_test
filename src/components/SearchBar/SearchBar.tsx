@@ -1,9 +1,18 @@
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 export const SearchBar = () => {
     const [text, setText] = useState("");
     const navigate = useNavigate();
+    const [params] = useSearchParams();
+    const query = params.get('query') ?? "";
+    useEffect(() => {
+        if (!query) {
+            setText("");
+        } else if (query) {
+            setText(query);
+        }
+    }, [query]);
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
