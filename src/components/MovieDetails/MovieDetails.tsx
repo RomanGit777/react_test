@@ -1,4 +1,4 @@
-import './MovieInfo.css'
+import './MovieDetails.css'
 import {useEffect, useState} from "react";
 import type {IMovie} from '../../models/IMovie';
 import {getMovieById} from "../../api/getMovies.ts";
@@ -7,7 +7,7 @@ import {PosterPreview} from "../PosterPreview/PosterPreview.tsx";
 import {StarsRating} from "../StarsRating/StarsRating.tsx";
 import {GenreBadge} from "../GenreBadge/GenreBadge.tsx";
 
-export const MovieInfo = () => {
+export const MovieDetails = () => {
     let {id} = useParams();
     const [movie, setMovie] = useState<IMovie | null>(null);
     const navigate = useNavigate();
