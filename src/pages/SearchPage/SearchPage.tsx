@@ -1,11 +1,11 @@
 import './SearchPage.css'
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getMoviesBySearch} from "../api/getMovies.ts";
-import type {IMovieSearch} from "../models/IMovieSearch.ts";
-import {usePagination} from "../hooks/UsePagination.tsx";
-import {Pagination} from "../components/Pagination/Pagination.tsx";
-import {SearchMovieList} from "../components/SearchMovieList/SearchMovieList.tsx";
+import {getMoviesBySearch} from "../../api/getMovies.ts";
+import type {IMovieSearch} from "../../models/IMovieSearch.ts";
+import {usePagination} from "../../hooks/UsePagination.tsx";
+import {Pagination} from "../../components/Pagination/Pagination.tsx";
+import {SearchMovieList} from "../../components/SearchMovieList/SearchMovieList.tsx";
 
 export const SearchPage = () => {
    const [params, setSearchParams] = useSearchParams();

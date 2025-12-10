@@ -1,10 +1,10 @@
 import './MoviesPage.css'
 import {useEffect, useState} from "react";
-import type {IMovie} from "../models/IMovie";
-import {MoviesList} from "../components/MoviesList/MoviesList.tsx";
-import {getMovies} from "../api/getMovies.ts";
-import {usePagination} from "../hooks/UsePagination.tsx";
-import {Pagination} from "../components/Pagination/Pagination.tsx";
+import type {IMovie} from "../../models/IMovie.ts";
+import {MoviesList} from "../../components/MoviesList/MoviesList.tsx";
+import {getMovies} from "../../api/getMovies.ts";
+import {usePagination} from "../../hooks/UsePagination.tsx";
+import {Pagination} from "../../components/Pagination/Pagination.tsx";
 
 export const MoviesPage = () => {
     const [movies, setMovies] = useState<IMovie[]>([]);
