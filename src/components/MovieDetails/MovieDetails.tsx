@@ -31,6 +31,9 @@ export const MovieDetails = () => {
                 </span>
                 <StarsRating rating={movie.vote_average} className={'rating'}/>
                 <p className={'description'}><strong>Description:</strong> {movie.overview}</p>
+                <p><strong>Release date:</strong> {movie.release_date}</p>
+                <p><strong>Original Language:</strong> {movie.original_language}</p>
+                <p><strong>Popularity:</strong> {movie.popularity}</p>
             </div>
         </div>
     );
