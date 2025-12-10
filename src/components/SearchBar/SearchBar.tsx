@@ -1,11 +1,15 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
+import type {IMovieSearch} from "../../models/IMovieSearch.ts";
+import {getMoviesBySearch} from "../../api/getMovies.ts";
+import {StarsRating} from "../StarsRating/StarsRating.tsx";
 
 export const SearchBar = () => {
     const [text, setText] = useState("");
     const navigate = useNavigate();
     const [params] = useSearchParams();
     const query = params.get('query') ?? "";
+    const [suggestions, setSuggestions] = useState<IMovieSearch[]>([])
     useEffect(() => {
         if (!query) {
             setText("");
@@ -13,18 +17,46 @@ export const SearchBar = () => {
             setText(query);
         }
     }, [query]);
+    useEffect(() => {
+        if(!text.trim()){
+            setSuggestions([]);
+            return;
+        }
+        const timeout = setTimeout(async () => {
+            const data = await getMoviesBySearch(text);
+            setSuggestions(data.slice(0,6));
+        }, 300);
+        return () => clearTimeout(timeout);
+    }, [text]);
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         navigate(`/search?query=${encodeURIComponent(text)}`);
     }
-
+    const handleSelect = (movieId: number) => {
+        setText("");           // clear input
+        setSuggestions([]);    // close dropdown
+        navigate(`/movie/${movieId}`);
+    };
     return (
         <form className={'search-wrapper'} onSubmit={handleSubmit}>
             <input
                 placeholder={'Search'}
                 value={text}
                 onChange={(e) => setText(e.target.value)} />
+            {suggestions.length > 0 &&
+                <ul className={'search-dropdown'}>
+                    {suggestions.map((movie) => (
+                            <li
+                                key={movie.id}
+                                className={'search-item'}
+                                onClick={() => handleSelect(movie.id)}
+                            >
+                               <p>{movie.title}</p>  ({movie.original_title} {movie.release_date}) <StarsRating rating={movie.vote_average} className={'rating'}/>
+                            </li>
+                        ))}
+                </ul>
+            }
 
             <button type="submit">
                 <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
