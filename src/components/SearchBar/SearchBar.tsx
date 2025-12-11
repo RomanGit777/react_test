@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import type {IMovieSearch} from "../../models/IMovieSearch.ts";
 import {getMoviesBySearch} from "../../api/getMovies.ts";
-import {StarsRating} from "../StarsRating/StarsRating.tsx";
 
 export const SearchBar = () => {
     const [text, setText] = useState("");
@@ -52,7 +51,11 @@ export const SearchBar = () => {
                                 className={'search-item'}
                                 onClick={() => handleSelect(movie.id)}
                             >
-                               <p>{movie.title}</p>  ({movie.original_title} {movie.release_date}) <StarsRating rating={movie.vote_average} className={'rating'}/>
+                               <p className={'title'}>{movie.title}</p> <p>({movie.original_title} {movie.release_date})</p>
+                                <p
+                                    className={'rating-in-search'}
+                                    style={{backgroundColor: movie.vote_average >= 7 ? "green" : "grey" }}
+                                >{movie.vote_average.toFixed()}</p>
                             </li>
                         ))}
                 </ul>
