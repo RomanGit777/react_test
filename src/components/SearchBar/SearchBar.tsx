@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import type {IMovieSearch} from "../../models/IMovieSearch.ts";
 import {getMoviesBySearch} from "../../api/getMovies.ts";
 
@@ -10,6 +10,12 @@ export const SearchBar = () => {
     const query = params.get('query') ?? "";
     const [suggestions, setSuggestions] = useState<IMovieSearch[]>([]);
     const wrapperRef = useRef<HTMLDivElement>(null);
+    const location = useLocation();
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    useEffect(() => {
+        setSuggestions([]);
+    }, [location.pathname]);
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
             if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
@@ -44,20 +50,27 @@ export const SearchBar = () => {
         e.preventDefault();
         setSuggestions([]);
         navigate(`/search?query=${encodeURIComponent(text)}`);
+        setDropdownOpen(false);
     }
     const handleSelect = (movieId: number) => {
         setText("");
         setSuggestions([]);
         navigate(`/movie/${movieId}`);
+        setDropdownOpen(false);
     };
+
     return (
         <div ref={wrapperRef} className={'search-wrapper'}>
             <form  onSubmit={handleSubmit} >
                 <input
                     placeholder={'Search'}
                     value={text}
-                    onChange={(e) => setText(e.target.value)} />
-                {suggestions.length > 0 &&
+                    onChange={(e) => {
+                        setText(e.target.value);
+                        setDropdownOpen(true);
+                    }}
+                />
+                {dropdownOpen && suggestions.length > 0 &&
                     <ul className={'search-dropdown'}>
                         {suggestions.map((movie) => (
                                 <li
