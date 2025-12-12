@@ -1,19 +1,78 @@
-@media screen and (min-width: 0) and (max-width: 480px) {
-    body {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .page-content{
+@media screen and (max-width: 480px) {
+    .container{
+        width: 100% !important;
 
     }
-    .grid{
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr;
-
+    .header {
+        width: 100% !important;
+        height: 50px !important;
+        padding: 0 12px !important;
     }
 
+    .header > h2 {
+        font-size: 10px !important;
+        margin-left: 0 !important;
+    }
 
+    .nav {
+        gap: 20px;             /* reduce spacing */
+    }
 
+    .genres-wrapper > button {
+        font-size: 16px;
+    }
+
+    .home-page-btn {
+        font-size: 16px;
+    }
+
+    .user-profile {
+        gap: 6px;
+        margin-right: 0;
+        font-size: 12px;
+    }
+
+    .user-profile img {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* 🔎 SEARCH BAR */
+    .search-wrapper input {
+        width: 180px;          /* smaller */
+        padding: 6px 25px 6px 8px;
+        font-size: 14px;
+    }
+
+    .search-wrapper svg {
+        right: 6px;
+        top: 6px;
+    }
+
+    /* 🔽 DROPDOWN */
+    .search-dropdown {
+        width: 100%;           /* full width */
+        top: 35px;
+    }
+
+    .search-item {
+        gap: 6px;
+        padding: 6px 8px;
+        height: auto;
+        font-size: 14px;
+        flex-wrap: wrap;       /* allow multi-line titles */
+    }
+
+    /* 🟦 GENRES POPUP */
+    .genres-container {
+        width: 280px;
+        height: auto;
+        grid-template-columns: repeat(2, 1fr); /* 4 → 2 columns */
+        padding: 8px;
+    }
+
+    .genres-list {
+        max-width: 100%;
+        padding-left: 8px;
+    }
 }
