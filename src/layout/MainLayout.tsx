@@ -8,12 +8,12 @@ function MainLayout() {
         window.history.scrollRestoration = "manual"
     }, []);
   return (
-      <>
+      <div className={'container'}>
           <Header/>
         <div className={'page-content'}>
           <Outlet/>
         </div>
-      </>
+      </div>
   )
 }
 
