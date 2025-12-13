@@ -38,15 +38,7 @@
     margin-bottom: 15px;
     font-family: "Poppins", sans-serif;
 }
-.rating svg{
-    width: 25px;
-    height: 25px;
-}
-.rating{
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 10px;
-}
+
 .badges{
     margin-top: 10px;
     cursor: pointer;
