@@ -1,4 +1,3 @@
-import './MovieCard.css'
 import type {IMovie} from "../../models/IMovie.ts";
 import {MovieInfo} from "../MovieInfo/MovieInfo.tsx";
 
