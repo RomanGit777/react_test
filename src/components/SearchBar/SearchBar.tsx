@@ -1,3 +1,4 @@
+import searchBarStyles from './SearchBar.module.css'
 import {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import type {IMovieSearch} from "../../models/IMovieSearch.ts";
@@ -60,7 +61,7 @@ export const SearchBar = () => {
     };
 
     return (
-        <div ref={wrapperRef} className={'search-wrapper'}>
+        <div ref={wrapperRef} className={searchBarStyles.searchWrapper}>
             <form  onSubmit={handleSubmit} >
                 <input
                     placeholder={'Search'}
@@ -71,16 +72,16 @@ export const SearchBar = () => {
                     }}
                 />
                 {dropdownOpen && suggestions.length > 0 &&
-                    <ul className={'search-dropdown'}>
+                    <ul className={searchBarStyles.searchDropdown}>
                         {suggestions.map((movie) => (
                                 <li
                                     key={movie.id}
-                                    className={'search-item'}
+                                    className={searchBarStyles.searchItem}
                                     onClick={() => handleSelect(movie.id)}
                                 >
-                                   <p className={'title'}>{movie.title}</p> <p>({movie.original_title} {movie.release_date})</p>
+                                   <p className={searchBarStyles.title}>{movie.title}</p> <p>({movie.original_title} {movie.release_date})</p>
                                     <p
-                                        className={'rating-in-search'}
+                                        className={searchBarStyles.searchRating}
                                         style={{backgroundColor: movie.vote_average >= 7 ? "green" : "grey" }}
                                     >{movie.vote_average.toFixed()}</p>
                                 </li>
