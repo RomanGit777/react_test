@@ -29,7 +29,7 @@ export const MovieDetails = () => {
                         <GenreBadge key={genre.id} id={genre.id} label={genre.name} className="me-1" onClick={() => navigate(`/genres/${genre.id}`)} />
                     ))}
                 </span>
-                <StarsRating rating={movie.vote_average} className={'rating'}/>
+                <StarsRating rating={movie.vote_average}/>
                 <p className={stylesMovieDetails.desc}><strong>Description:</strong> {movie.overview}</p>
                 <p><strong>Release date:</strong> {movie.release_date}</p>
                 <p><strong>Original Language:</strong> {movie.original_language}</p>
