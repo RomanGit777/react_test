@@ -1,3 +1,46 @@
 @media screen and (max-width: 480px) {
+    /* MOBILE FIRST */
+    .header {
+        height: 50px ;
+        width: 100% ;
+        padding: 0 12px ;
+        display: flex ;
+        align-items: center ;
+        flex-direction: column ;
+        justify-content: space-between !important;
+    }
+
+    .header h2 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    /* NAV */
+    .nav {
+        gap: 12px;
+    }
+
+    /* SEARCH */
+    .searchWrapper input {
+        width: 160px;
+        font-size: 14px;
+    }
+
+    /* DROPDOWN */
+    .searchDropdown {
+        width: 100%;
+    }
+
+    /* MOVIE GRID */
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* CARDS */
+    .card {
+        width: 100% !important;
+    }
 
 }
