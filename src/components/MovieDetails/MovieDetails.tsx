@@ -1,4 +1,4 @@
-import './MovieDetails.css'
+import stylesMovieDetails from'./MovieDetails.module.css'
 import {useEffect, useState} from "react";
 import type {IMovie} from '../../models/IMovie';
 import {getMovieById} from "../../api/getMovies.ts";
@@ -20,17 +20,17 @@ export const MovieDetails = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     return (
-        <div className={'info-wrapper'}>
-            <PosterPreview posterPath={movie.poster_path} title={movie.title} className={'info-img'} />
+        <div className={stylesMovieDetails.infoWrapper}>
+            <PosterPreview posterPath={movie.poster_path} title={movie.title} className={stylesMovieDetails.infoImg} />
             <div>
                 <h2>{movie.title}</h2>
-                <span className={'badges'}>
+                <span className={stylesMovieDetails.badges}>
                     {movie.genres?.map(genre => (
                         <GenreBadge key={genre.id} id={genre.id} label={genre.name} className="me-1" onClick={() => navigate(`/genres/${genre.id}`)} />
                     ))}
                 </span>
                 <StarsRating rating={movie.vote_average} className={'rating'}/>
-                <p className={'description'}><strong>Description:</strong> {movie.overview}</p>
+                <p className={stylesMovieDetails.desc}><strong>Description:</strong> {movie.overview}</p>
                 <p><strong>Release date:</strong> {movie.release_date}</p>
                 <p><strong>Original Language:</strong> {movie.original_language}</p>
                 <p><strong>Popularity:</strong> {movie.popularity}</p>

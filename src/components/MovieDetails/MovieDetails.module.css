@@ -1,4 +1,4 @@
-.info-wrapper{
+.infoWrapper{
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -6,33 +6,33 @@
     max-height: 700px;
     max-width: 100%;
 }
-.info-wrapper div{
+.infoWrapper div{
     display: flex;
     flex-direction: column;
 }
-.info-wrapper h2{
+.infoWrapper h2{
     font-family: "Ribeye", serif;
     color: #dfd8d8;
     font-size: 42px;
     letter-spacing: 4px;
     padding-bottom: 5px;
 }
-.info-wrapper svg{
+.infoWrapper svg{
     height: 20px;
     width: 20px;
 }
-.info-img{
+.infoImg{
     border-radius: 8px;
     width: 300px;
 }
-.info-wrapper span{
+.infoWrapper span{
     font-size: 20px;
     margin-bottom: 5px;
     display: flex;
     align-items: center;
 }
 
-.info-wrapper p{
+.infoWrapper p{
     max-width: 800px;
     color: #dfd8d8;
     margin-bottom: 15px;
