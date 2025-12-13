@@ -1,4 +1,4 @@
-import './Header.css'
+import headerStyles from './Header.module.css';
 import {UserInfo} from "../UserInfo/UserInfo.tsx";
 import {useEffect, useState} from "react";
 import {getGenres} from "../../api/getMovies.ts";
@@ -14,19 +14,19 @@ export const Header = () => {
     const navigate = useNavigate();
 
     return (
-        <div className={'header'}>
+        <div className={headerStyles.header}>
             <h2>Logo</h2>
-            <nav className={'nav'}>
-                <button className={'home-page-btn'} onClick={() => navigate('/')}>Home Page</button>
-                    <div className={'genres-wrapper'}
+            <nav className={headerStyles.nav}>
+                <button className={headerStyles.homePageBtn} onClick={() => navigate('/')}>Home Page</button>
+                    <div className={headerStyles.genresWrapper}
                          onMouseEnter={() => setShowGenres(true)}
                          onMouseLeave={() => setShowGenres(false)}
                     >
                         <button>Genres</button>
                         {showGenres && (
-                            <ul className={'genres-container'}>
+                            <ul className={headerStyles.genresContainer}>
                                 {genres.map(g => (
-                                    <li className={'genres-list'} key={g.id} onClick={() => navigate(`/genres/${g.id}`)}>
+                                    <li className={headerStyles.genresList} key={g.id} onClick={() => navigate(`/genres/${g.id}`)}>
                                         {g.name}</li>
                                 ))}
                             </ul>
