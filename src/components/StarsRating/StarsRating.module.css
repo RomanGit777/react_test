@@ -1,15 +1,16 @@
-.rating svg{
-    width: 25px;
-    height: 25px;
-}
 .rating{
     display: flex;
     justify-content: flex-start;
     margin-top: 10px;
+}
+.rating svg{
+    width: 25px;
+    height: 25px;
 }
 .rating span{
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 18px;
+    color: #ece7e7;
 }
