@@ -25,7 +25,7 @@ export const MovieInfo = ({movie,shortOverview}: MovieInfoProps) => {
                                     <GenreBadge key={id} id={id} label={GENRE_MAP[id]} className="me-1"/>
                                 ))}
                             </span>
-                    <StarsRating rating={movie.vote_average} className={'rating'}/>
+                    <StarsRating rating={movie.vote_average}/>
                 </div>
 
                 <h4 className={stylesMovieInfo.overlayTitle}>{movie.title}</h4>

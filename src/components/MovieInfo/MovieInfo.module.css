@@ -48,12 +48,7 @@
     max-width: 160px;
 }
 
-.rating span{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-}
+
 
 .overlayTitle {
     margin: 0 0 6px;
