@@ -16,12 +16,12 @@
     font-family: 'Poppins', sans-serif;
     margin-left: 35px;
 }
-.header>.nav>.genres-wrapper>button{
+.genresWrapper>button{
     color: #148BB5;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
 }
-.home-page-btn{
+.homePageBtn{
     color: #148BB5;
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
@@ -55,11 +55,11 @@
     justify-content: space-between;
     gap: 150px;
 }
-.genres-wrapper{
+.genresWrapper{
     position: relative;
 }
 
-.genres-container{
+.genresContainer{
     position: absolute;
     top: 100%;
     left: 0;
@@ -74,14 +74,14 @@
     z-index: 10;
     gap: 5px;
 }
-.genres-list{
+.genresList{
     cursor: pointer;
     max-width: 155px;
     transition: 90ms;
     padding-left: 15px;
     padding-top: 2px;
 }
-.genres-list:hover{
+.genresList:hover{
     transition: ease-in-out;
     background-color: #4c86b5;
 }
