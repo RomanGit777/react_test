@@ -61,7 +61,7 @@ export const SearchBar = () => {
     };
 
     return (
-        <div ref={wrapperRef} className={searchBarStyles.searchWrapper}>
+        <div ref={wrapperRef} className={searchBarStyles.searchWrapper} id={'searchWrapper'}>
             <form  onSubmit={handleSubmit} >
                 <input
                     placeholder={'Search'}
@@ -72,7 +72,7 @@ export const SearchBar = () => {
                     }}
                 />
                 {dropdownOpen && suggestions.length > 0 &&
-                    <ul className={searchBarStyles.searchDropdown}>
+                    <ul className={searchBarStyles.searchDropdown} id={'searchDropdown'}>
                         {suggestions.map((movie) => (
                                 <li
                                     key={movie.id}
