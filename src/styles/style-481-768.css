@@ -1,4 +1,12 @@
 @media screen and (min-width: 481px) and (max-height: 768px) {
+    #infoWrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #infoWrapper img{
+        max-height: 500px;
+    }
     #header{
         gap: 12px;
         display: flex;
@@ -15,7 +23,7 @@
         height: 30px;
     }
     #header nav {
-        gap: 85px;
+        gap: 45px;
     }
     #genresContainer {
         position: fixed;
