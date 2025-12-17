@@ -3,8 +3,6 @@
         #grid{
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
         #page-content{
             margin-top: 95px;
@@ -44,10 +42,13 @@
         }
         #genresContainer {
             position: fixed;
-            top: 55px; /* header height */
+            top: 55px;
             left: 50%;
             transform: translateX(-50%);
             width: min(90%, 400px);
+            max-height: 80vh;
+            overflow-y: auto;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         }
         #searchWrapper{
             position: absolute;
