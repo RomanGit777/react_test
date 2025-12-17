@@ -1,46 +1,86 @@
 @media screen and (max-width: 480px) {
-    /* MOBILE FIRST */
-    .header {
-        height: 50px ;
-        width: 100% ;
-        padding: 0 12px ;
-        display: flex ;
-        align-items: center ;
-        flex-direction: column ;
-        justify-content: space-between !important;
-    }
 
-    .header h2 {
-        font-size: 20px;
-        margin: 0;
-    }
+        #grid{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #header{
+            gap: 25px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        #header h2 {
+            font-size: 22px;
+        }
+        #genresWrapper,
+        #genresBtn{
+            width: 55px;
+            font-size: 14px;
+        }
+        #homePageBtn{
+            width: 90px;
+            font-size: 14px;
+        }
+        #userProfile p{
+            width: 20px;
+        }
+        #avatar{
+        width: 30px;
+        height: 30px;
+        }
+        #header nav {
+            gap: 25px;
+        }
+        #genresContainer {
+            width: 400px;
+            left: -225px;
+        }
+        #searchWrapper{
+            position: absolute;
+            top: 55px;
+            left: -1px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        #searchWrapper form {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+         #searchWrapper input{
+            flex: 1;
+            min-width: 0; /* VERY important in flex layouts */
+         #searchWrapper svg{
+             top: 5px;
+         }
+        }  #searchWrapper ul{
+           width: 100%;
+           top: 31px;
+        }
 
-    /* NAV */
-    .nav {
-        gap: 12px;
-    }
-
-    /* SEARCH */
-    .searchWrapper input {
-        width: 160px;
-        font-size: 14px;
-    }
-
-    /* DROPDOWN */
-    .searchDropdown {
-        width: 100%;
-    }
-
-    /* MOVIE GRID */
-    .grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    /* CARDS */
-    .card {
-        width: 100% !important;
-    }
-
+        /*#movies-page-container{*/
+        /*    display: flex;*/
+        /*    flex-direction: column;*/
+        /*}*/
 }
+
+    /*@media (max-width: 768px) {*/
+    /*    .header {*/
+    /*        flex-direction: column;*/
+    /*        height: auto;*/
+    /*        padding: 10px 15px;*/
+    /*    }*/
+
+    /*    .nav {*/
+    /*        flex-direction: column;*/
+    /*        gap: 10px;*/
+    /*    }*/
+
+    /*    .genresContainer {*/
+    /*        width: 100%;*/
+    /*        grid-template-columns: repeat(2, 1fr);*/
+    /*    }*/
+    /*}*/

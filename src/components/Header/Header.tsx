@@ -14,17 +14,17 @@ export const Header = () => {
     const navigate = useNavigate();
 
     return (
-        <div className={headerStyles.header}>
+        <div className={headerStyles.header} id={'header'}>
             <h2>Logo</h2>
             <nav className={headerStyles.nav}>
-                <button className={headerStyles.homePageBtn} onClick={() => navigate('/')}>Home Page</button>
-                    <div className={headerStyles.genresWrapper}
+                <button  id={'homePageBtn'} className={headerStyles.homePageBtn} onClick={() => navigate('/')}>Home Page</button>
+                    <div className={headerStyles.genresWrapper} id={'genresWrapper'}
                          onMouseEnter={() => setShowGenres(true)}
                          onMouseLeave={() => setShowGenres(false)}
                     >
-                        <button>Genres</button>
+                        <button id={'genresBtn'}>Genres</button>
                         {showGenres && (
-                            <ul className={headerStyles.genresContainer}>
+                            <ul className={headerStyles.genresContainer} id={'genresContainer'}>
                                 {genres.map(g => (
                                     <li className={headerStyles.genresList} key={g.id} onClick={() => navigate(`/genres/${g.id}`)}>
                                         {g.name}</li>

@@ -10,7 +10,7 @@ export const MoviesList = ({ movies }: MoviesListProps) => {
     if (!movies.length) return <div>No movies found</div>;
 
     return (
-        <div className={'grid'}>
+        <div className={'grid'} id={'grid'}>
             {movies.map((m) => <MovieCard key={m.id} movie={m} />)}
         </div>
     );

@@ -22,7 +22,7 @@ export const MoviesPage = () => {
     if (!movies.length) return <div>No movies found</div>;
 
     return (
-        <div className={'movies-page-container'}>
+        <div className={'movies-page-container'} id={'movies-page-container'}>
             <MoviesList movies={currentItems} />
             <Pagination  goToPage={goToPage} totalPages={totalPages} currentPage={currentPage} />
         </div>
