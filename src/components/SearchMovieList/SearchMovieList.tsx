@@ -8,7 +8,7 @@ interface SearchMoviesListProps {
 export const SearchMovieList= ({ movies }: SearchMoviesListProps) => {
     if (!movies.length) return <div>No movies found</div>;
     return (
-        <div className={'grid-search-page'}>
+        <div className={'grid-search-page'} id={'grid-search-page'}>
             {movies.map((m) => <SearchMovieCard key={m.id} movie={m} />)}
         </div>
     );
