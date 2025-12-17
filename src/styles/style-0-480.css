@@ -1,15 +1,43 @@
 @media screen and (max-width: 480px) {
-
+    :root {
+        --header-height: 55px;
+    }
         #grid{
             display: flex;
             flex-direction: column;
         }
         #page-content{
-            margin-top: 95px;
+            margin-top: 5px;
+            padding-top: var(--header-height);
         }
         #grid-search-page{
             display: flex;
             flex-direction: column;
+        }
+        #infoWrapper{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+        #infoWrapper img{
+            max-height: 500px;
+        }
+        #infoWrapper h2 {
+            font-size: clamp(22px, 5vw, 42px);
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        #infoWrapper p {
+            max-width: 100%;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        #badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
         }
         #header{
             gap: 12px;
