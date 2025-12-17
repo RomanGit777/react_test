@@ -4,6 +4,10 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+        }
+        #page-content{
+            margin-top: 95px;
         }
         #header{
             gap: 25px;
@@ -12,7 +16,9 @@
             align-items: center;
         }
         #header h2 {
-            font-size: 22px;
+            margin-left: 0;
+            width: 40px;
+            font-size: 18px;
         }
         #genresWrapper,
         #genresBtn{
@@ -26,6 +32,9 @@
         #userProfile p{
             width: 20px;
         }
+        #userProfile {
+            margin-right: 0;
+        }
         #avatar{
         width: 30px;
         height: 30px;
@@ -34,8 +43,11 @@
             gap: 25px;
         }
         #genresContainer {
-            width: 400px;
-            left: -225px;
+            position: fixed;
+            top: 55px; /* header height */
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(90%, 400px);
         }
         #searchWrapper{
             position: absolute;
@@ -52,19 +64,17 @@
         }
          #searchWrapper input{
             flex: 1;
-            min-width: 0; /* VERY important in flex layouts */
-         #searchWrapper svg{
-             top: 5px;
+            min-width: 0;
          }
-        }  #searchWrapper ul{
+        #searchWrapper svg{
+        top: 5px;
+        }
+        #searchWrapper ul{
            width: 100%;
            top: 31px;
         }
 
-        /*#movies-page-container{*/
-        /*    display: flex;*/
-        /*    flex-direction: column;*/
-        /*}*/
+
 }
 
     /*@media (max-width: 768px) {*/
