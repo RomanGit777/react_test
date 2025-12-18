@@ -2,14 +2,14 @@
     #header{
         flex-wrap: nowrap;
     }
+    #header nav{
+        align-items: center;
+    }
     #searchWrapper{
         position: relative;
         top: 0;
         left: 0;
         display: flex;
-    }
-    #searchWrapper svg{
-        top: 18px;
     }
     #page-content{
         margin-top: 65px;
