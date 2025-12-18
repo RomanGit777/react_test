@@ -1,0 +1,14 @@
+@media screen and (min-width: 769px) and (max-width: 1279px){
+    #header{
+        flex-wrap: nowrap;
+    }
+    #searchWrapper{
+        position: relative;
+        top: 0;
+        left: 0;
+        display: flex;
+    }
+    #searchWrapper svg{
+        top: 18px;
+    }
+}
