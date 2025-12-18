@@ -37,7 +37,9 @@
     }
     #genresContainer {
         top: 45px;
-
+    }
+    #searchWrapper ul{
+        width: 55vw;
     }
     /*@media screen and (min-width: 1446px){*/
     /*    #genresContainer {*/

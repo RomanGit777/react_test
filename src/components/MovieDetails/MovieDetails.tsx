@@ -33,7 +33,6 @@ export const MovieDetails = () => {
                 <p className={stylesMovieDetails.desc}><strong>Description:</strong> {movie.overview}</p>
                 <p><strong>Release date:</strong> {movie.release_date}</p>
                 <p><strong>Original Language:</strong> {movie.original_language}</p>
-                <p><strong>Popularity:</strong> {movie.popularity}</p>
             </div>
         </div>
     );
