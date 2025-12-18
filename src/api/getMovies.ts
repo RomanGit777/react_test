@@ -5,9 +5,9 @@ import type {IGenresResponse} from "../models/IGenresResponse.ts";
 import type {IMovieSearchResponse} from "../models/IMovieSearchResponse.ts";
 import type {IMovieSearch} from "../models/IMovieSearch.ts";
 
-export const getMovies = async (): Promise<IMovie[]> => {
+export const getMovies = async (page: number = 1): Promise<IMovie[]> => {
     const {data} = await axios.get<IMoviesResponse>
-    (`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
+    (`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&page=${page}`);
     return data.results
 }
 export const getMovieById = async (id: string): Promise<IMovie> => {
