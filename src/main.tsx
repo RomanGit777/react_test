@@ -1,6 +1,7 @@
 import './styles/global.css'
 import './styles/style-0-480.css';
 import './styles/style-481-768.css'
+import './styles/style-769-1279.css'
 import {createRoot} from 'react-dom/client'
 import {RouterProvider} from "react-router-dom";
 import {routes} from "./router/routes.tsx";
