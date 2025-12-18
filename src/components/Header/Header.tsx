@@ -1,16 +1,17 @@
 import headerStyles from './Header.module.css';
 import {UserInfo} from "../UserInfo/UserInfo.tsx";
-import {useEffect, useState} from "react";
-import {getGenres} from "../../api/getMovies.ts";
-import type {IGenres} from "../../models/IGenres.ts";
+import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {SearchBar} from "../SearchBar/SearchBar.tsx";
+import {useGenres} from "../../queries/useGenres.ts";
+
 export const Header = () => {
     const [showGenres, setShowGenres] = useState(false)
-    const [genres, setGenres] = useState<IGenres[]>([])
-    useEffect(() => {
-        getGenres().then(res => setGenres(res.genres))
-    }, []);
+
+    const {data: genres = [], isLoading, isError } = useGenres();
+
+    if (isError) return null;
+
     const navigate = useNavigate();
 
     return (
@@ -25,10 +26,14 @@ export const Header = () => {
                         <button id={'genresBtn'}>Genres</button>
                         {showGenres && (
                             <ul className={headerStyles.genresContainer} id={'genresContainer'}>
-                                {genres.map(g => (
+                                {isLoading ? (
+                                    <li>Loading...</li>
+                                ) : (
+                                genres.map(g => (
                                     <li className={headerStyles.genresList} key={g.id} onClick={() => navigate(`/genres/${g.id}`)}>
                                         {g.name}</li>
-                                ))}
+                                ))
+                                )}
                             </ul>
                         )}
                     </div>
