@@ -104,9 +104,14 @@
         }
         #searchWrapper ul{
            width: 100%;
-           top: 31px;
+           top: 27px;
         }
-
+        #searchWrapper  li{
+            height: 70px;
+        }
+        #badge{
+            grid-template-columns: repeat(1, 1fr);
+        }
 
 }
 

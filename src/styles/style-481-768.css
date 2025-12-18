@@ -62,4 +62,7 @@
         width: 100%;
         top: 31px;
     }
+    #badge{
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
