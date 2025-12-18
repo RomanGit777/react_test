@@ -1,5 +1,5 @@
 import './MoviesList.css'
-import {MovieCard} from "../MovieCard/MovieCard.tsx";
+import {MoviesListCard} from "../MoviesListCard/MoviesListCard.tsx";
 import type {IMovie} from "../../models/IMovie.ts";
 
 interface MoviesListProps {
@@ -11,7 +11,7 @@ export const MoviesList = ({ movies }: MoviesListProps) => {
 
     return (
         <div className={'grid'} id={'grid'}>
-            {movies.map((m) => <MovieCard key={m.id} movie={m} />)}
+            {movies.map((m) => <MoviesListCard key={m.id} movie={m} />)}
         </div>
     );
 };

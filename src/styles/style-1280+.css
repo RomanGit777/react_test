@@ -16,9 +16,8 @@
         top: 0;
         left: 0;
         display: flex;
-    }
-    #searchWrapper{
         width: 400px;
+
     }
     #page-content{
         margin-top: 65px;
@@ -39,11 +38,6 @@
         top: 45px;
     }
     #searchWrapper ul{
-        width: 55vw;
+        width: 400px;
     }
-    /*@media screen and (min-width: 1446px){*/
-    /*    #genresContainer {*/
-    /*        left: 50%;*/
-    /*    }*/
-    /*}*/
 }

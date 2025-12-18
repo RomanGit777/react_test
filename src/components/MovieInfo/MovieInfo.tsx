@@ -20,7 +20,7 @@ export const MovieInfo = ({movie,shortOverview}: MovieInfoProps) => {
 
             <div className={stylesMovieInfo.overlay}>
                 <div className={stylesMovieInfo.overlayTop}>
-                            <span className={stylesMovieInfo.badge}>
+                            <span className={stylesMovieInfo.badge} id={'badge'}>
                                 {movie.genre_ids!.map(id => (
                                     <GenreBadge key={id} id={id} label={GENRE_MAP[id]} className="me-1"/>
                                 ))}
