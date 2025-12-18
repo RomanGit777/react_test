@@ -11,4 +11,7 @@
     #searchWrapper svg{
         top: 18px;
     }
+    #page-content{
+        margin-top: 65px;
+    }
 }
