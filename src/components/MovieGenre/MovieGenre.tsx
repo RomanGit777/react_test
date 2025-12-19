@@ -2,12 +2,12 @@ import {useParams} from "react-router-dom";
 import {MoviesList} from "../MoviesList/MoviesList.tsx";
 import {usePagination} from "../../hooks/UsePagination.tsx";
 import {Pagination} from "../Pagination/Pagination.tsx";
-import {useMovieGenre} from "../../queries/useMovieGenre.ts";
+import {useMoviesByGenre} from "../../queries/useMoviesByGenre.ts";
 
 
 export const MovieGenre = () => {
     const {id} = useParams();
-    const {data: movies, isLoading, error } = useMovieGenre(id);
+    const {data: movies, isLoading, error } = useMoviesByGenre(id);
 
     const {currentPage,totalPages,goToPage,currentItems} = usePagination(movies ?? []);
     if (isLoading) return <div>Loading...</div>;
