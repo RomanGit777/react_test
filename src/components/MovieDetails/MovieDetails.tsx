@@ -1,21 +1,20 @@
-import stylesMovieDetails from'./MovieDetails.module.css'
-import {useEffect, useState} from "react";
-import type {IMovie} from '../../models/IMovie';
-import {getMovieById} from "../../api/getMovies.ts";
+import stylesMovieDetails from './MovieDetails.module.css'
 import {useNavigate, useParams} from "react-router-dom";
 import {PosterPreview} from "../PosterPreview/PosterPreview.tsx";
 import {StarsRating} from "../StarsRating/StarsRating.tsx";
 import {GenreBadge} from "../GenreBadge/GenreBadge.tsx";
+import {useMovieById} from "../../queries/useMovieById.ts";
 
 export const MovieDetails = () => {
-    let {id} = useParams();
-    const [movie, setMovie] = useState<IMovie | null>(null);
+    const {id} = useParams();
     const navigate = useNavigate();
-    useEffect(() => {
-        if (id) getMovieById(id).then(setMovie);
-    }, [id])
+    const {data: movie, isLoading, error} = useMovieById(id);
 
-    if(!movie) return <div>Loading movie...</div>;
+    if (!id) return <div>No movie ID provided...</div>
+
+    if (isLoading) return <div>Movie loading...</div>
+    if (error) return <div>Error: {error.message}</div>;
+    if (!movie) return <div>No movie found.</div>;
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
