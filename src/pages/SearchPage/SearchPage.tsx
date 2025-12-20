@@ -1,18 +1,19 @@
 import './SearchPage.css'
 import {useSearchParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {getMoviesBySearch} from "../../api/getMovies.ts";
-import type {IMovieSearch} from "../../models/IMovieSearch.ts";
 import {usePagination} from "../../hooks/UsePagination.tsx";
 import {Pagination} from "../../components/Pagination/Pagination.tsx";
 import {SearchMovieList} from "../../components/SearchMovieList/SearchMovieList.tsx";
+import {useMoviesBySearch} from "../../queries/useMoviesBySearch.ts";
 
 export const SearchPage = () => {
    const [params, setSearchParams] = useSearchParams();
    const query = params.get("query") ?? "";
 
-    const [movies, setMovies] = useState<IMovieSearch[]>([]);
-    const {currentPage,totalPages, currentItems} = usePagination(movies);
+   const {data: movies, isLoading, error} = useMoviesBySearch(query);
+    const {currentPage,totalPages, currentItems} = usePagination(movies || []);
+
+    if(error) return <div>Error: {error.message}</div>
+    if(isLoading) return <div>Loading...</div>
 
     const goToPage = (page: number) => {
         const currentParams = Object.fromEntries(params.entries());
@@ -21,14 +22,6 @@ export const SearchPage = () => {
     };
 
 
-    useEffect(() => {
-        if(!query.trim()) {
-            setMovies([]);
-            return;
-        }
-        getMoviesBySearch(query)
-            .then(setMovies)
-    }, [query])
     return (
     <div className={'search-page-wrapper'}>
             <SearchMovieList movies={currentItems} />
