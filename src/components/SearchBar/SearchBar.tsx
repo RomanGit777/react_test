@@ -1,14 +1,15 @@
 import searchBarStyles from './SearchBar.module.css'
 import {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
-import {getMoviesBySearch} from "../../api/getMovies.ts";
 import {useSearchSuggestions} from "../../queries/useSearchSuggestions.ts";
+import {useDebounce} from "../../hooks/useDebounce.ts";
 
 export const SearchBar = () => {
     const [text, setText] = useState("");
     const navigate = useNavigate();
     const [params] = useSearchParams();
     const query = params.get('query') ?? "";
+    const debouncedText = useDebounce(text, 300);
 
     const {data: suggestions, isLoading, error} = useSearchSuggestions(query);
 
@@ -42,28 +43,17 @@ export const SearchBar = () => {
             setDropdownOpen(false);
             return;
         }
-        const timeout = setTimeout(async () => {
-            const data = await getMoviesBySearch(text); // should I call hook here?
-
-            setSuggestions(data.slice(0,6)); // // and what should replace it here?
-
-        }, 300);
-        return () => clearTimeout(timeout);
     }, [text]);
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-
-        setSuggestions([]); //
-
+        setDropdownOpen(false);
         navigate(`/search?query=${encodeURIComponent(text)}`);
         setDropdownOpen(false);
     }
     const handleSelect = (movieId: number) => {
         setText("");
-
-        setSuggestions([]); //
-
+        setDropdownOpen(false);
         navigate(`/movie/${movieId}`);
         setDropdownOpen(false);
     };
@@ -81,7 +71,7 @@ export const SearchBar = () => {
                         setDropdownOpen(true);
                     }}
                 />
-                {dropdownOpen && suggestions.length > 0 &&
+                {suggestions && dropdownOpen && suggestions.length > 0 &&
                     <ul className={searchBarStyles.searchDropdown} id={'searchDropdown'}>
                         {suggestions.map((movie) => (
                                 <li
