@@ -1,8 +1,8 @@
 import searchBarStyles from './SearchBar.module.css'
 import {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
-import type {IMovieSearch} from "../../models/IMovieSearch.ts";
 import {getMoviesBySearch} from "../../api/getMovies.ts";
+import {useSearchSuggestions} from "../../queries/useSearchSuggestions.ts";
 
 export const SearchBar = () => {
     const [text, setText] = useState("");
@@ -10,27 +10,25 @@ export const SearchBar = () => {
     const [params] = useSearchParams();
     const query = params.get('query') ?? "";
 
-    const [suggestions, setSuggestions] = useState<IMovieSearch[]>([]); //
+    const {data: suggestions, isLoading, error} = useSearchSuggestions(query);
 
     const wrapperRef = useRef<HTMLDivElement>(null);
     const location = useLocation();
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     useEffect(() => {
-
-        setSuggestions([]); //
+        setDropdownOpen(false);
     }, [location.pathname]);
 
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
             if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-                setSuggestions([]); //
-            }
-        }
-
+                setDropdownOpen(false);
+            }}
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
+
     useEffect(() => {
         if (!query) {
             setText("");
@@ -41,14 +39,13 @@ export const SearchBar = () => {
 
     useEffect(() => {
         if(!text.trim()){
-
-            setSuggestions([]); //
+            setDropdownOpen(false);
             return;
         }
         const timeout = setTimeout(async () => {
-            const data = await getMoviesBySearch(text);
+            const data = await getMoviesBySearch(text); // should I call hook here?
 
-            setSuggestions(data.slice(0,6)); //
+            setSuggestions(data.slice(0,6)); // // and what should replace it here?
 
         }, 300);
         return () => clearTimeout(timeout);
@@ -71,6 +68,8 @@ export const SearchBar = () => {
         setDropdownOpen(false);
     };
 
+    if (error) return <div>Error: {error.message}</div>;
+    if (isLoading) return <div>Loading...</div>
     return (
         <div ref={wrapperRef} className={searchBarStyles.searchWrapper} id={'searchWrapper'}>
             <form  onSubmit={handleSubmit} >
