@@ -9,18 +9,22 @@ export const SearchBar = () => {
     const navigate = useNavigate();
     const [params] = useSearchParams();
     const query = params.get('query') ?? "";
-    const [suggestions, setSuggestions] = useState<IMovieSearch[]>([]);
+
+    const [suggestions, setSuggestions] = useState<IMovieSearch[]>([]); //
+
     const wrapperRef = useRef<HTMLDivElement>(null);
     const location = useLocation();
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     useEffect(() => {
-        setSuggestions([]);
+
+        setSuggestions([]); //
     }, [location.pathname]);
+
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
             if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-                setSuggestions([]); // CLOSE ONLY DROPDOWN
+                setSuggestions([]); //
             }
         }
 
@@ -37,25 +41,32 @@ export const SearchBar = () => {
 
     useEffect(() => {
         if(!text.trim()){
-            setSuggestions([]);
+
+            setSuggestions([]); //
             return;
         }
         const timeout = setTimeout(async () => {
             const data = await getMoviesBySearch(text);
-            setSuggestions(data.slice(0,6));
+
+            setSuggestions(data.slice(0,6)); //
+
         }, 300);
         return () => clearTimeout(timeout);
     }, [text]);
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        setSuggestions([]);
+
+        setSuggestions([]); //
+
         navigate(`/search?query=${encodeURIComponent(text)}`);
         setDropdownOpen(false);
     }
     const handleSelect = (movieId: number) => {
         setText("");
-        setSuggestions([]);
+
+        setSuggestions([]); //
+
         navigate(`/movie/${movieId}`);
         setDropdownOpen(false);
     };
