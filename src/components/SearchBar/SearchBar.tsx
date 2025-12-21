@@ -1,14 +1,16 @@
 import searchBarStyles from './SearchBar.module.css'
 import {useEffect, useRef, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {useSearchSuggestions} from "../../queries/useSearchSuggestions.ts";
 import {useDebounce} from "../../hooks/useDebounce.ts";
 
 export const SearchBar = () => {
     const [text, setText] = useState("");
+    const [params] = useSearchParams();
+    const query = params.get('query') ?? "";
     const navigate = useNavigate();
     const debouncedText = useDebounce(text, 300);
-    const {data: suggestions, isLoading, error} = useSearchSuggestions(debouncedText);
+    const {data: suggestions, isFetching, error} = useSearchSuggestions(debouncedText, 5);
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -21,17 +23,17 @@ export const SearchBar = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    useEffect(() => { if (!query) { setText(""); } else if (query) { setText(query); } }, [query]);
+
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setDropdownOpen(false);
         navigate(`/search?query=${encodeURIComponent(text)}`);
-        setDropdownOpen(false);
     }
     const handleSelect = (movieId: number) => {
         setText("");
         setDropdownOpen(false);
         navigate(`/movie/${movieId}`);
-        setDropdownOpen(false);
     };
 
     if (error) return <div>Error: {error.message}</div>;
@@ -43,14 +45,11 @@ export const SearchBar = () => {
                     value={text}
                     onChange={(e) => {
                         setText(e.target.value);
-                        setDropdownOpen(true);
-                    }}
-                />
-                {isLoading && dropdownOpen && (
-                    <div>Loading</div>
-                )}
+                        setDropdownOpen(true);}}/>
+
                 {suggestions && dropdownOpen && suggestions.length > 0 &&
                     <ul className={searchBarStyles.searchDropdown} id={'searchDropdown'}>
+                        {isFetching && dropdownOpen && (<div>Loading</div>)}
                         {suggestions.map((movie) => (
                                 <li
                                     key={movie.id}
@@ -63,9 +62,7 @@ export const SearchBar = () => {
                                         style={{backgroundColor: movie.vote_average >= 7 ? "green" : "grey" }}
                                     >{movie.vote_average.toFixed()}</p>
                                 </li>
-                            ))}
-                    </ul>
-                }
+                            ))}</ul>}
 
                 <button type="submit">
                     <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
