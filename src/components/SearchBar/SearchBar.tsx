@@ -1,25 +1,16 @@
 import searchBarStyles from './SearchBar.module.css'
 import {useEffect, useRef, useState} from "react";
-import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useSearchSuggestions} from "../../queries/useSearchSuggestions.ts";
 import {useDebounce} from "../../hooks/useDebounce.ts";
 
 export const SearchBar = () => {
     const [text, setText] = useState("");
     const navigate = useNavigate();
-    const [params] = useSearchParams();
-    const query = params.get('query') ?? "";
     const debouncedText = useDebounce(text, 300);
-
-    const {data: suggestions, isLoading, error} = useSearchSuggestions(query);
-
+    const {data: suggestions, isLoading, error} = useSearchSuggestions(debouncedText);
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const location = useLocation();
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
-    useEffect(() => {
-        setDropdownOpen(false);
-    }, [location.pathname]);
 
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
@@ -29,21 +20,6 @@ export const SearchBar = () => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
-
-    useEffect(() => {
-        if (!query) {
-            setText("");
-        } else if (query) {
-            setText(query);
-        }
-    }, [query]);
-
-    useEffect(() => {
-        if(!text.trim()){
-            setDropdownOpen(false);
-            return;
-        }
-    }, [text]);
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -59,7 +35,6 @@ export const SearchBar = () => {
     };
 
     if (error) return <div>Error: {error.message}</div>;
-    if (isLoading) return <div>Loading...</div>
     return (
         <div ref={wrapperRef} className={searchBarStyles.searchWrapper} id={'searchWrapper'}>
             <form  onSubmit={handleSubmit} >
@@ -71,6 +46,9 @@ export const SearchBar = () => {
                         setDropdownOpen(true);
                     }}
                 />
+                {isLoading && dropdownOpen && (
+                    <div>Loading</div>
+                )}
                 {suggestions && dropdownOpen && suggestions.length > 0 &&
                     <ul className={searchBarStyles.searchDropdown} id={'searchDropdown'}>
                         {suggestions.map((movie) => (
