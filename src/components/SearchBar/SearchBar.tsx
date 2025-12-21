@@ -21,7 +21,7 @@ export const SearchBar = () => {
             }}
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    }, [wrapperRef]);
 
     useEffect(() => { if (!query) { setText(""); } else if (query) { setText(query); } }, [query]);
 
@@ -36,7 +36,6 @@ export const SearchBar = () => {
         navigate(`/movie/${movieId}`);
     };
 
-    if (error) return <div>Error: {error.message}</div>;
     return (
         <div ref={wrapperRef} className={searchBarStyles.searchWrapper} id={'searchWrapper'}>
             <form  onSubmit={handleSubmit} >
@@ -48,21 +47,21 @@ export const SearchBar = () => {
                         setDropdownOpen(true);}}/>
 
                 {suggestions && dropdownOpen && suggestions.length > 0 &&
-                    <ul className={searchBarStyles.searchDropdown} id={'searchDropdown'}>
-                        {isFetching && dropdownOpen && (<div>Loading</div>)}
-                        {suggestions.map((movie) => (
-                                <li
-                                    key={movie.id}
-                                    className={searchBarStyles.searchItem}
-                                    onClick={() => handleSelect(movie.id)}
-                                >
-                                   <p className={searchBarStyles.title}>{movie.title}</p> <p>({movie.original_title} {movie.release_date})</p>
-                                    <p
-                                        className={searchBarStyles.searchRating}
-                                        style={{backgroundColor: movie.vote_average >= 7 ? "green" : "grey" }}
-                                    >{movie.vote_average.toFixed()}</p>
-                                </li>
-                            ))}</ul>}
+                    <ul className={searchBarStyles.searchDropdown} id="searchDropdown">
+                        {isFetching && dropdownOpen && (<li>Loading...</li>)}
+                        {error && dropdownOpen && (<li className={searchBarStyles.searchItem}>Error: {error.message}</li>)}
+                        {suggestions && dropdownOpen && suggestions.map((movie) => (
+                            <li key={movie.id} className={searchBarStyles.searchItem} onClick={() => handleSelect(movie.id)}>
+                                <p className={searchBarStyles.title}>{movie.title}</p>
+                                <p>({movie.original_title} {movie.release_date})</p>
+                                <p className={searchBarStyles.searchRating}
+                                   style={{ backgroundColor: movie.vote_average >= 7 ? "green" : "grey" }}>
+                                    {movie.vote_average.toFixed()}
+                                </p>
+                            </li>
+                        ))}
+                    </ul>
+                }
 
                 <button type="submit">
                     <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
