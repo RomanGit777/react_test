@@ -7,7 +7,7 @@ export interface PosterPreviewProps {
 export const PosterPreview = ({posterPath, className, title}: PosterPreviewProps) => {
     const posterUrl = posterPath
         ? `https://image.tmdb.org/t/p/w500${posterPath}`
-        : "/assets/placeholder.jpg";
+        : "/icons/bg.svg";
 
     return <img className={className} src={posterUrl} alt={title} />
 };
