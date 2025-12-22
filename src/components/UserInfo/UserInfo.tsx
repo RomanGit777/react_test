@@ -1,5 +1,5 @@
 import userInfoStyles from './UserInfo.module.css'
-import avatar from "../../imgs/avatar.avif";
+import avatar from "/imgs/avatar.avif";
 
 export const UserInfo = () => {
     return (
