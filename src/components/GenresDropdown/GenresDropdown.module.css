@@ -1,0 +1,35 @@
+.genresWrapper>button{
+    color: #148BB5;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+.genresWrapper{
+    position: relative;
+}
+
+.genresContainer{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: min(90vw, 550px);
+    height: 200px;
+    background-color: #167293;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    color: #f1eeee;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 10;
+    gap: 5px;
+}
+.genresList{
+    cursor: pointer;
+    max-width: 155px;
+    transition: 90ms;
+    padding-left: 15px;
+    padding-top: 2px;
+}
+.genresList:hover{
+    transition: ease-in-out;
+    background-color: #4c86b5;
+}
