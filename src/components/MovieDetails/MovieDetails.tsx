@@ -4,19 +4,21 @@ import {PosterPreview} from "../PosterPreview/PosterPreview.tsx";
 import {StarsRating} from "../StarsRating/StarsRating.tsx";
 import {GenreBadge} from "../GenreBadge/GenreBadge.tsx";
 import {useMovieById} from "../../queries/useMovieById.ts";
+import {useEffect} from "react";
 
 export const MovieDetails = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     const {data: movie, isLoading, error} = useMovieById(id);
+    useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [id])
 
     if (!id) return <div>No movie ID provided...</div>
-
     if (isLoading) return <div>Movie loading...</div>
     if (error) return <div>Error: {error.message}</div>;
     if (!movie) return <div>No movie found.</div>;
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     return (
         <div className={stylesMovieDetails.infoWrapper} id={'infoWrapper'}>
