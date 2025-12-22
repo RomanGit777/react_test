@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
-import {getGenres} from "../api/getMovies.ts";
 import type {IGenres} from "../models/IGenres.ts";
+import { getGenres } from "../api/getGenres.ts";
 
 export const useGenres = () => {
     return useQuery<IGenres[], Error>({
