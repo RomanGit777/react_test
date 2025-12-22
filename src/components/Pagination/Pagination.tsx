@@ -14,6 +14,7 @@ export const Pagination: React.FC<PaginationProps> = ({currentPage, totalPages, 
 
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                         <button
+                            type={"button"}
                             key={page}
                             onClick={() => goToPage(page)}
                             className={page === currentPage ? stylesPagination.pageButtonActive : stylesPagination.pageButton}
