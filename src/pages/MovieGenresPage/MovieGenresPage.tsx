@@ -1,11 +1,11 @@
 import {useParams} from "react-router-dom";
-import {MoviesList} from "../MoviesList/MoviesList.tsx";
 import {usePagination} from "../../hooks/UsePagination.tsx";
-import {Pagination} from "../Pagination/Pagination.tsx";
 import {useMoviesByGenre} from "../../queries/useMoviesByGenre.ts";
+import {MoviesList} from "../../components/MoviesList/MoviesList.tsx";
+import {Pagination} from "../../components/Pagination/Pagination.tsx";
 
 
-export const MovieGenre = () => {
+export const MovieGenresPage = () => {
     const {id} = useParams();
     const {data: movies, isLoading, error } = useMoviesByGenre(id);
 
