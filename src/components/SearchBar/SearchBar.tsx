@@ -51,7 +51,9 @@ export const SearchBar = () => {
                         {isFetching && dropdownOpen && (<li>Loading...</li>)}
                         {error && dropdownOpen && (<li className={searchBarStyles.searchItem}>Error: {error.message}</li>)}
                         {suggestions && dropdownOpen && suggestions.map((movie) => (
-                            <li key={movie.id} className={searchBarStyles.searchItem} onClick={() => handleSelect(movie.id)}>
+                            <li key={movie.id} className={searchBarStyles.searchItem}
+                                onClick={() => handleSelect(movie.id)}
+                                role="button" tabIndex={0}>
                                 <p className={searchBarStyles.title}>{movie.title}</p>
                                 <p>({movie.original_title} {movie.release_date})</p>
                                 <p className={searchBarStyles.searchRating}
