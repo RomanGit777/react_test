@@ -22,7 +22,7 @@ export const GenresDropdown = () => {
                                 <li>Loading...</li>
                             ) : (
                                 genres.map(g => (
-                                    <li className={genresDropdownStyles.genresList} key={g.id}
+                                    <li role={"button"} tabIndex={0} className={genresDropdownStyles.genresList} key={g.id}
                                         onClick={() => { navigate(`/genres/${g.id}`); setShowGenres(false);}}>
                                         {g.name}</li>
                                 ))
