@@ -46,11 +46,13 @@ export const SearchBar = () => {
                         setText(e.target.value);
                         setDropdownOpen(true);}}/>
 
-                {suggestions && dropdownOpen && suggestions.length > 0 &&
+                {dropdownOpen && (
                     <ul className={searchBarStyles.searchDropdown} id="searchDropdown">
-                        {isFetching && dropdownOpen && (<li>Loading...</li>)}
-                        {error && dropdownOpen && (<li className={searchBarStyles.searchItem}>Error: {error.message}</li>)}
-                        {suggestions && dropdownOpen && suggestions.map((movie) => (
+
+                        {isFetching && <li>Loading...</li>}
+                        {error && (<li>Error: {error.message}</li>)}
+
+                        {suggestions?.map((movie) => (
                             <li key={movie.id} className={searchBarStyles.searchItem}
                                 onClick={() => handleSelect(movie.id)}
                                 role="button" tabIndex={0}>
@@ -63,7 +65,7 @@ export const SearchBar = () => {
                             </li>
                         ))}
                     </ul>
-                }
+                )}
 
                 <button type="submit">
                     <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
