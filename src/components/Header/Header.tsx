@@ -30,7 +30,8 @@ export const Header = () => {
                                     <li>Loading...</li>
                                 ) : (
                                 genres.map(g => (
-                                    <li className={headerStyles.genresList} key={g.id} onClick={() => navigate(`/genres/${g.id}`)}>
+                                    <li className={headerStyles.genresList} key={g.id}
+                                        onClick={() => { navigate(`/genres/${g.id}`); setShowGenres(false);}}>
                                         {g.name}</li>
                                 ))
                                 )}
