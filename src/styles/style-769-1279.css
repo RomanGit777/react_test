@@ -4,8 +4,15 @@
         justify-content: space-evenly;
         padding: 0 10px;
     }
+    #header h2{
+        margin-left: 1px;
+    }
+    #userProfile {
+        margin-right: 1px;
+    }
     #header nav{
         align-items: center;
+        gap: 15px;
     }
     #searchWrapper{
         position: relative;
