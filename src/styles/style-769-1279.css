@@ -29,7 +29,7 @@
     #genresContainer {
         position: fixed;
         top: 40px;
-        left: 50%;
+        left: 20%;
         width: min(90%, 500px);
         max-height: 90vh;
         overflow-y: auto;
