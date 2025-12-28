@@ -11,6 +11,9 @@
     #grid{
         grid-template-columns: repeat(3, minmax(280px, 1fr));
     }
+    #grid-search-page{
+        grid-template-columns: repeat(3, minmax(280px, 1fr));
+    }
     #searchWrapper{
         position: relative;
         top: 0;
