@@ -1,6 +1,6 @@
 import searchBarStyles from './SearchBar.module.css'
 import {useEffect, useRef, useState} from "react";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import {useSearchSuggestions} from "../../queries/useSearchSuggestions.ts";
 import {useDebounce} from "../../hooks/useDebounce.ts";
 
@@ -13,6 +13,7 @@ export const SearchBar = () => {
     const {data: suggestions, isFetching, error} = useSearchSuggestions(debouncedText, 5);
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
@@ -24,6 +25,8 @@ export const SearchBar = () => {
     }, [wrapperRef]);
 
     useEffect(() => { if (!query) { setText(""); } else if (query) { setText(query); } }, [query]);
+
+    useEffect(() => { setText("")}, [location.pathname]);
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
