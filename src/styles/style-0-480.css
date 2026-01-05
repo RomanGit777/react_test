@@ -77,7 +77,7 @@
         }
         #genresContainer {
             position: fixed;
-            top: 55px;
+            top: 35px;
             left: 50%;
             transform: translateX(-50%);
             width: min(90%, 400px);
