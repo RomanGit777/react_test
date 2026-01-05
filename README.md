@@ -73,20 +73,35 @@ export default defineConfig([
 ```
 # 🎬 React Movies App
 
-A responsive movie browsing application built using **React + TypeScript** with data provided by the **TMDB API**.  
-Users can browse movies, search, view details, and explore genres.
+## 🛠 Run locally
+npm run dev
 
----
+## 🧱 Tech stack
+- React
+- TypeScript
+- Vite
+- React Router
+- TanStack Query
 
-## 🚀 Features
+## 📁 Project structure
+- components – reusable UI components
+- containers – pages (MoviesPage, MovieDetailsPage, SearchPage)
+- hooks – custom hooks (useDebounce, usePagination)
+- queries – TanStack Query hooks
+- api – TMDB requests
 
-- Browse list of popular movies
-- Pagination support
-- Search movies by title
-- View movie details (description, rating, poster, etc.)
-- Responsive UI based on provided mockup
-- Clean reusable component structure
+## 🔍 Search
+- Search by movie title or part of title
+- Debounced input (300ms)
+- Suggestions dropdown (limited to 5 results)
+- Separate Search Page with pagination
 
+## 🧭 Routing
+- / – movies list
+- /movie/:id – movie details
+- /search?query= – search results
+
+⚠️ API keys are included for educational/test purposes only.
 API Keys:
 VITE_TMDB_API_KEY=acaf5d95b786adebe6571ed065536914
 VITE_TMDB_READ_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhY2FmNWQ5NWI3ODZhZGViZTY1NzFlZDA2NTUzNjkxNCIsIm5iZiI6MTc2MzM5MTE2MS4wMzEwMDAxLCJzdWIiOiI2OTFiMzZiOTExN2MwZTQ3ZDIxNzVlNmEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.0GeKgy1y3_v5DzelZDZ_OOtDdfMoohfs65-2xBxwu-I
