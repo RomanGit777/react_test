@@ -1,13 +1,11 @@
 import searchBarStyles from './SearchBar.module.css'
 import {useEffect, useRef, useState} from "react";
-import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useSearchSuggestions} from "../../queries/useSearchSuggestions.ts";
 import {useDebounce} from "../../hooks/useDebounce.ts";
 
 export const SearchBar = () => {
     const [text, setText] = useState("");
-    const [params] = useSearchParams();
-    const query = params.get('query') ?? "";
     const navigate = useNavigate();
     const debouncedText = useDebounce(text, 300);
     const {data: suggestions, isFetching, error} = useSearchSuggestions(debouncedText, 5);
@@ -23,8 +21,6 @@ export const SearchBar = () => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [wrapperRef]);
-
-    useEffect(() => { if (!query) { setText(""); } else if (query) { setText(query); } }, [query]);
 
     useEffect(() => { setText("")}, [location.pathname]);
 
