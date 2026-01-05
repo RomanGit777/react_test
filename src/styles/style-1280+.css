@@ -1,10 +1,10 @@
 @media screen and (min-width: 1279px){
-    #userInfo{
-        margin-right: 35px;
-    }
-    #header h2{
-        margin-left: 35px;
-    }
+    /*#userInfo{*/
+    /*    margin-right: 35px;*/
+    /*}*/
+    /*#header h2{*/
+    /*    margin-left: 35px;*/
+    /*}*/
     #header nav{
         gap: 95px;
     }
@@ -38,7 +38,7 @@
         flex-direction: column;
     }
     #genresContainer {
-        top: 45px;
+        top: 25px;
     }
     #searchWrapper ul{
         width: 400px;

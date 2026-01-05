@@ -1,18 +1,19 @@
 @media screen and (min-width: 769px) and (max-width: 1279px){
     #header{
         flex-wrap: nowrap;
-        justify-content: space-evenly;
         padding: 0 10px;
     }
     #header h2{
-        margin-left: 1px;
+        margin-right: 15px;
+        margin-left: 15px;
     }
     #userProfile {
-        margin-right: 1px;
+        margin-right: 15px;
+        margin-left: 15px;
     }
     #header nav{
         align-items: center;
-        gap: 15px;
+        gap: 25px;
     }
     #searchWrapper{
         position: relative;
@@ -49,7 +50,7 @@
     }
     @media screen and (min-width: 900px){
         #homePageBtn{
-            width: 190px;
+            width: 120px;
         }
     }
 }
