@@ -1,0 +1,73 @@
+Index: src/api/getMovies.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import axios from \"axios\"\r\nimport type {IMovie} from \"../models/IMovie.ts\";\r\nimport type {IMoviesResponse} from \"../models/IMoviesResponse.ts\";\r\nimport type {IGenresResponse} from \"../models/IGenresResponse.ts\";\r\nimport type {IMovieSearchResponse} from \"../models/IMovieSearchResponse.ts\";\r\nimport type {IMovieSearch} from \"../models/IMovieSearch.ts\";\r\n\r\nexport const getMovies = async (page: number = 1): Promise<IMovie[]> => {\r\n    const {data} = await axios.get<IMoviesResponse>\r\n    (`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&page=${page}`);\r\n    // console.log(data.results);\r\n    return data.results\r\n}\r\nexport const getMovieById = async (id: string): Promise<IMovie> => {\r\n    const {data} = await axios.get\r\n    (`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data\r\n}\r\nexport const getGenres = async (): Promise<IGenresResponse> => {\r\n    const {data} = await axios.get\r\n    (`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data\r\n}\r\nexport const getMoviesByGenre = async (genre_ids: string): Promise<IMovie[]> => {\r\n    const {data} = await axios.get<IMoviesResponse>\r\n    (`https://api.themoviedb.org/3/discover/movie?with_genres=${genre_ids}&api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data.results\r\n}\r\n\r\nexport const getMoviesBySearch = async (query: string, page: number = 1) : Promise<IMovieSearch[]> => {\r\n    const {data} = await axios.get<IMovieSearchResponse>\r\n    (`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${query}&page=${page}`);\r\n    return data.results\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/api/getMovies.ts b/src/api/getMovies.ts
+--- a/src/api/getMovies.ts	(revision af43b071a898a154f0edbbc90f11e0aa83bc5d7d)
++++ b/src/api/getMovies.ts	(date 1766239098134)
+@@ -30,5 +30,6 @@
+ export const getMoviesBySearch = async (query: string, page: number = 1) : Promise<IMovieSearch[]> => {
+     const {data} = await axios.get<IMovieSearchResponse>
+     (`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${query}&page=${page}`);
++    console.log(data.results);
+     return data.results
+ }
+\ No newline at end of file
+Index: src/pages/SearchPage/SearchPage.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './SearchPage.css'\r\nimport {useSearchParams} from \"react-router-dom\";\r\nimport {useEffect, useState} from \"react\";\r\nimport {getMoviesBySearch} from \"../../api/getMovies.ts\";\r\nimport type {IMovieSearch} from \"../../models/IMovieSearch.ts\";\r\nimport {usePagination} from \"../../hooks/UsePagination.tsx\";\r\nimport {Pagination} from \"../../components/Pagination/Pagination.tsx\";\r\nimport {SearchMovieList} from \"../../components/SearchMovieList/SearchMovieList.tsx\";\r\n\r\nexport const SearchPage = () => {\r\n   const [params, setSearchParams] = useSearchParams();\r\n   const query = params.get(\"query\") ?? \"\";\r\n\r\n    const [movies, setMovies] = useState<IMovieSearch[]>([]);\r\n    const {currentPage,totalPages, currentItems} = usePagination(movies);\r\n\r\n    const goToPage = (page: number) => {\r\n        const currentParams = Object.fromEntries(params.entries());\r\n        setSearchParams({ ...currentParams, page: String(page) });\r\n        window.scrollTo({ top: 0, behavior: \"smooth\" });\r\n    };\r\n\r\n\r\n    useEffect(() => {\r\n        if(!query.trim()) {\r\n            setMovies([]);\r\n            return;\r\n        }\r\n        getMoviesBySearch(query)\r\n            .then(setMovies)\r\n    }, [query])\r\n    return (\r\n    <div className={'search-page-wrapper'}>\r\n            <SearchMovieList movies={currentItems} />\r\n            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage} />\r\n    </div>\r\n        )};\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/SearchPage/SearchPage.tsx b/src/pages/SearchPage/SearchPage.tsx
+--- a/src/pages/SearchPage/SearchPage.tsx	(revision af43b071a898a154f0edbbc90f11e0aa83bc5d7d)
++++ b/src/pages/SearchPage/SearchPage.tsx	(date 1766239098148)
+@@ -1,19 +1,25 @@
+ import './SearchPage.css'
+ import {useSearchParams} from "react-router-dom";
+-import {useEffect, useState} from "react";
+-import {getMoviesBySearch} from "../../api/getMovies.ts";
+-import type {IMovieSearch} from "../../models/IMovieSearch.ts";
+ import {usePagination} from "../../hooks/UsePagination.tsx";
+ import {Pagination} from "../../components/Pagination/Pagination.tsx";
+ import {SearchMovieList} from "../../components/SearchMovieList/SearchMovieList.tsx";
++import {useMoviesBySearch} from "../../queries/useMoviesBySearch.ts";
+ 
+ export const SearchPage = () => {
+    const [params, setSearchParams] = useSearchParams();
+    const query = params.get("query") ?? "";
+ 
+-    const [movies, setMovies] = useState<IMovieSearch[]>([]);
++    const {data: movies, error, isLoading} = useMoviesBySearch(query);
++
+     const {currentPage,totalPages, currentItems} = usePagination(movies);
+ 
++    if (error) return <div>Error: {error.message}</div>
++    if (isLoading) return <div>Loading...</div>;
++
++    if(!query.trim()) {
++        return;
++    }
++
+     const goToPage = (page: number) => {
+         const currentParams = Object.fromEntries(params.entries());
+         setSearchParams({ ...currentParams, page: String(page) });
+@@ -21,14 +27,6 @@
+     };
+ 
+ 
+-    useEffect(() => {
+-        if(!query.trim()) {
+-            setMovies([]);
+-            return;
+-        }
+-        getMoviesBySearch(query)
+-            .then(setMovies)
+-    }, [query])
+     return (
+     <div className={'search-page-wrapper'}>
+             <SearchMovieList movies={currentItems} />

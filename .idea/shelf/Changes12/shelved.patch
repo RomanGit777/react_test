@@ -1,0 +1,132 @@
+Index: src/components/GenreBadge/GenreBadge.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {Badge} from \"reactstrap\";\r\n\r\ninterface GenreBadgeProps {\r\n    label: string;\r\n    id: number;\r\n    className?: string;\r\n    onClick?: () => void;\r\n}\r\n\r\nexport const GenreBadge = ({label, id, className, onClick}: GenreBadgeProps) => {\r\n    return (\r\n        <Badge key={id} color='info' className={className} onClick={onClick}>\r\n            {label}\r\n        </Badge>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/GenreBadge/GenreBadge.tsx b/src/components/GenreBadge/GenreBadge.tsx
+--- a/src/components/GenreBadge/GenreBadge.tsx	(revision 272491c88a126096b66f3e34ff681c30b1ff838e)
++++ b/src/components/GenreBadge/GenreBadge.tsx	(date 1765647331711)
+@@ -1,15 +1,15 @@
++import stylesGenreBadge from './GenreBadge.module.css'
+ import {Badge} from "reactstrap";
+ 
+ interface GenreBadgeProps {
+     label: string;
+     id: number;
+-    className?: string;
+     onClick?: () => void;
+ }
+ 
+-export const GenreBadge = ({label, id, className, onClick}: GenreBadgeProps) => {
++export const GenreBadge = ({label, id, onClick}: GenreBadgeProps) => {
+     return (
+-        <Badge key={id} color='info' className={className} onClick={onClick}>
++        <Badge key={id} color='info' className={stylesGenreBadge.badge} onClick={onClick}>
+             {label}
+         </Badge>
+     );
+Index: src/components/MovieDetails/MovieDetails.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import stylesMovieDetails from'./MovieDetails.module.css'\r\nimport {useEffect, useState} from \"react\";\r\nimport type {IMovie} from '../../models/IMovie';\r\nimport {getMovieById} from \"../../api/getMovies.ts\";\r\nimport {useNavigate, useParams} from \"react-router-dom\";\r\nimport {PosterPreview} from \"../PosterPreview/PosterPreview.tsx\";\r\nimport {StarsRating} from \"../StarsRating/StarsRating.tsx\";\r\nimport {GenreBadge} from \"../GenreBadge/GenreBadge.tsx\";\r\n\r\nexport const MovieDetails = () => {\r\n    let {id} = useParams();\r\n    const [movie, setMovie] = useState<IMovie | null>(null);\r\n    const navigate = useNavigate();\r\n    useEffect(() => {\r\n        if (id) getMovieById(id).then(setMovie);\r\n    }, [id])\r\n\r\n    if(!movie) return <div>Loading movie...</div>;\r\n\r\n    window.scrollTo({ top: 0, behavior: 'smooth' });\r\n\r\n    return (\r\n        <div className={stylesMovieDetails.infoWrapper}>\r\n            <PosterPreview posterPath={movie.poster_path} title={movie.title} className={stylesMovieDetails.infoImg} />\r\n            <div>\r\n                <h2>{movie.title}</h2>\r\n                <span className={stylesMovieDetails.badges}>\r\n                    {movie.genres?.map(genre => (\r\n                        <GenreBadge key={genre.id} id={genre.id} label={genre.name} className=\"me-1\" onClick={() => navigate(`/genres/${genre.id}`)} />\r\n                    ))}\r\n                </span>\r\n                <StarsRating rating={movie.vote_average}/>\r\n                <p className={stylesMovieDetails.desc}><strong>Description:</strong> {movie.overview}</p>\r\n                <p><strong>Release date:</strong> {movie.release_date}</p>\r\n                <p><strong>Original Language:</strong> {movie.original_language}</p>\r\n                <p><strong>Popularity:</strong> {movie.popularity}</p>\r\n            </div>\r\n        </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/MovieDetails/MovieDetails.tsx b/src/components/MovieDetails/MovieDetails.tsx
+--- a/src/components/MovieDetails/MovieDetails.tsx	(revision 272491c88a126096b66f3e34ff681c30b1ff838e)
++++ b/src/components/MovieDetails/MovieDetails.tsx	(date 1765647407760)
+@@ -26,7 +26,7 @@
+                 <h2>{movie.title}</h2>
+                 <span className={stylesMovieDetails.badges}>
+                     {movie.genres?.map(genre => (
+-                        <GenreBadge key={genre.id} id={genre.id} label={genre.name} className="me-1" onClick={() => navigate(`/genres/${genre.id}`)} />
++                        <GenreBadge key={genre.id} id={genre.id} label={genre.name} onClick={() => navigate(`/genres/${genre.id}`)} />
+                     ))}
+                 </span>
+                 <StarsRating rating={movie.vote_average}/>
+Index: src/components/MovieDetails/MovieDetails.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.infoWrapper{\r\n    display: flex;\r\n    justify-content: center;\r\n    gap: 20px;\r\n    margin-top: 50px;\r\n    max-height: 700px;\r\n    max-width: 100%;\r\n}\r\n.infoWrapper div{\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n.infoWrapper h2{\r\n    font-family: \"Ribeye\", serif;\r\n    color: #dfd8d8;\r\n    font-size: 42px;\r\n    letter-spacing: 4px;\r\n    padding-bottom: 5px;\r\n}\r\n.infoWrapper svg{\r\n    height: 20px;\r\n    width: 20px;\r\n}\r\n.infoImg{\r\n    border-radius: 8px;\r\n    width: 300px;\r\n}\r\n.infoWrapper span{\r\n    font-size: 20px;\r\n    margin-bottom: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.infoWrapper p{\r\n    max-width: 800px;\r\n    color: #dfd8d8;\r\n    margin-bottom: 15px;\r\n    font-family: \"Poppins\", sans-serif;\r\n}\r\n\r\n.badges{\r\n    margin-top: 10px;\r\n    cursor: pointer;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/MovieDetails/MovieDetails.module.css b/src/components/MovieDetails/MovieDetails.module.css
+--- a/src/components/MovieDetails/MovieDetails.module.css	(revision 272491c88a126096b66f3e34ff681c30b1ff838e)
++++ b/src/components/MovieDetails/MovieDetails.module.css	(date 1765647290774)
+@@ -39,7 +39,3 @@
+     font-family: "Poppins", sans-serif;
+ }
+ 
+-.badges{
+-    margin-top: 10px;
+-    cursor: pointer;
+-}
+\ No newline at end of file
+Index: src/components/MovieInfo/MovieInfo.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.card {\r\n    position: relative;\r\n    width: 350px;\r\n    height: 500px;\r\n    border-radius: 8px;\r\n    overflow: hidden;\r\n    background: #111;\r\n    box-shadow: 0 6px 18px rgba(0,0,0,0.35);\r\n    transition: transform 0.25s ease;\r\n}\r\n\r\n.cardImg {\r\n    display: block;\r\n    width: 100%;\r\n    height: 500px;\r\n    object-fit: cover;\r\n    transition: transform 0.4s ease, filter 0.4s ease;\r\n}\r\n\r\n.overlay {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    padding: 12px;\r\n    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 60%);\r\n    color: #fff;\r\n    transform: translateY(20px);\r\n    opacity: 0;\r\n    transition: opacity 0.35s ease, transform 0.35s ease;\r\n    pointer-events: none;\r\n}\r\n\r\n.overlayTop {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-bottom: 8px;\r\n    gap: 5px;\r\n    max-width: 350px;\r\n}\r\n\r\n.badge {\r\n    font-size: 22px;\r\n    display: grid;\r\n    grid-template-columns: repeat(2, 1fr);\r\n    gap: 8px;\r\n    max-width: 160px;\r\n}\r\n\r\n\r\n\r\n.overlayTitle {\r\n    margin: 0 0 6px;\r\n    font-size: 20px;\r\n    line-height: 1.1;\r\n}\r\n\r\n.overlayDesc {\r\n    margin: 0;\r\n    font-size: 16px;\r\n    color: rgba(255,255,255,0.9);\r\n}\r\n\r\n.card:hover .cardImg,\r\n.card:focus-within .cardImg {\r\n    transform: scale(1.06);\r\n    filter: brightness(40%);\r\n}\r\n\r\n.card:hover .overlay,\r\n.card:focus-within .overlay {\r\n    opacity: 1;\r\n    transform: translateY(0);\r\n    pointer-events: auto;\r\n}\r\n\r\n.card:hover {\r\n    transform: translateY(-4px);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/MovieInfo/MovieInfo.module.css b/src/components/MovieInfo/MovieInfo.module.css
+--- a/src/components/MovieInfo/MovieInfo.module.css	(revision 272491c88a126096b66f3e34ff681c30b1ff838e)
++++ b/src/components/MovieInfo/MovieInfo.module.css	(date 1765647290699)
+@@ -40,15 +40,6 @@
+     max-width: 350px;
+ }
+ 
+-.badge {
+-    font-size: 22px;
+-    display: grid;
+-    grid-template-columns: repeat(2, 1fr);
+-    gap: 8px;
+-    max-width: 160px;
+-}
+-
+-
+ 
+ .overlayTitle {
+     margin: 0 0 6px;
+Index: src/components/GenreBadge/GenreBadge.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/GenreBadge/GenreBadge.module.css b/src/components/GenreBadge/GenreBadge.module.css
+new file mode 100644
+--- /dev/null	(date 1765647290759)
++++ b/src/components/GenreBadge/GenreBadge.module.css	(date 1765647290759)
+@@ -0,0 +1,9 @@
++.badges{
++    margin-top: 10px;
++    cursor: pointer;
++    font-size: 22px;
++    display: grid;
++    grid-template-columns: repeat(2, 1fr);
++    gap: 8px;
++    max-width: 160px;
++}
+\ No newline at end of file
+Index: src/components/MovieInfo/MovieInfo.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import stylesMovieInfo from './MovieInfo.module.css'\r\nimport {PosterPreview} from \"../PosterPreview/PosterPreview.tsx\";\r\nimport {GenreBadge} from \"../GenreBadge/GenreBadge.tsx\";\r\nimport {GENRE_MAP} from \"../../constants/genres.ts\";\r\nimport {StarsRating} from \"../StarsRating/StarsRating.tsx\";\r\nimport {useNavigate} from \"react-router-dom\";\r\nimport type {IMovieSearch} from \"../../models/IMovieSearch.ts\";\r\nimport type { IMovie } from \"../../models/IMovie.ts\";\r\nexport interface MovieInfoProps {\r\n    movie: IMovie | IMovieSearch;\r\n    shortOverview?: string;\r\n}\r\nexport const MovieInfo = ({movie,shortOverview}: MovieInfoProps) => {\r\n    let navigate = useNavigate();\r\n\r\n    return (\r\n        <div className={stylesMovieInfo.card} role=\"button\" tabIndex={0} aria-label={movie.title}\r\n             onClick={() => navigate(`/movie/${movie.id}`)} >\r\n            <PosterPreview title={movie.title} posterPath={movie.poster_path} className={stylesMovieInfo.cardImg} />\r\n\r\n            <div className={stylesMovieInfo.overlay}>\r\n                <div className={stylesMovieInfo.overlayTop}>\r\n                            <span className={stylesMovieInfo.badge}>\r\n                                {movie.genre_ids!.map(id => (\r\n                                    <GenreBadge key={id} id={id} label={GENRE_MAP[id]} className=\"me-1\"/>\r\n                                ))}\r\n                            </span>\r\n                    <StarsRating rating={movie.vote_average}/>\r\n                </div>\r\n\r\n                <h4 className={stylesMovieInfo.overlayTitle}>{movie.title}</h4>\r\n                <p className={stylesMovieInfo.overlayDesc}>{shortOverview}</p>\r\n            </div>\r\n        </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/MovieInfo/MovieInfo.tsx b/src/components/MovieInfo/MovieInfo.tsx
+--- a/src/components/MovieInfo/MovieInfo.tsx	(revision 272491c88a126096b66f3e34ff681c30b1ff838e)
++++ b/src/components/MovieInfo/MovieInfo.tsx	(date 1765647407747)
+@@ -22,7 +22,7 @@
+                 <div className={stylesMovieInfo.overlayTop}>
+                             <span className={stylesMovieInfo.badge}>
+                                 {movie.genre_ids!.map(id => (
+-                                    <GenreBadge key={id} id={id} label={GENRE_MAP[id]} className="me-1"/>
++                                    <GenreBadge key={id} id={id} label={GENRE_MAP[id]} />
+                                 ))}
+                             </span>
+                     <StarsRating rating={movie.vote_average}/>

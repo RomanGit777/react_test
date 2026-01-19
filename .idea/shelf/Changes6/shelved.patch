@@ -1,0 +1,123 @@
+Index: src/pages/SearchPage.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './SearchPage.css'\r\nimport {useNavigate, useSearchParams} from \"react-router-dom\";\r\nimport {useEffect, useState} from \"react\";\r\nimport {getMoviesBySearch} from \"../api/getMovies.ts\";\r\nimport type {IMovieSearch} from \"../models/IMovieSearch.ts\";\r\nimport {usePagination} from \"../hooks/UsePagination.tsx\";\r\nimport {Pagination} from \"../components/Pagination/Pagination.tsx\";\r\nimport {SearchMovieList} from \"../components/SearchMovieList/SearchMovieList.tsx\";\r\n\r\nexport const SearchPage = () => {\r\n   const [params] = useSearchParams();\r\n   const query = params.get(\"query\") ?? \"\";\r\n\r\n    const [movies, setMovies] = useState<IMovieSearch[]>([]);\r\n    const {currentPage,totalPages,goToPage, currentItems} = usePagination(movies);\r\n\r\n    const navigate = useNavigate();\r\n\r\n    useEffect(() => {\r\n        navigate(`/search?query=${query}&page=1`, { replace: true });\r\n    }, [query]);\r\n\r\n    useEffect(() => {\r\n        if(!query.trim()) {\r\n            setMovies([]);\r\n            return;\r\n        }\r\n        getMoviesBySearch(query)\r\n            .then(setMovies)\r\n    }, [query])\r\n    return (\r\n    <div className={'search-page-wrapper'}>\r\n            <SearchMovieList movies={currentItems} />\r\n            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage} />\r\n    </div>\r\n        )};\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/SearchPage.tsx b/src/pages/SearchPage.tsx
+--- a/src/pages/SearchPage.tsx	(revision 98c61f3b809f4e39d476afad29658118b8b40ae5)
++++ b/src/pages/SearchPage.tsx	(date 1765364395424)
+@@ -1,36 +1,43 @@
+ import './SearchPage.css'
+-import {useNavigate, useSearchParams} from "react-router-dom";
++import {useSearchParams} from "react-router-dom";
+ import {useEffect, useState} from "react";
+ import {getMoviesBySearch} from "../api/getMovies.ts";
+ import type {IMovieSearch} from "../models/IMovieSearch.ts";
+ import {usePagination} from "../hooks/UsePagination.tsx";
+ import {Pagination} from "../components/Pagination/Pagination.tsx";
+ import {SearchMovieList} from "../components/SearchMovieList/SearchMovieList.tsx";
+-
+ export const SearchPage = () => {
+-   const [params] = useSearchParams();
+-   const query = params.get("query") ?? "";
++    const [params] = useSearchParams();
++
++    const query = params.get("query") ?? "";
++    const page = Number(params.get("page") || 1);
+ 
+     const [movies, setMovies] = useState<IMovieSearch[]>([]);
+-    const {currentPage,totalPages,goToPage, currentItems} = usePagination(movies);
+-
+-    const navigate = useNavigate();
+-
+-    useEffect(() => {
+-        navigate(`/search?query=${query}&page=1`, { replace: true });
+-    }, [query]);
+ 
+     useEffect(() => {
+-        if(!query.trim()) {
++        if (!query.trim()) {
+             setMovies([]);
+             return;
+         }
+-        getMoviesBySearch(query)
+-            .then(setMovies)
+-    }, [query])
++
++        getMoviesBySearch(query).then(setMovies);
++    }, [query]);
++
++    const { currentPage, currentItems, totalPages, goToPage } =
++        usePagination(movies, page);
++
+     return (
+-    <div className={'search-page-wrapper'}>
++        <div className="search-page-wrapper">
+             <SearchMovieList movies={currentItems} />
+-            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage} />
+-    </div>
+-        )};
++
++            {totalPages > 1 && (
++                <Pagination
++                    currentPage={currentPage}
++                    totalPages={totalPages}
++                    goToPage={goToPage}
++                />
++            )}
++        </div>
++    );
++};
++
+Index: src/hooks/UsePagination.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { useSearchParams } from \"react-router-dom\";\r\nimport { useEffect, useState } from \"react\";\r\n\r\nexport function usePagination<T>(items: T[], itemsPerPage: number = 6) {\r\n    const [searchParams, setSearchParams] = useSearchParams();\r\n    const [currentPage, setCurrentPage] = useState(\r\n        Number(searchParams.get(\"page\") || 1)\r\n    );\r\n\r\n    const totalPages = Math.ceil(items.length / itemsPerPage);\r\n    const firstIndex = (currentPage - 1) * itemsPerPage;\r\n    const currentItems = items.slice(firstIndex, firstIndex + itemsPerPage);\r\n\r\n    // \uD83D\uDD25 Sync state with URL\r\n    useEffect(() => {\r\n        const page = Number(searchParams.get(\"page\") || 1);\r\n        setCurrentPage(page);\r\n    }, [searchParams]);\r\n\r\n\r\n\r\n    const goToPage = (page: number) => {\r\n        if (page < 1 || page > totalPages) return;\r\n        setSearchParams({ page: String(page) });\r\n        window.scrollTo({ top: 0, behavior: \"smooth\" });\r\n    };\r\n\r\n    return { currentPage, totalPages, currentItems, goToPage };\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/hooks/UsePagination.tsx b/src/hooks/UsePagination.tsx
+--- a/src/hooks/UsePagination.tsx	(revision 98c61f3b809f4e39d476afad29658118b8b40ae5)
++++ b/src/hooks/UsePagination.tsx	(date 1765364436053)
+@@ -1,29 +1,14 @@
+-import { useSearchParams } from "react-router-dom";
+-import { useEffect, useState } from "react";
+-
+-export function usePagination<T>(items: T[], itemsPerPage: number = 6) {
+-    const [searchParams, setSearchParams] = useSearchParams();
+-    const [currentPage, setCurrentPage] = useState(
+-        Number(searchParams.get("page") || 1)
+-    );
+-
++export function usePagination<T>(
++    items: T[],
++    currentPage: number,
++    itemsPerPage: number = 6
++) {
+     const totalPages = Math.ceil(items.length / itemsPerPage);
+-    const firstIndex = (currentPage - 1) * itemsPerPage;
++
++    const safePage = Math.min(Math.max(currentPage, 1), totalPages || 1);
++
++    const firstIndex = (safePage - 1) * itemsPerPage;
+     const currentItems = items.slice(firstIndex, firstIndex + itemsPerPage);
+ 
+-    // 🔥 Sync state with URL
+-    useEffect(() => {
+-        const page = Number(searchParams.get("page") || 1);
+-        setCurrentPage(page);
+-    }, [searchParams]);
+-
+-
+-
+-    const goToPage = (page: number) => {
+-        if (page < 1 || page > totalPages) return;
+-        setSearchParams({ page: String(page) });
+-        window.scrollTo({ top: 0, behavior: "smooth" });
+-    };
+-
+-    return { currentPage, totalPages, currentItems, goToPage };
++    return { currentItems, totalPages };
+ }

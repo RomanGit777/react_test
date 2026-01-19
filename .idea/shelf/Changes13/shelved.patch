@@ -1,0 +1,43 @@
+Index: src/api/getMovies.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import axios from \"axios\"\r\nimport type {IMovie} from \"../models/IMovie.ts\";\r\nimport type {IMoviesResponse} from \"../models/IMoviesResponse.ts\";\r\nimport type {IGenresResponse} from \"../models/IGenresResponse.ts\";\r\nimport type {IMovieSearchResponse} from \"../models/IMovieSearchResponse.ts\";\r\nimport type {IMovieSearch} from \"../models/IMovieSearch.ts\";\r\n\r\nexport const getMovies = async (): Promise<IMovie[]> => {\r\n    const {data} = await axios.get<IMoviesResponse>\r\n    (`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data.results\r\n}\r\nexport const getMovieById = async (id: string): Promise<IMovie> => {\r\n    const {data} = await axios.get\r\n    (`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data\r\n}\r\nexport const getGenres = async (): Promise<IGenresResponse> => {\r\n    const {data} = await axios.get\r\n    (`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data\r\n}\r\nexport const getMoviesByGenre = async (genre_ids: string): Promise<IMovie[]> => {\r\n    const {data} = await axios.get<IMoviesResponse>\r\n    (`https://api.themoviedb.org/3/discover/movie?with_genres=${genre_ids}&api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data.results\r\n}\r\n\r\nexport const getMoviesBySearch = async (query: string) : Promise<IMovieSearch[]> => {\r\n    const {data} = await axios.get<IMovieSearchResponse>\r\n    (`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${query}`);\r\n    return data.results\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/api/getMovies.ts b/src/api/getMovies.ts
+--- a/src/api/getMovies.ts	(revision 9773565caae96b7edcfb6e78652c37b477f16252)
++++ b/src/api/getMovies.ts	(date 1766075022301)
+@@ -8,26 +8,31 @@
+ export const getMovies = async (): Promise<IMovie[]> => {
+     const {data} = await axios.get<IMoviesResponse>
+     (`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
++    console.log(data.results);
+     return data.results
+ }
+ export const getMovieById = async (id: string): Promise<IMovie> => {
+     const {data} = await axios.get
+     (`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
++    console.log(data);
+     return data
+ }
+ export const getGenres = async (): Promise<IGenresResponse> => {
+     const {data} = await axios.get
+     (`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
++    console.log(data);
+     return data
+ }
+ export const getMoviesByGenre = async (genre_ids: string): Promise<IMovie[]> => {
+     const {data} = await axios.get<IMoviesResponse>
+     (`https://api.themoviedb.org/3/discover/movie?with_genres=${genre_ids}&api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
++    console.log(data.results);
+     return data.results
+ }
+ 
+ export const getMoviesBySearch = async (query: string) : Promise<IMovieSearch[]> => {
+     const {data} = await axios.get<IMovieSearchResponse>
+     (`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${query}`);
++    console.log(data.results);
+     return data.results
+ }
+\ No newline at end of file

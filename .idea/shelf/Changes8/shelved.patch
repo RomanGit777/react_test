@@ -1,0 +1,95 @@
+Index: src/api/getMovies.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import axios from \"axios\"\r\nimport type {IMovie} from \"../models/IMovie.ts\";\r\nimport type {IMoviesResponse} from \"../models/IMoviesResponse.ts\";\r\nimport type {IGenresResponse} from \"../models/IGenresResponse.ts\";\r\nimport type {IMovieSearchResponse} from \"../models/IMovieSearchResponse.ts\";\r\nimport type {IMovieSearch} from \"../models/IMovieSearch.ts\";\r\n\r\nexport const getMovies = async (): Promise<IMovie[]> => {\r\n    const {data} = await axios.get<IMoviesResponse>\r\n    (`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data.results\r\n}\r\nexport const getMovieById = async (id: string): Promise<IMovie> => {\r\n    const {data} = await axios.get\r\n    (`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data\r\n}\r\nexport const getGenres = async (): Promise<IGenresResponse> => {\r\n    const {data} = await axios.get\r\n    (`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data\r\n}\r\nexport const getMoviesByGenre = async (genre_ids: string): Promise<IMovie[]> => {\r\n    const {data} = await axios.get<IMoviesResponse>\r\n    (`https://api.themoviedb.org/3/discover/movie?with_genres=${genre_ids}&api_key=${import.meta.env.VITE_TMDB_API_KEY}`);\r\n    return data.results\r\n}\r\n\r\nexport const getMoviesBySearch = async (query: string) : Promise<IMovieSearch[]> => {\r\n    const {data} = await axios.get<IMovieSearchResponse>\r\n    (`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${query}`);\r\n    return data.results\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/api/getMovies.ts b/src/api/getMovies.ts
+--- a/src/api/getMovies.ts	(revision 98c61f3b809f4e39d476afad29658118b8b40ae5)
++++ b/src/api/getMovies.ts	(date 1765367288856)
+@@ -26,8 +26,8 @@
+     return data.results
+ }
+ 
+-export const getMoviesBySearch = async (query: string) : Promise<IMovieSearch[]> => {
++export const getMoviesBySearch = async (query: string, page: number) : Promise<IMovieSearch[]> => {
+     const {data} = await axios.get<IMovieSearchResponse>
+-    (`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${query}`);
++    (`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${query}&page=${page}`);
+     return data.results
+ }
+\ No newline at end of file
+Index: src/pages/SearchPage.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './SearchPage.css'\r\nimport {useNavigate, useSearchParams} from \"react-router-dom\";\r\nimport {useEffect, useState} from \"react\";\r\nimport {getMoviesBySearch} from \"../api/getMovies.ts\";\r\nimport type {IMovieSearch} from \"../models/IMovieSearch.ts\";\r\nimport {usePagination} from \"../hooks/UsePagination.tsx\";\r\nimport {Pagination} from \"../components/Pagination/Pagination.tsx\";\r\nimport {SearchMovieList} from \"../components/SearchMovieList/SearchMovieList.tsx\";\r\n\r\nexport const SearchPage = () => {\r\n   const [params] = useSearchParams();\r\n   const query = params.get(\"query\") ?? \"\";\r\n\r\n    const [movies, setMovies] = useState<IMovieSearch[]>([]);\r\n    const {currentPage,totalPages,goToPage, currentItems} = usePagination(movies);\r\n\r\n    const navigate = useNavigate();\r\n\r\n    useEffect(() => {\r\n        navigate(`/search?query=${query}&page=1`, { replace: true });\r\n    }, [query]);\r\n\r\n    useEffect(() => {\r\n        if(!query.trim()) {\r\n            setMovies([]);\r\n            return;\r\n        }\r\n        getMoviesBySearch(query)\r\n            .then(setMovies)\r\n    }, [query])\r\n    return (\r\n    <div className={'search-page-wrapper'}>\r\n            <SearchMovieList movies={currentItems} />\r\n            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage} />\r\n    </div>\r\n        )};\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/SearchPage.tsx b/src/pages/SearchPage.tsx
+--- a/src/pages/SearchPage.tsx	(revision 98c61f3b809f4e39d476afad29658118b8b40ae5)
++++ b/src/pages/SearchPage.tsx	(date 1765367984598)
+@@ -1,5 +1,5 @@
+ import './SearchPage.css'
+-import {useNavigate, useSearchParams} from "react-router-dom";
++import {useSearchParams} from "react-router-dom";
+ import {useEffect, useState} from "react";
+ import {getMoviesBySearch} from "../api/getMovies.ts";
+ import type {IMovieSearch} from "../models/IMovieSearch.ts";
+@@ -8,29 +8,40 @@
+ import {SearchMovieList} from "../components/SearchMovieList/SearchMovieList.tsx";
+ 
+ export const SearchPage = () => {
+-   const [params] = useSearchParams();
+-   const query = params.get("query") ?? "";
++    // ✅ Read URL params
++    const [params, setParams] = useSearchParams();
++    const query = params.get("query") ?? "";
++    const page = Number(params.get("page") || 1);
+ 
+     const [movies, setMovies] = useState<IMovieSearch[]>([]);
+-    const {currentPage,totalPages,goToPage, currentItems} = usePagination(movies);
++    const [loading, setLoading] = useState(false);
+ 
+-    const navigate = useNavigate();
++    // 🔥 Function to change page while keeping query intact
++    const goToPage = (p: number) => {
++        if (!query) return; // prevent clearing query
++        setParams({ query, page: String(p) });
++        window.scrollTo({ top: 0, behavior: "smooth" });
++    };
+ 
+-    useEffect(() => {
+-        navigate(`/search?query=${query}&page=1`, { replace: true });
+-    }, [query]);
+-
++    // fetch movies based on query and page...
+     useEffect(() => {
+-        if(!query.trim()) {
++        if (!query.trim()) {
+             setMovies([]);
+             return;
+         }
+-        getMoviesBySearch(query)
++        setLoading(true);
++        getMoviesBySearch(query, page)
+             .then(setMovies)
+-    }, [query])
++            .finally(() => setLoading(false));
++    }, [query, page]);
++
++    // pagination
++    const { currentItems, totalPages } = usePagination(movies, page);
++
+     return (
+-    <div className={'search-page-wrapper'}>
++        <div className={'search-page-wrapper'}>
+             <SearchMovieList movies={currentItems} />
+-            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage} />
+-    </div>
+-        )};
++            <Pagination currentPage={page} totalPages={totalPages} goToPage={goToPage} />
++        </div>
++    );
++};

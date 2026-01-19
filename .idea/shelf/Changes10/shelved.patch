@@ -1,0 +1,168 @@
+Index: src/components/SearchBar/SearchBar.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.search-wrapper {\r\n    position: relative;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n.search-wrapper input {\r\n    width: 180px;\r\n    height: 25px;\r\n    background-color: #2A334B;\r\n    color: white;\r\n    border: none;\r\n    border-radius: 4px;\r\n    padding: 8px 25px 8px 10px;\r\n    font-family: 'Poppins', sans-serif;\r\n}\r\n.search-wrapper svg {\r\n    position: absolute;\r\n    right: 7px;\r\n    width: 16px;\r\n    height: 16px;\r\n    cursor: pointer;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/SearchBar/SearchBar.css b/src/components/SearchBar/SearchBar.css
+--- a/src/components/SearchBar/SearchBar.css	(revision f5b2df505738ffc44943cb18940b7233eabdd8ff)
++++ b/src/components/SearchBar/SearchBar.css	(date 1765640411170)
+@@ -4,7 +4,7 @@
+     align-items: center;
+ }
+ .search-wrapper input {
+-    width: 180px;
++    width: 300px;
+     height: 25px;
+     background-color: #2A334B;
+     color: white;
+@@ -16,6 +16,7 @@
+ .search-wrapper svg {
+     position: absolute;
+     right: 7px;
++    top: 8px;
+     width: 16px;
+     height: 16px;
+     cursor: pointer;
+Index: src/components/Header/Header.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/Header/Header.css b/src/components/Header/Header.module.css
+rename from src/components/Header/Header.css
+rename to src/components/Header/Header.module.css
+--- a/src/components/Header/Header.css	(revision f5b2df505738ffc44943cb18940b7233eabdd8ff)
++++ b/src/components/Header/Header.module.css	(date 1765640411190)
+@@ -10,7 +10,7 @@
+     left: 0;
+     z-index: 1000;
+ }
+-.header>h2{
++.header h2{
+     color: #148BB5;
+     font-size: 26px;
+     font-family: 'Poppins', sans-serif;
+@@ -26,53 +26,8 @@
+     font-size: 18px;
+     font-family: 'Poppins', sans-serif;
+ }
+-.search-wrapper {
+-    position: relative;
+-    display: flex;
+-    align-items: center;
+-}
+-.search-wrapper input {
+-    width: 300px;
+-    height: 25px;
+-    background-color: #2A334B;
+-    color: white;
+-    border: none;
+-    border-radius: 4px;
+-    padding: 8px 25px 8px 10px;
+-    font-family: 'Poppins', sans-serif;
+-}
+-.search-wrapper svg {
+-    position: absolute;
+-    right: 7px;
+-    top: 8px;
+-    width: 16px;
+-    height: 16px;
+-    cursor: pointer;
+-}
+-.user-profile {
+-    display: flex;
+-    align-items: center;
+-    gap: 12px;
+-    margin-right: 35px;
+-    font-family: 'Arial', sans-serif;
+-    font-size: 14px;
+-    color: #AAB3C0;
+-    cursor: pointer;
+-    transition: transform 0.2s;
+-}
+ 
+-.user-profile:hover {
+-    transform: scale(1.05);
+-}
+ 
+-.user-profile img {
+-    width: 40px;
+-    height: 40px;
+-    object-fit: cover;
+-    border-radius: 50%;
+-    border: 2px solid #fff;
+-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+-}
+ 
+ .nav{
+     display: flex;
+Index: src/components/MovieGenre/MovieGenre.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.genres-page-wrapper{\r\n    width: 100%;\r\n    min-height: 100vh;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/MovieGenre/MovieGenre.css b/src/components/MovieGenre/MovieGenre.css
+--- a/src/components/MovieGenre/MovieGenre.css	(revision f5b2df505738ffc44943cb18940b7233eabdd8ff)
++++ b/src/components/MovieGenre/MovieGenre.css	(date 1765640161040)
+@@ -1,4 +1,5 @@
+ .genres-page-wrapper{
+     width: 100%;
+     min-height: 100vh;
++    padding-bottom: 20px;
+ }
+\ No newline at end of file
+Index: src/components/UserInfo/UserInfo.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/UserInfo/UserInfo.module.css b/src/components/UserInfo/UserInfo.module.css
+new file mode 100644
+--- /dev/null	(date 1765640338649)
++++ b/src/components/UserInfo/UserInfo.module.css	(date 1765640338649)
+@@ -0,0 +1,24 @@
++.user-profile {
++    display: flex;
++    align-items: center;
++    gap: 12px;
++    margin-right: 35px;
++    font-family: 'Arial', sans-serif;
++    font-size: 14px;
++    color: #AAB3C0;
++    cursor: pointer;
++    transition: transform 0.2s;
++}
++
++.user-profile:hover {
++    transform: scale(1.05);
++}
++
++.user-profile img {
++    width: 40px;
++    height: 40px;
++    object-fit: cover;
++    border-radius: 50%;
++    border: 2px solid #fff;
++    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
++}
+\ No newline at end of file
+Index: src/components/Header/Header.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './Header.css'\r\nimport {UserInfo} from \"../UserInfo/UserInfo.tsx\";\r\nimport {useEffect, useState} from \"react\";\r\nimport {getGenres} from \"../../api/getMovies.ts\";\r\nimport type {IGenres} from \"../../models/IGenres.ts\";\r\nimport {useNavigate} from \"react-router-dom\";\r\nimport {SearchBar} from \"../SearchBar/SearchBar.tsx\";\r\nexport const Header = () => {\r\n    const [showGenres, setShowGenres] = useState(false)\r\n    const [genres, setGenres] = useState<IGenres[]>([])\r\n    useEffect(() => {\r\n        getGenres().then(res => setGenres(res.genres))\r\n    }, []);\r\n    const navigate = useNavigate();\r\n\r\n    return (\r\n        <div className={'header'}>\r\n            <h2>Logo</h2>\r\n            <nav className={'nav'}>\r\n                <button className={'home-page-btn'} onClick={() => navigate('/')}>Home Page</button>\r\n                    <div className={'genres-wrapper'}\r\n                         onMouseEnter={() => setShowGenres(true)}\r\n                         onMouseLeave={() => setShowGenres(false)}\r\n                    >\r\n                        <button>Genres</button>\r\n                        {showGenres && (\r\n                            <ul className={'genres-container'}>\r\n                                {genres.map(g => (\r\n                                    <li className={'genres-list'} key={g.id} onClick={() => navigate(`/genres/${g.id}`)}>\r\n                                        {g.name}</li>\r\n                                ))}\r\n                            </ul>\r\n                        )}\r\n                    </div>\r\n\r\n                        <SearchBar/>\r\n            </nav>\r\n            <UserInfo/>\r\n        </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/Header/Header.tsx b/src/components/Header/Header.tsx
+--- a/src/components/Header/Header.tsx	(revision f5b2df505738ffc44943cb18940b7233eabdd8ff)
++++ b/src/components/Header/Header.tsx	(date 1765640229224)
+@@ -1,4 +1,4 @@
+-import './Header.css'
++import './Header.module.css'
+ import {UserInfo} from "../UserInfo/UserInfo.tsx";
+ import {useEffect, useState} from "react";
+ import {getGenres} from "../../api/getMovies.ts";

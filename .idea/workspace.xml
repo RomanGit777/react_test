@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="011e97d7-82ff-4de8-971f-a929d0b650f6" name="Changes" comment="changed browser router to hash router" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="gh-pages" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;RomanGit777&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/RomanGit777/react_Movie_App-.git&quot;,
+    &quot;accountId&quot;: &quot;dd9b964c-e108-4bd6-a5a8-d0e79443f5f5&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="35bcttIqnNBJwCM5zY5x5OJUp5Q" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "ReactCreateComponentLastSelected": "arrowFunctionComponent",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "gh-pages",
+    "ignore.virus.scanning.warn.message": "true",
+    "js.last.introduce.type": "CONST",
+    "last_opened_file_path": "C:/Users/rsave/WebstormProjects/react_test/src/pages",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "npm.npm dev.executor": "Run",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2025.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\rsave\WebstormProjects\react_test\src\pages" />
+      <recent name="C:\Users\rsave\WebstormProjects\react_test\public" />
+      <recent name="C:\Users\rsave\WebstormProjects\react_test\src\components\Header" />
+      <recent name="C:\Users\rsave\WebstormProjects\react_test\src\styles\components" />
+      <recent name="C:\Users\rsave\WebstormProjects\react_test\src\components\header" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\rsave\WebstormProjects\react_test\src\icons" />
+      <recent name="C:\Users\rsave\WebstormProjects\react_test\public\favicon" />
+      <recent name="C:\Users\rsave\WebstormProjects\react_test\src\pages\SearchPage" />
+      <recent name="C:\Users\rsave\WebstormProjects\react_test\src\pages\MoviesPage" />
+      <recent name="C:\Users\rsave\WebstormProjects\react_test\src\imgs" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="npm dev" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-WS-251.23774.424" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="011e97d7-82ff-4de8-971f-a929d0b650f6" name="Changes" comment="" />
+      <created>1763382429903</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1763382429903</updated>
+      <workItem from="1763382430943" duration="1532000" />
+      <workItem from="1763390918061" duration="9683000" />
+      <workItem from="1763548131985" duration="6169000" />
+      <workItem from="1763631901745" duration="4674000" />
+      <workItem from="1763655273984" duration="21000" />
+      <workItem from="1764088963796" duration="1094000" />
+      <workItem from="1764425799106" duration="7213000" />
+      <workItem from="1764517667753" duration="7490000" />
+      <workItem from="1764592040946" duration="5397000" />
+      <workItem from="1764676659641" duration="8538000" />
+      <workItem from="1764705670700" duration="4140000" />
+      <workItem from="1764761193346" duration="7547000" />
+      <workItem from="1764788119848" duration="3726000" />
+      <workItem from="1764791933536" duration="33000" />
+      <workItem from="1764845915841" duration="7335000" />
+      <workItem from="1764934427167" duration="7292000" />
+      <workItem from="1765041059590" duration="4575000" />
+      <workItem from="1765127528275" duration="6102000" />
+      <workItem from="1765183588722" duration="7666000" />
+      <workItem from="1765207091240" duration="7239000" />
+      <workItem from="1765294092862" duration="7650000" />
+      <workItem from="1765362418715" duration="7391000" />
+      <workItem from="1765400011677" duration="3663000" />
+      <workItem from="1765448619800" duration="7614000" />
+      <workItem from="1765465566232" duration="1804000" />
+      <workItem from="1765552261653" duration="16078000" />
+      <workItem from="1765649591509" duration="350000" />
+      <workItem from="1765964685228" duration="7389000" />
+      <workItem from="1765981216972" duration="7599000" />
+      <workItem from="1765998631100" duration="5983000" />
+      <workItem from="1766043958929" duration="11849000" />
+      <workItem from="1766073567440" duration="7577000" />
+      <workItem from="1766086278374" duration="3535000" />
+      <workItem from="1766135067837" duration="7790000" />
+      <workItem from="1766238306143" duration="7068000" />
+      <workItem from="1766314663798" duration="7826000" />
+      <workItem from="1766403780110" duration="7575000" />
+      <workItem from="1766429749779" duration="7410000" />
+      <workItem from="1766949882903" duration="1956000" />
+      <workItem from="1767596703818" duration="15222000" />
+      <workItem from="1767778820977" duration="171000" />
+      <workItem from="1767779002794" duration="61000" />
+      <workItem from="1767779170220" duration="14000" />
+      <workItem from="1767779861324" duration="148000" />
+      <workItem from="1768820898171" duration="7910000" />
+      <workItem from="1768829614829" duration="338000" />
+      <workItem from="1768829974374" duration="1457000" />
+      <workItem from="1768846562756" duration="287000" />
+      <workItem from="1768846871186" duration="809000" />
+      <workItem from="1768847956874" duration="323000" />
+    </task>
+    <task id="LOCAL−00113" summary="tanStack for getMovies done">
+      <option name="closed" value="true" />
+      <created>1766089657613</created>
+      <option name="number" value="LOCAL−00113" />
+      <option name="presentableId" value="LOCAL−00113" />
+      <updated>1766089657614</updated>
+    </task>
+    <task id="LOCAL−00114" summary="tanStack for getMoviesById done">
+      <option name="closed" value="true" />
+      <created>1766139152476</created>
+      <option name="number" value="LOCAL−00114" />
+      <option name="presentableId" value="LOCAL−00114" />
+      <updated>1766139152476</updated>
+    </task>
+    <task id="LOCAL−00115" summary="tanStack for MovieGenre.tsx done">
+      <option name="closed" value="true" />
+      <created>1766141753517</created>
+      <option name="number" value="LOCAL−00115" />
+      <option name="presentableId" value="LOCAL−00115" />
+      <updated>1766141753517</updated>
+    </task>
+    <task id="LOCAL−00116" summary="renamed">
+      <option name="closed" value="true" />
+      <created>1766141890708</created>
+      <option name="number" value="LOCAL−00116" />
+      <option name="presentableId" value="LOCAL−00116" />
+      <updated>1766141890708</updated>
+    </task>
+    <task id="LOCAL−00117" summary="tanStack for MoviesBySearch and SearchBar">
+      <option name="closed" value="true" />
+      <created>1766142854601</created>
+      <option name="number" value="LOCAL−00117" />
+      <option name="presentableId" value="LOCAL−00117" />
+      <updated>1766142854601</updated>
+    </task>
+    <task id="LOCAL−00118" summary="tanStack for MoviesBySearch and SearchBar / done with hook">
+      <option name="closed" value="true" />
+      <created>1766238871993</created>
+      <option name="number" value="LOCAL−00118" />
+      <option name="presentableId" value="LOCAL−00118" />
+      <updated>1766238871993</updated>
+    </task>
+    <task id="LOCAL−00119" summary="tanStack for MoviesBySearch and SearchBar / moved state + useEffect">
+      <option name="closed" value="true" />
+      <created>1766239794770</created>
+      <option name="number" value="LOCAL−00119" />
+      <option name="presentableId" value="LOCAL−00119" />
+      <updated>1766239794770</updated>
+    </task>
+    <task id="LOCAL−00120" summary="tanStack for MoviesBySearch and SearchBar / pagination changes">
+      <option name="closed" value="true" />
+      <created>1766240346227</created>
+      <option name="number" value="LOCAL−00120" />
+      <option name="presentableId" value="LOCAL−00120" />
+      <updated>1766240346227</updated>
+    </task>
+    <task id="LOCAL−00121" summary="tanStack for SearchBar / separate UI and server state">
+      <option name="closed" value="true" />
+      <created>1766240842200</created>
+      <option name="number" value="LOCAL−00121" />
+      <option name="presentableId" value="LOCAL−00121" />
+      <updated>1766240842200</updated>
+    </task>
+    <task id="LOCAL−00122" summary="tanStack for SearchBar / created a hook">
+      <option name="closed" value="true" />
+      <created>1766241932736</created>
+      <option name="number" value="LOCAL−00122" />
+      <option name="presentableId" value="LOCAL−00122" />
+      <updated>1766241932736</updated>
+    </task>
+    <task id="LOCAL−00123" summary="tanStack for SearchBar / add changes">
+      <option name="closed" value="true" />
+      <created>1766243390915</created>
+      <option name="number" value="LOCAL−00123" />
+      <option name="presentableId" value="LOCAL−00123" />
+      <updated>1766243390915</updated>
+    </task>
+    <task id="LOCAL−00124" summary="tanStack for SearchBar / created hook for debounce">
+      <option name="closed" value="true" />
+      <created>1766245594472</created>
+      <option name="number" value="LOCAL−00124" />
+      <option name="presentableId" value="LOCAL−00124" />
+      <updated>1766245594472</updated>
+    </task>
+    <task id="LOCAL−00125" summary="tanStack for SearchBar / added debounced hook into searchbar + removed unsued Effects">
+      <option name="closed" value="true" />
+      <created>1766317995595</created>
+      <option name="number" value="LOCAL−00125" />
+      <option name="presentableId" value="LOCAL−00125" />
+      <updated>1766317995596</updated>
+    </task>
+    <task id="LOCAL−00126" summary="tanStack for SearchBar / fixed jumping header while writing + clean input when comeback to the homepage">
+      <option name="closed" value="true" />
+      <created>1766319463695</created>
+      <option name="number" value="LOCAL−00126" />
+      <option name="presentableId" value="LOCAL−00126" />
+      <updated>1766319463695</updated>
+    </task>
+    <task id="LOCAL−00127" summary="tanStack for SearchBar / position of error handling + isFetching">
+      <option name="closed" value="true" />
+      <created>1766320579971</created>
+      <option name="number" value="LOCAL−00127" />
+      <option name="presentableId" value="LOCAL−00127" />
+      <updated>1766320579971</updated>
+    </task>
+    <task id="LOCAL−00128" summary="removed logs">
+      <option name="closed" value="true" />
+      <created>1766320992259</created>
+      <option name="number" value="LOCAL−00128" />
+      <option name="presentableId" value="LOCAL−00128" />
+      <updated>1766320992259</updated>
+    </task>
+    <task id="LOCAL−00129" summary="styl for fail page">
+      <option name="closed" value="true" />
+      <created>1766322213170</created>
+      <option name="number" value="LOCAL−00129" />
+      <option name="presentableId" value="LOCAL−00129" />
+      <updated>1766322213170</updated>
+    </task>
+    <task id="LOCAL−00130" summary="organizing project / removed getGenres">
+      <option name="closed" value="true" />
+      <created>1766404642737</created>
+      <option name="number" value="LOCAL−00130" />
+      <option name="presentableId" value="LOCAL−00130" />
+      <updated>1766404642739</updated>
+    </task>
+    <task id="LOCAL−00131" summary="organizing project / added closeDropdown when clicking on genre">
+      <option name="closed" value="true" />
+      <created>1766405821528</created>
+      <option name="number" value="LOCAL−00131" />
+      <option name="presentableId" value="LOCAL−00131" />
+      <updated>1766405821528</updated>
+    </task>
+    <task id="LOCAL−00132" summary="organizing project / moved dropdown logic">
+      <option name="closed" value="true" />
+      <created>1766406485008</created>
+      <option name="number" value="LOCAL−00132" />
+      <option name="presentableId" value="LOCAL−00132" />
+      <updated>1766406485008</updated>
+    </task>
+    <task id="LOCAL−00133" summary="organizing project / tabIndex + roleBtn to li">
+      <option name="closed" value="true" />
+      <created>1766406892574</created>
+      <option name="number" value="LOCAL−00133" />
+      <option name="presentableId" value="LOCAL−00133" />
+      <updated>1766406892574</updated>
+    </task>
+    <task id="LOCAL−00134" summary="organizing project / tabIndex + roleBtn to li in searchBar">
+      <option name="closed" value="true" />
+      <created>1766407354259</created>
+      <option name="number" value="LOCAL−00134" />
+      <option name="presentableId" value="LOCAL−00134" />
+      <updated>1766407354262</updated>
+    </task>
+    <task id="LOCAL−00135" summary="organizing project / cleaned structure in searchBar">
+      <option name="closed" value="true" />
+      <created>1766407504893</created>
+      <option name="number" value="LOCAL−00135" />
+      <option name="presentableId" value="LOCAL−00135" />
+      <updated>1766407504893</updated>
+    </task>
+    <task id="LOCAL−00136" summary="organizing project /">
+      <option name="closed" value="true" />
+      <created>1766409596276</created>
+      <option name="number" value="LOCAL−00136" />
+      <option name="presentableId" value="LOCAL−00136" />
+      <updated>1766409596276</updated>
+    </task>
+    <task id="LOCAL−00137" summary="organizing project /">
+      <option name="closed" value="true" />
+      <created>1766409745202</created>
+      <option name="number" value="LOCAL−00137" />
+      <option name="presentableId" value="LOCAL−00137" />
+      <updated>1766409745202</updated>
+    </task>
+    <task id="LOCAL−00138" summary="organizing project / added bg if no posterPath, moved icons and img to public">
+      <option name="closed" value="true" />
+      <created>1766411831361</created>
+      <option name="number" value="LOCAL−00138" />
+      <option name="presentableId" value="LOCAL−00138" />
+      <updated>1766411831362</updated>
+    </task>
+    <task id="LOCAL−00139" summary="organizing project / added useEffect for scroll">
+      <option name="closed" value="true" />
+      <created>1766430497724</created>
+      <option name="number" value="LOCAL−00139" />
+      <option name="presentableId" value="LOCAL−00139" />
+      <updated>1766430497724</updated>
+    </task>
+    <task id="LOCAL−00140" summary="organizing project / making hooks work safer">
+      <option name="closed" value="true" />
+      <created>1766431961558</created>
+      <option name="number" value="LOCAL−00140" />
+      <option name="presentableId" value="LOCAL−00140" />
+      <updated>1766431961558</updated>
+    </task>
+    <task id="LOCAL−00141" summary="organizing project / renamed movie genre to page">
+      <option name="closed" value="true" />
+      <created>1766433486975</created>
+      <option name="number" value="LOCAL−00141" />
+      <option name="presentableId" value="LOCAL−00141" />
+      <updated>1766433486975</updated>
+    </task>
+    <task id="LOCAL−00142" summary="fixing res design / added some margin + made less suggestions in dropdown">
+      <option name="closed" value="true" />
+      <created>1766493034022</created>
+      <option name="number" value="LOCAL−00142" />
+      <option name="presentableId" value="LOCAL−00142" />
+      <updated>1766493034022</updated>
+    </task>
+    <task id="LOCAL−00143" summary="fixing res design /">
+      <option name="closed" value="true" />
+      <created>1766951355018</created>
+      <option name="number" value="LOCAL−00143" />
+      <option name="presentableId" value="LOCAL−00143" />
+      <updated>1766951355018</updated>
+    </task>
+    <task id="LOCAL−00144" summary="fixing res design / fixed grid for search page">
+      <option name="closed" value="true" />
+      <created>1766951542104</created>
+      <option name="number" value="LOCAL−00144" />
+      <option name="presentableId" value="LOCAL−00144" />
+      <updated>1766951542104</updated>
+    </task>
+    <task id="LOCAL−00145" summary="fixing res design / fixed genres wrapper position + svg top marign">
+      <option name="closed" value="true" />
+      <created>1766951849070</created>
+      <option name="number" value="LOCAL−00145" />
+      <option name="presentableId" value="LOCAL−00145" />
+      <updated>1766951849070</updated>
+    </task>
+    <task id="LOCAL−00146" summary="fixing res design / fixed some margins">
+      <option name="closed" value="true" />
+      <created>1767598360354</created>
+      <option name="number" value="LOCAL−00146" />
+      <option name="presentableId" value="LOCAL−00146" />
+      <updated>1767598360354</updated>
+    </task>
+    <task id="LOCAL−00147" summary="fixing res design / fixed some widths">
+      <option name="closed" value="true" />
+      <created>1767599929530</created>
+      <option name="number" value="LOCAL−00147" />
+      <option name="presentableId" value="LOCAL−00147" />
+      <updated>1767599929530</updated>
+    </task>
+    <task id="LOCAL−00148" summary="fix clear input">
+      <option name="closed" value="true" />
+      <created>1767601419925</created>
+      <option name="number" value="LOCAL−00148" />
+      <option name="presentableId" value="LOCAL−00148" />
+      <updated>1767601419925</updated>
+    </task>
+    <task id="LOCAL−00149" summary="fixed search bar">
+      <option name="closed" value="true" />
+      <created>1767602813807</created>
+      <option name="number" value="LOCAL−00149" />
+      <option name="presentableId" value="LOCAL−00149" />
+      <updated>1767602813807</updated>
+    </task>
+    <task id="LOCAL−00150" summary="deleted margins">
+      <option name="closed" value="true" />
+      <created>1767602942675</created>
+      <option name="number" value="LOCAL−00150" />
+      <option name="presentableId" value="LOCAL−00150" />
+      <updated>1767602942675</updated>
+    </task>
+    <task id="LOCAL−00151" summary="added margins">
+      <option name="closed" value="true" />
+      <created>1767603019910</created>
+      <option name="number" value="LOCAL−00151" />
+      <option name="presentableId" value="LOCAL−00151" />
+      <updated>1767603019910</updated>
+    </task>
+    <task id="LOCAL−00152" summary="added disabled for search button">
+      <option name="closed" value="true" />
+      <created>1767603467370</created>
+      <option name="number" value="LOCAL−00152" />
+      <option name="presentableId" value="LOCAL−00152" />
+      <updated>1767603467370</updated>
+    </task>
+    <task id="LOCAL−00153" summary="readme">
+      <option name="closed" value="true" />
+      <created>1767604484646</created>
+      <option name="number" value="LOCAL−00153" />
+      <option name="presentableId" value="LOCAL−00153" />
+      <updated>1767604484646</updated>
+    </task>
+    <task id="LOCAL−00154" summary="more height to search item">
+      <option name="closed" value="true" />
+      <created>1767604825722</created>
+      <option name="number" value="LOCAL−00154" />
+      <option name="presentableId" value="LOCAL−00154" />
+      <updated>1767604825722</updated>
+    </task>
+    <task id="LOCAL−00155" summary="add project files for mentor">
+      <option name="closed" value="true" />
+      <created>1767607231884</created>
+      <option name="number" value="LOCAL−00155" />
+      <option name="presentableId" value="LOCAL−00155" />
+      <updated>1767607231884</updated>
+    </task>
+    <task id="LOCAL−00156" summary="add project files for mentor">
+      <option name="closed" value="true" />
+      <created>1767609086774</created>
+      <option name="number" value="LOCAL−00156" />
+      <option name="presentableId" value="LOCAL−00156" />
+      <updated>1767609086774</updated>
+    </task>
+    <task id="LOCAL−00157" summary="add project files for mentor / fixed gap">
+      <option name="closed" value="true" />
+      <created>1767778739603</created>
+      <option name="number" value="LOCAL−00157" />
+      <option name="presentableId" value="LOCAL−00157" />
+      <updated>1767778739603</updated>
+    </task>
+    <task id="LOCAL−00158" summary="removed unnecessary files">
+      <option name="closed" value="true" />
+      <created>1768821251652</created>
+      <option name="number" value="LOCAL−00158" />
+      <option name="presentableId" value="LOCAL−00158" />
+      <updated>1768821251652</updated>
+    </task>
+    <task id="LOCAL−00159" summary="removed unnecessary files">
+      <option name="closed" value="true" />
+      <created>1768822917168</created>
+      <option name="number" value="LOCAL−00159" />
+      <option name="presentableId" value="LOCAL−00159" />
+      <updated>1768822917168</updated>
+    </task>
+    <task id="LOCAL−00160" summary="added README.md">
+      <option name="closed" value="true" />
+      <created>1768826678925</created>
+      <option name="number" value="LOCAL−00160" />
+      <option name="presentableId" value="LOCAL−00160" />
+      <updated>1768826678925</updated>
+    </task>
+    <task id="LOCAL−00161" summary="changed browser router to hash router">
+      <option name="closed" value="true" />
+      <created>1768828399972</created>
+      <option name="number" value="LOCAL−00161" />
+      <option name="presentableId" value="LOCAL−00161" />
+      <updated>1768828399972</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="organizing project / tabIndex + roleBtn to li in searchBar" />
+    <MESSAGE value="organizing project / cleaned structure in searchBar" />
+    <MESSAGE value="organizing project /" />
+    <MESSAGE value="organizing project / added bg if no posterPath, moved icons and img to public" />
+    <MESSAGE value="organizing project / added useEffect for scroll" />
+    <MESSAGE value="organizing project / making hooks work safer" />
+    <MESSAGE value="organizing project / renamed movie genre to page" />
+    <MESSAGE value="fixing res design / added some margin + made less suggestions in dropdown" />
+    <MESSAGE value="fixing res design /" />
+    <MESSAGE value="fixing res design / fixed grid for search page" />
+    <MESSAGE value="fixing res design / fixed genres wrapper position + svg top marign" />
+    <MESSAGE value="fixing res design / fixed some margins" />
+    <MESSAGE value="fixing res design / fixed some widths" />
+    <MESSAGE value="fix clear input" />
+    <MESSAGE value="fixed search bar" />
+    <MESSAGE value="deleted margins" />
+    <MESSAGE value="added margins" />
+    <MESSAGE value="added disabled for search button" />
+    <MESSAGE value="readme" />
+    <MESSAGE value="more height to search item" />
+    <MESSAGE value="add project files for mentor" />
+    <MESSAGE value="add project files for mentor / fixed gap" />
+    <MESSAGE value="removed unnecessary files" />
+    <MESSAGE value="added README.md" />
+    <MESSAGE value="changed browser router to hash router" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed browser router to hash router" />
+  </component>
+</project>

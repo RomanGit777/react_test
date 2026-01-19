@@ -1,0 +1,19 @@
+Index: src/main.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './styles/global.css'\r\nimport './styles/style-0-480.css';\r\nimport './styles/style-481-768.css'\r\nimport './styles/style-769-1279.css'\r\nimport './styles/style-1280+.css'\r\nimport {createRoot} from 'react-dom/client'\r\nimport {RouterProvider} from \"react-router-dom\";\r\nimport {routes} from \"./router/routes.tsx\";\r\n\r\ncreateRoot(document.getElementById('root')!).render(\r\n    <RouterProvider router={routes}/>\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main.tsx b/src/main.tsx
+--- a/src/main.tsx	(revision 840cf6f61579c445c5f0bc802b6933f05af19bf7)
++++ b/src/main.tsx	(date 1766077660396)
+@@ -8,5 +8,7 @@
+ import {routes} from "./router/routes.tsx";
+ 
+ createRoot(document.getElementById('root')!).render(
++    // <QueryProvider >
+     <RouterProvider router={routes}/>
++    // </QueryProvider>
+ )
+\ No newline at end of file

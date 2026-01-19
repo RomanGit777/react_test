@@ -1,0 +1,70 @@
+Index: src/pages/SearchPage.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {useSearchParams} from \"react-router-dom\";\r\nimport {useEffect, useState} from \"react\";\r\nimport {getMoviesBySearch} from \"../api/getMovies.ts\";\r\nimport type {IMovieSearch} from \"../models/IMovieSearch.ts\";\r\nimport {PosterPreview} from \"../components/PosterPreview/PosterPreview.tsx\";\r\n\r\nexport const SearchPage = () => {\r\n   const [params] = useSearchParams();\r\n   const query = params.get(\"query\") ?? \"\";\r\n\r\n    const [movies, setMovies] = useState<IMovieSearch[]>([]);\r\n    const [loading, setLoading] = useState(false);\r\n\r\n    useEffect(() => {\r\n        if(!query.trim()) {\r\n            setMovies([]);\r\n            return;\r\n        }\r\n        setLoading(true);\r\n        getMoviesBySearch(query)\r\n            .then(setMovies)\r\n            .finally(() => setLoading(false));\r\n    }, [query])\r\n    return (\r\n        <div>\r\n            {loading && <div>Loading...</div>}\r\n            {!loading && movies.map((movie) =>\r\n                <div key={movie.id}>\r\n                    {movie.title}\r\n                    <PosterPreview title={movie.title} posterPath={movie.poster_path}/>\r\n                </div>)}\r\n        </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/SearchPage.tsx b/src/pages/SearchPage.tsx
+--- a/src/pages/SearchPage.tsx	(revision 429a6fb33d6b501222f5adee8865c8fa285826e9)
++++ b/src/pages/SearchPage.tsx	(date 1765296097988)
+@@ -1,8 +1,13 @@
+-import {useSearchParams} from "react-router-dom";
++import {useNavigate, useSearchParams} from "react-router-dom";
+ import {useEffect, useState} from "react";
+ import {getMoviesBySearch} from "../api/getMovies.ts";
+ import type {IMovieSearch} from "../models/IMovieSearch.ts";
+ import {PosterPreview} from "../components/PosterPreview/PosterPreview.tsx";
++import {Pagination} from "../components/Pagination/Pagination.tsx";
++import {usePagination} from "../hooks/UsePagination.tsx";
++import {GenreBadge} from "../components/GenreBadge/GenreBadge.tsx";
++import {GENRE_MAP} from "../constants/genres.ts";
++import {StarsRating} from "../components/StarsRating/StarsRating.tsx";
+ 
+ export const SearchPage = () => {
+    const [params] = useSearchParams();
+@@ -10,6 +15,10 @@
+ 
+     const [movies, setMovies] = useState<IMovieSearch[]>([]);
+     const [loading, setLoading] = useState(false);
++    const {currentPage,totalPages,goToPage} = usePagination(movies);
++    const navigate = useNavigate();
++    const shortOverview = movie.overview ? movie.overview.slice(0, 80) + "…" : "";
++
+ 
+     useEffect(() => {
+         if(!query.trim()) {
+@@ -24,11 +33,27 @@
+     return (
+         <div>
+             {loading && <div>Loading...</div>}
+-            {!loading && movies.map((movie) =>
+-                <div key={movie.id}>
+-                    {movie.title}
+-                    <PosterPreview title={movie.title} posterPath={movie.poster_path}/>
+-                </div>)}
++            {movies.map((movies) =>
++            <div className="card" role="button" tabIndex={0} aria-label={movies.title}
++                 onClick={() => navigate(`/movie/${movies.id}`)} >
++                <PosterPreview title={movies.title} posterPath={movies.poster_path} className={'card-img'} />
++
++                <div className="overlay">
++                    <div className="overlay-top">
++                            <span className={'badge'}>
++                                {movies.genre_ids!.map(id => (
++                                    <GenreBadge key={id} id={id} label={GENRE_MAP[id]} className="me-1"/>
++                                ))}
++                            </span>
++                        <StarsRating rating={movies.vote_average} className={'rating'}/>
++                    </div>
++
++                    <h4 className="overlay-title">{movies.title}</h4>
++                    <p className="overlay-desc">{movies.Showrt}</p>
++                </div>
++            </div>
++            )}
++            <Pagination  goToPage={goToPage} totalPages={totalPages} currentPage={currentPage} />
+         </div>
+     );
+ };
+\ No newline at end of file

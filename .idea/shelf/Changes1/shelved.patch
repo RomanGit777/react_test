@@ -1,0 +1,175 @@
+Index: src/pages/MoviesPage.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './MoviesPage.css'\r\nimport { useState, useEffect } from \"react\";\r\nimport type { IMovie } from \"../models/IMovie\";\r\nimport { MoviesList } from \"../components/MoviesList/MoviesList.tsx\";\r\nimport { getMovies } from \"../api/getMovies.ts\";\r\nimport {useSearchParams} from \"react-router-dom\";\r\nimport {Pagination} from \"../components/Pagination/Pagination.tsx\";\r\n\r\nexport const MoviesPage = () => {\r\n    const [movies, setMovies] = useState<IMovie[]>([]);\r\n    const [loading, setLoading] = useState(true);\r\n    const [searchParams, setSearchParams] = useSearchParams();\r\n    const initialPage = Number(searchParams.get(\"page\") || 1);\r\n    const [currentPage, setCurrentPage] = useState(initialPage);\r\n    const moviesPerPage = 6;\r\n\r\n\r\n\r\n    useEffect(() => {\r\n        getMovies()\r\n            .then((data) => setMovies(data))\r\n            .catch((err) => console.log(\"Failed to load movies\", err))\r\n            .finally(() => setLoading(false));\r\n    }, []);\r\n    useEffect(() => {\r\n        const page = Number(searchParams.get(\"page\") || 1);\r\n        setCurrentPage(page);\r\n    }, [searchParams]);\r\n\r\n\r\n\r\n    // Pagination logic\r\n    const indexOfLastMovie = currentPage * moviesPerPage;\r\n    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;\r\n    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);\r\n    const totalPages = Math.ceil(movies.length / moviesPerPage);\r\n\r\n    if (loading) return <div>Loading...</div>;\r\n    if (!movies.length) return <div>No movies found</div>;\r\n\r\n    const goToPage = (page: number) => {\r\n        if (page >= 1 && page <= totalPages) {\r\n            setCurrentPage(page);\r\n            setSearchParams({page: String(page)})\r\n\r\n            // Scroll to top smoothly\r\n            window.scrollTo({ top: 0, behavior: 'smooth' });\r\n        }\r\n    };\r\n\r\n\r\n    return (\r\n        <div className={'movies-page-container'}>\r\n            <MoviesList movies={currentMovies} />\r\n            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage}/>\r\n\r\n        </div>\r\n    );\r\n};\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/MoviesPage.tsx b/src/pages/MoviesPage.tsx
+--- a/src/pages/MoviesPage.tsx	(revision 1d6059ca920e42e4c9866c8083ce9376b118d453)
++++ b/src/pages/MoviesPage.tsx	(date 1765130939313)
+@@ -3,16 +3,11 @@
+ import type { IMovie } from "../models/IMovie";
+ import { MoviesList } from "../components/MoviesList/MoviesList.tsx";
+ import { getMovies } from "../api/getMovies.ts";
+-import {useSearchParams} from "react-router-dom";
+-import {Pagination} from "../components/Pagination/Pagination.tsx";
++import {usePagination} from "../components/Pagination/usePagination.tsx";
+ 
+ export const MoviesPage = () => {
+     const [movies, setMovies] = useState<IMovie[]>([]);
+     const [loading, setLoading] = useState(true);
+-    const [searchParams, setSearchParams] = useSearchParams();
+-    const initialPage = Number(searchParams.get("page") || 1);
+-    const [currentPage, setCurrentPage] = useState(initialPage);
+-    const moviesPerPage = 6;
+ 
+ 
+ 
+@@ -22,37 +17,19 @@
+             .catch((err) => console.log("Failed to load movies", err))
+             .finally(() => setLoading(false));
+     }, []);
+-    useEffect(() => {
+-        const page = Number(searchParams.get("page") || 1);
+-        setCurrentPage(page);
+-    }, [searchParams]);
+-
+-
+-
+-    // Pagination logic
+-    const indexOfLastMovie = currentPage * moviesPerPage;
+-    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+-    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+-    const totalPages = Math.ceil(movies.length / moviesPerPage);
+ 
+     if (loading) return <div>Loading...</div>;
+     if (!movies.length) return <div>No movies found</div>;
+ 
+-    const goToPage = (page: number) => {
+-        if (page >= 1 && page <= totalPages) {
+-            setCurrentPage(page);
+-            setSearchParams({page: String(page)})
+-
+-            // Scroll to top smoothly
+-            window.scrollTo({ top: 0, behavior: 'smooth' });
+-        }
+-    };
+ 
+ 
+     return (
+         <div className={'movies-page-container'}>
+             <MoviesList movies={currentMovies} />
+-            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage}/>
++            <UsePagination
++                currentPage={currentPage}
++                totalPages={totalPages}
++                goToPage={goToPage}/>
+ 
+         </div>
+     );
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># React + TypeScript + Vite\r\n\r\nThis template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.\r\n\r\nCurrently, two official plugins are available:\r\n\r\n- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh\r\n- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh\r\n\r\n## React Compiler\r\n\r\nThe React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).\r\n\r\n## Expanding the ESLint configuration\r\n\r\nIf you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:\r\n\r\n```js\r\nexport default defineConfig([\r\n  globalIgnores(['dist']),\r\n  {\r\n    files: ['**/*.{ts,tsx}'],\r\n    extends: [\r\n      // Other configs...\r\n\r\n      // Remove tseslint.configs.recommended and replace with this\r\n      tseslint.configs.recommendedTypeChecked,\r\n      // Alternatively, use this for stricter rules\r\n      tseslint.configs.strictTypeChecked,\r\n      // Optionally, add this for stylistic rules\r\n      tseslint.configs.stylisticTypeChecked,\r\n\r\n      // Other configs...\r\n    ],\r\n    languageOptions: {\r\n      parserOptions: {\r\n        project: ['./tsconfig.node.json', './tsconfig.app.json'],\r\n        tsconfigRootDir: import.meta.dirname,\r\n      },\r\n      // other options...\r\n    },\r\n  },\r\n])\r\n```\r\n\r\nYou can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:\r\n\r\n```js\r\n// eslint.config.js\r\nimport reactX from 'eslint-plugin-react-x'\r\nimport reactDom from 'eslint-plugin-react-dom'\r\n\r\nexport default defineConfig([\r\n  globalIgnores(['dist']),\r\n  {\r\n    files: ['**/*.{ts,tsx}'],\r\n    extends: [\r\n      // Other configs...\r\n      // Enable lint rules for React\r\n      reactX.configs['recommended-typescript'],\r\n      // Enable lint rules for React DOM\r\n      reactDom.configs.recommended,\r\n    ],\r\n    languageOptions: {\r\n      parserOptions: {\r\n        project: ['./tsconfig.node.json', './tsconfig.app.json'],\r\n        tsconfigRootDir: import.meta.dirname,\r\n      },\r\n      // other options...\r\n    },\r\n  },\r\n])\r\n```\r\n# \uD83C\uDFAC React Movies App\r\n\r\nA responsive movie browsing application built using **React + TypeScript** with data provided by the **TMDB API**.  \r\nUsers can browse movies, search, view details, and explore genres.\r\n\r\n---\r\n\r\n## \uD83D\uDE80 Features\r\n\r\n- Browse list of popular movies\r\n- Pagination support\r\n- Search movies by title\r\n- View movie details (description, rating, poster, etc.)\r\n- Responsive UI based on provided mockup\r\n- Clean reusable component structure
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/README.md b/README.md
+--- a/README.md	(revision 1d6059ca920e42e4c9866c8083ce9376b118d453)
++++ b/README.md	(date 1765129998579)
+@@ -81,7 +81,7 @@
+ ## 🚀 Features
+ 
+ - Browse list of popular movies
+-- Pagination support
++- UsePagination support
+ - Search movies by title
+ - View movie details (description, rating, poster, etc.)
+ - Responsive UI based on provided mockup
+Index: src/components/Pagination/Pagination.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/Pagination/Pagination.tsx b/src/components/Pagination/usePagination.tsx
+rename from src/components/Pagination/Pagination.tsx
+rename to src/components/Pagination/usePagination.tsx
+--- a/src/components/Pagination/Pagination.tsx	(revision 1d6059ca920e42e4c9866c8083ce9376b118d453)
++++ b/src/components/Pagination/usePagination.tsx	(date 1765130965295)
+@@ -1,13 +1,32 @@
+-import React from "react";
++import {useEffect, useState} from "react";
++import {useSearchParams} from "react-router-dom";
++
++export function UsePagination<T>(items: T[], itemsPerPage: number = 6)  {
++    const [currentPage, setCurrentPage] = useState();
++    const [searchParams, setSearchParams] = useSearchParams(
++        Number(searchParams.get("page") || 1)
++    );
+ 
+-export interface PaginationProps {
+-    currentPage: number;
+-    totalPages: number;
+-    goToPage: (page: number) => void;
+-}
++    useEffect(() => {
++        const page = Number(searchParams.get("page") || 1);
++        setCurrentPage(page);
++    }, [searchParams]);
++
++    const totalPages = Math.ceil(movies.length / moviesPerPage);
++
++    const goToPage = (page: number) => {
++        if (page >= 1 && page <= totalPages) {
++            setCurrentPage(page);
++            setSearchParams({page: String(page)})
++
++            // Scroll to top smoothly
++            window.scrollTo({ top: 0, behavior: 'smooth' });
++        }
++    };
+ 
+-export const Pagination: React.FC<PaginationProps> = ({currentPage, totalPages, goToPage }) => {
+-    if (currentPage < 1) return null;
++    const firstIndex = (currentPage - 1) * itemsPerPage;
++    const currentItems = items.slice(firstIndex, firstIndex + itemsPerPage);
++
+     return (
+             <div
+                 className="pagination"
+@@ -18,7 +37,6 @@
+                     marginTop: "20px",
+                 }}
+                 >
+-
+                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                         <button
+                             key={page}
+Index: src/components/MovieGenre/MovieGenre.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {useParams} from \"react-router-dom\";\r\nimport {useEffect, useState} from \"react\";\r\nimport {getMoviesByGenre} from \"../../api/getMovies.ts\";\r\nimport type {IMovie} from \"../../models/IMovie.ts\";\r\nimport {MoviesList} from \"../MoviesList/MoviesList.tsx\";\r\nimport {Pagination} from \"../Pagination/Pagination.tsx\";\r\n\r\n\r\nexport const MovieGenre = () => {\r\n    const {id} = useParams();\r\n    const [movie, setMovie] = useState<IMovie[]>([])\r\n    useEffect(() => {\r\n        getMoviesByGenre(String(id)).then(mg => setMovie(mg))\r\n    }, [id])\r\n    return (\r\n        <div>\r\n            <MoviesList movies={movie} />\r\n            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage}/>\r\n        </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/MovieGenre/MovieGenre.tsx b/src/components/MovieGenre/MovieGenre.tsx
+--- a/src/components/MovieGenre/MovieGenre.tsx	(revision 1d6059ca920e42e4c9866c8083ce9376b118d453)
++++ b/src/components/MovieGenre/MovieGenre.tsx	(date 1765129998497)
+@@ -3,7 +3,6 @@
+ import {getMoviesByGenre} from "../../api/getMovies.ts";
+ import type {IMovie} from "../../models/IMovie.ts";
+ import {MoviesList} from "../MoviesList/MoviesList.tsx";
+-import {Pagination} from "../Pagination/Pagination.tsx";
+ 
+ 
+ export const MovieGenre = () => {
+@@ -15,7 +14,6 @@
+     return (
+         <div>
+             <MoviesList movies={movie} />
+-            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage}/>
+         </div>
+     );
+ };
+\ No newline at end of file

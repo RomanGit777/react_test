@@ -1,0 +1,118 @@
+Index: src/styles/style-0-480.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@media screen and (max-width: 480px) {\r\n    .container{\r\n        width: 100% !important;\r\n\r\n    }\r\n    .header {\r\n        width: 100% !important;\r\n        height: 50px !important;\r\n        padding: 0 12px !important;\r\n    }\r\n\r\n    .header > h2 {\r\n        font-size: 10px !important;\r\n        margin-left: 0 !important;\r\n    }\r\n\r\n    .nav {\r\n        gap: 20px;             /* reduce spacing */\r\n    }\r\n\r\n    .genres-wrapper > button {\r\n        font-size: 16px;\r\n    }\r\n\r\n    .home-page-btn {\r\n        font-size: 16px;\r\n    }\r\n\r\n    .user-profile {\r\n        gap: 6px;\r\n        margin-right: 0;\r\n        font-size: 12px;\r\n    }\r\n\r\n    .user-profile img {\r\n        width: 32px;\r\n        height: 32px;\r\n    }\r\n\r\n    /* \uD83D\uDD0E SEARCH BAR */\r\n    .search-wrapper input {\r\n        width: 180px;          /* smaller */\r\n        padding: 6px 25px 6px 8px;\r\n        font-size: 14px;\r\n    }\r\n\r\n    .search-wrapper svg {\r\n        right: 6px;\r\n        top: 6px;\r\n    }\r\n\r\n    /* \uD83D\uDD3D DROPDOWN */\r\n    .search-dropdown {\r\n        width: 100%;           /* full width */\r\n        top: 35px;\r\n    }\r\n\r\n    .search-item {\r\n        gap: 6px;\r\n        padding: 6px 8px;\r\n        height: auto;\r\n        font-size: 14px;\r\n        flex-wrap: wrap;       /* allow multi-line titles */\r\n    }\r\n\r\n    /* \uD83D\uDFE6 GENRES POPUP */\r\n    .genres-container {\r\n        width: 280px;\r\n        height: auto;\r\n        grid-template-columns: repeat(2, 1fr); /* 4 → 2 columns */\r\n        padding: 8px;\r\n    }\r\n\r\n    .genres-list {\r\n        max-width: 100%;\r\n        padding-left: 8px;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/styles/style-0-480.css b/src/styles/style-0-480.css
+--- a/src/styles/style-0-480.css	(revision a02050ff117a6410f6e65bfe4c3e72d3ed329fb7)
++++ b/src/styles/style-0-480.css	(date 1765639501917)
+@@ -1,78 +1,49 @@
+ @media screen and (max-width: 480px) {
+-    .container{
+-        width: 100% !important;
+-
+-    }
+     .header {
+-        width: 100% !important;
+         height: 50px !important;
++        width: 100% !important;
+         padding: 0 12px !important;
++        display: flex !important;
++        align-items: center !important;
++        flex-direction: column !important;
++        justify-content: space-between !important;
++        background-color: red;
+     }
+-
+-    .header > h2 {
+-        font-size: 10px !important;
+-        margin-left: 0 !important;
++    .home-page-btn{
++        font-size: 15px !important;
++        margin: 0 !important;
++    }
++    .header h2 {
++        font-size: 15px !important;
++        margin: 0 !important;
+     }
+ 
++    /* NAV */
+     .nav {
+-        gap: 20px;             /* reduce spacing */
+-    }
+-
+-    .genres-wrapper > button {
+-        font-size: 16px;
+-    }
+-
+-    .home-page-btn {
+-        font-size: 16px;
+-    }
+-
+-    .user-profile {
+-        gap: 6px;
+-        margin-right: 0;
+-        font-size: 12px;
+-    }
+-
+-    .user-profile img {
+-        width: 32px;
+-        height: 32px;
++        gap: 12px !important;
+     }
+ 
+-    /* 🔎 SEARCH BAR */
++    /* SEARCH */
+     .search-wrapper input {
+-        width: 180px;          /* smaller */
+-        padding: 6px 25px 6px 8px;
+-        font-size: 14px;
+-    }
+-
+-    .search-wrapper svg {
+-        right: 6px;
+-        top: 6px;
++        width: 160px !important;
++        font-size: 14px !important;
+     }
+ 
+-    /* 🔽 DROPDOWN */
++    /* DROPDOWN */
+     .search-dropdown {
+-        width: 100%;           /* full width */
+-        top: 35px;
++        width: 100% !important;
+     }
+ 
+-    .search-item {
+-        gap: 6px;
+-        padding: 6px 8px;
+-        height: auto;
+-        font-size: 14px;
+-        flex-wrap: wrap;       /* allow multi-line titles */
++    /* MOVIE GRID */
++    .grid {
++        display: grid !important;
++        grid-template-columns: 1fr !important;
++        gap: 12px !important;
+     }
+ 
+-    /* 🟦 GENRES POPUP */
+-    .genres-container {
+-        width: 280px;
+-        height: auto;
+-        grid-template-columns: repeat(2, 1fr); /* 4 → 2 columns */
+-        padding: 8px;
++    /* CARDS */
++    .card {
++        width: 100% !important;
+     }
+ 
+-    .genres-list {
+-        max-width: 100%;
+-        padding-left: 8px;
+-    }
+ }
+\ No newline at end of file

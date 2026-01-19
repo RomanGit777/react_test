@@ -1,0 +1,138 @@
+Index: src/pages/MoviesPage.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './MoviesPage.css'\r\nimport { useState, useEffect } from \"react\";\r\nimport type { IMovie } from \"../models/IMovie\";\r\nimport { MoviesList } from \"../components/MoviesList/MoviesList.tsx\";\r\nimport { getMovies } from \"../api/getMovies.ts\";\r\nimport {useSearchParams} from \"react-router-dom\";\r\nimport {Pagination} from \"../components/Pagination/Pagination.tsx\";\r\n\r\nexport const MoviesPage = () => {\r\n    const [movies, setMovies] = useState<IMovie[]>([]);\r\n    const [loading, setLoading] = useState(true);\r\n    const [searchParams, setSearchParams] = useSearchParams();\r\n    const initialPage = Number(searchParams.get(\"page\") || 1);\r\n    const [currentPage, setCurrentPage] = useState(initialPage);\r\n    const moviesPerPage = 6;\r\n\r\n\r\n\r\n    useEffect(() => {\r\n        getMovies()\r\n            .then((data) => setMovies(data))\r\n            .catch((err) => console.log(\"Failed to load movies\", err))\r\n            .finally(() => setLoading(false));\r\n    }, []);\r\n    useEffect(() => {\r\n        const page = Number(searchParams.get(\"page\") || 1);\r\n        setCurrentPage(page);\r\n    }, [searchParams]);\r\n\r\n\r\n\r\n    // Pagination logic\r\n    const indexOfLastMovie = currentPage * moviesPerPage;\r\n    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;\r\n    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);\r\n    const totalPages = Math.ceil(movies.length / moviesPerPage);\r\n\r\n    if (loading) return <div>Loading...</div>;\r\n    if (!movies.length) return <div>No movies found</div>;\r\n\r\n    const goToPage = (page: number) => {\r\n        if (page >= 1 && page <= totalPages) {\r\n            setCurrentPage(page);\r\n            setSearchParams({page: String(page)})\r\n\r\n            // Scroll to top smoothly\r\n            window.scrollTo({ top: 0, behavior: 'smooth' });\r\n        }\r\n    };\r\n\r\n\r\n    return (\r\n        <div className={'movies-page-container'}>\r\n            <MoviesList movies={currentMovies} />\r\n            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage}/>\r\n\r\n        </div>\r\n    );\r\n};\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/MoviesPage.tsx b/src/pages/MoviesPage.tsx
+--- a/src/pages/MoviesPage.tsx	(revision 1d6059ca920e42e4c9866c8083ce9376b118d453)
++++ b/src/pages/MoviesPage.tsx	(date 1765129100956)
+@@ -3,16 +3,12 @@
+ import type { IMovie } from "../models/IMovie";
+ import { MoviesList } from "../components/MoviesList/MoviesList.tsx";
+ import { getMovies } from "../api/getMovies.ts";
+-import {useSearchParams} from "react-router-dom";
+ import {Pagination} from "../components/Pagination/Pagination.tsx";
+ 
+ export const MoviesPage = () => {
+     const [movies, setMovies] = useState<IMovie[]>([]);
+     const [loading, setLoading] = useState(true);
+-    const [searchParams, setSearchParams] = useSearchParams();
+-    const initialPage = Number(searchParams.get("page") || 1);
+-    const [currentPage, setCurrentPage] = useState(initialPage);
+-    const moviesPerPage = 6;
++
+ 
+ 
+ 
+@@ -22,37 +18,21 @@
+             .catch((err) => console.log("Failed to load movies", err))
+             .finally(() => setLoading(false));
+     }, []);
+-    useEffect(() => {
+-        const page = Number(searchParams.get("page") || 1);
+-        setCurrentPage(page);
+-    }, [searchParams]);
+ 
+ 
+ 
+-    // Pagination logic
+-    const indexOfLastMovie = currentPage * moviesPerPage;
+-    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+-    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+-    const totalPages = Math.ceil(movies.length / moviesPerPage);
++
+ 
+     if (loading) return <div>Loading...</div>;
+     if (!movies.length) return <div>No movies found</div>;
+ 
+-    const goToPage = (page: number) => {
+-        if (page >= 1 && page <= totalPages) {
+-            setCurrentPage(page);
+-            setSearchParams({page: String(page)})
+ 
+-            // Scroll to top smoothly
+-            window.scrollTo({ top: 0, behavior: 'smooth' });
+-        }
+-    };
+ 
+ 
+     return (
+         <div className={'movies-page-container'}>
+             <MoviesList movies={currentMovies} />
+-            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage}/>
++            <Pagination/>
+ 
+         </div>
+     );
+Index: src/components/Pagination/Pagination.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from \"react\";\r\n\r\nexport interface PaginationProps {\r\n    currentPage: number;\r\n    totalPages: number;\r\n    goToPage: (page: number) => void;\r\n}\r\n\r\nexport const Pagination: React.FC<PaginationProps> = ({currentPage, totalPages, goToPage }) => {\r\n    if (currentPage < 1) return null;\r\n    return (\r\n            <div\r\n                className=\"pagination\"\r\n                style={{\r\n                    display: \"flex\",\r\n                    justifyContent: \"center\",\r\n                    gap: \"8px\",\r\n                    marginTop: \"20px\",\r\n                }}\r\n                >\r\n\r\n                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (\r\n                        <button\r\n                            key={page}\r\n                            onClick={() => goToPage(page)}\r\n                            style={{\r\n                                fontWeight: page === currentPage ? \"bold\" : \"normal\",\r\n                                backgroundColor: page === currentPage ? \"#ff4500\" : \"#111\",\r\n                                color: \"#fff\",\r\n                                border: \"none\",\r\n                                borderRadius: \"6px\",\r\n                                padding: \"6px 12px\",\r\n                                cursor: \"pointer\",\r\n                            }}\r\n                        >\r\n                            {page}\r\n                        </button>\r\n                    ))}\r\n\r\n            </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/Pagination/Pagination.tsx b/src/components/Pagination/Pagination.tsx
+--- a/src/components/Pagination/Pagination.tsx	(revision 1d6059ca920e42e4c9866c8083ce9376b118d453)
++++ b/src/components/Pagination/Pagination.tsx	(date 1765129100715)
+@@ -1,12 +1,32 @@
+-import React from "react";
++import React, {useEffect, useState} from "react";
++import {useSearchParams} from "react-router-dom";
++
+ 
+-export interface PaginationProps {
+-    currentPage: number;
+-    totalPages: number;
+-    goToPage: (page: number) => void;
+-}
++
++export const Pagination  = () => {
++    const [searchParams, setSearchParams] = useSearchParams();
++    const initialPage = Number(searchParams.get("page") || 1);
++    const [currentPage, setCurrentPage] = useState(initialPage);
++    const moviesPerPage = 6;
++    useEffect(() => {
++        const page = Number(searchParams.get("page") || 1);
++        setCurrentPage(page);
++    }, [searchParams]);
++
++const indexOfLastMovie = currentPage * moviesPerPage;
++const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
++const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
++const totalPages = Math.ceil(movies.length / moviesPerPage);
+ 
+-export const Pagination: React.FC<PaginationProps> = ({currentPage, totalPages, goToPage }) => {
++    const goToPage = (page: number) => {
++        if (page >= 1 && page <= totalPages) {
++            setCurrentPage(page);
++            setSearchParams({page: String(page)})
++
++            // Scroll to top smoothly
++            window.scrollTo({ top: 0, behavior: 'smooth' });
++        }
++    };
+     if (currentPage < 1) return null;
+     return (
+             <div
+Index: src/components/MovieGenre/MovieGenre.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {useParams} from \"react-router-dom\";\r\nimport {useEffect, useState} from \"react\";\r\nimport {getMoviesByGenre} from \"../../api/getMovies.ts\";\r\nimport type {IMovie} from \"../../models/IMovie.ts\";\r\nimport {MoviesList} from \"../MoviesList/MoviesList.tsx\";\r\nimport {Pagination} from \"../Pagination/Pagination.tsx\";\r\n\r\n\r\nexport const MovieGenre = () => {\r\n    const {id} = useParams();\r\n    const [movie, setMovie] = useState<IMovie[]>([])\r\n    useEffect(() => {\r\n        getMoviesByGenre(String(id)).then(mg => setMovie(mg))\r\n    }, [id])\r\n    return (\r\n        <div>\r\n            <MoviesList movies={movie} />\r\n            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage}/>\r\n        </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/MovieGenre/MovieGenre.tsx b/src/components/MovieGenre/MovieGenre.tsx
+--- a/src/components/MovieGenre/MovieGenre.tsx	(revision 1d6059ca920e42e4c9866c8083ce9376b118d453)
++++ b/src/components/MovieGenre/MovieGenre.tsx	(date 1765129154309)
+@@ -15,7 +15,7 @@
+     return (
+         <div>
+             <MoviesList movies={movie} />
+-            <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage}/>
++            <Pagination/>
+         </div>
+     );
+ };
+\ No newline at end of file

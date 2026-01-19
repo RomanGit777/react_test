@@ -1,0 +1,61 @@
+Index: src/pages/SearchPage.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {useSearchParams} from \"react-router-dom\";\r\nimport {useEffect, useState} from \"react\";\r\nimport {getMoviesBySearch} from \"../api/getMovies.ts\";\r\nimport type {IMovieSearch} from \"../models/IMovieSearch.ts\";\r\nimport {PosterPreview} from \"../components/PosterPreview/PosterPreview.tsx\";\r\n\r\nexport const SearchPage = () => {\r\n   const [params] = useSearchParams();\r\n   const query = params.get(\"query\") ?? \"\";\r\n\r\n    const [movies, setMovies] = useState<IMovieSearch[]>([]);\r\n    const [loading, setLoading] = useState(false);\r\n\r\n    useEffect(() => {\r\n        if(!query.trim()) {\r\n            setMovies([]);\r\n            return;\r\n        }\r\n        setLoading(true);\r\n        getMoviesBySearch(query)\r\n            .then(setMovies)\r\n            .finally(() => setLoading(false));\r\n    }, [query])\r\n    return (\r\n        <div>\r\n            {loading && <div>Loading...</div>}\r\n            {!loading && movies.map((movie) =>\r\n                <div key={movie.id}>\r\n                    {movie.title}\r\n                    <PosterPreview title={movie.title} posterPath={movie.poster_path}/>\r\n                </div>)}\r\n        </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/SearchPage.tsx b/src/pages/SearchPage.tsx
+--- a/src/pages/SearchPage.tsx	(revision 429a6fb33d6b501222f5adee8865c8fa285826e9)
++++ b/src/pages/SearchPage.tsx	(date 1765296455063)
+@@ -2,7 +2,7 @@
+ import {useEffect, useState} from "react";
+ import {getMoviesBySearch} from "../api/getMovies.ts";
+ import type {IMovieSearch} from "../models/IMovieSearch.ts";
+-import {PosterPreview} from "../components/PosterPreview/PosterPreview.tsx";
++import {MovieCard} from "../components/MovieCard/MovieCard.tsx";
+ 
+ export const SearchPage = () => {
+    const [params] = useSearchParams();
+@@ -24,11 +24,7 @@
+     return (
+         <div>
+             {loading && <div>Loading...</div>}
+-            {!loading && movies.map((movie) =>
+-                <div key={movie.id}>
+-                    {movie.title}
+-                    <PosterPreview title={movie.title} posterPath={movie.poster_path}/>
+-                </div>)}
++            {movies.map()}
+         </div>
+     );
+ };
+\ No newline at end of file
+Index: src/components/MovieCard/MovieCard.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './MovieCard.css'\r\nimport type {IMovie} from \"../../models/IMovie.ts\";\r\nimport {useNavigate} from \"react-router-dom\";\r\nimport {GENRE_MAP} from \"../../constants/genres.ts\";\r\nimport {PosterPreview} from \"../PosterPreview/PosterPreview.tsx\";\r\nimport {StarsRating} from \"../StarsRating/StarsRating.tsx\";\r\nimport {GenreBadge} from \"../GenreBadge/GenreBadge.tsx\";\r\n\r\n\r\ninterface MovieCardProps {\r\n    movie: IMovie\r\n}\r\n\r\nexport const MovieCard = ({movie}: MovieCardProps) => {\r\nlet navigate = useNavigate();\r\n\r\n    const shortOverview = movie.overview ? movie.overview.slice(0, 80) + \"…\" : \"\";\r\n\r\n\r\n    return (\r\n            <div className=\"card\" role=\"button\" tabIndex={0} aria-label={movie.title}\r\n                 onClick={() => navigate(`/movie/${movie.id}`)} >\r\n                    <PosterPreview title={movie.title} posterPath={movie.poster_path} className={'card-img'} />\r\n\r\n                <div className=\"overlay\">\r\n                        <div className=\"overlay-top\">\r\n                            <span className={'badge'}>\r\n                                {movie.genre_ids!.map(id => (\r\n                                    <GenreBadge key={id} id={id} label={GENRE_MAP[id]} className=\"me-1\"/>\r\n                                ))}\r\n                            </span>\r\n                            <StarsRating rating={movie.vote_average} className={'rating'}/>\r\n                        </div>\r\n\r\n                        <h4 className=\"overlay-title\">{movie.title}</h4>\r\n                        <p className=\"overlay-desc\">{shortOverview}</p>\r\n                    </div>\r\n        </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/MovieCard/MovieCard.tsx b/src/components/MovieCard/MovieCard.tsx
+--- a/src/components/MovieCard/MovieCard.tsx	(revision 429a6fb33d6b501222f5adee8865c8fa285826e9)
++++ b/src/components/MovieCard/MovieCard.tsx	(date 1765296434231)
+@@ -5,13 +5,15 @@
+ import {PosterPreview} from "../PosterPreview/PosterPreview.tsx";
+ import {StarsRating} from "../StarsRating/StarsRating.tsx";
+ import {GenreBadge} from "../GenreBadge/GenreBadge.tsx";
++import type {IMovieSearch} from "../../models/IMovieSearch.ts";
+ 
+ 
+ interface MovieCardProps {
+-    movie: IMovie
++    movie: IMovie;
++    movies?: IMovieSearch[];
+ }
+ 
+-export const MovieCard = ({movie}: MovieCardProps) => {
++export const MovieCard = ({movie, movies}: MovieCardProps) => {
+ let navigate = useNavigate();
+ 
+     const shortOverview = movie.overview ? movie.overview.slice(0, 80) + "…" : "";

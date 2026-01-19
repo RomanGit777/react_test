@@ -1,0 +1,89 @@
+Index: src/components/MovieInfo/MovieInfo.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './MovieInfo.css'\r\nimport {useEffect, useState} from \"react\";\r\nimport type {IMovie} from '../../models/IMovie';\r\nimport {getMovieById} from \"../../api/getMovies.ts\";\r\nimport {useParams} from \"react-router-dom\";\r\nimport {PosterPreview} from \"../PosterPreview/PosterPreview.tsx\";\r\nimport {StarsRating} from \"../StarsRating/StarsRating.tsx\";\r\nimport {GenreBadge} from \"../GenreBadge/GenreBadge.tsx\";\r\n\r\nexport const MovieInfo = () => {\r\n    let {id} = useParams();\r\n    const [movie, setMovie] = useState<IMovie | null>(null)\r\n    useEffect(() => {\r\n        if (id) getMovieById(id).then(setMovie);\r\n    }, [id])\r\n\r\n    if(!movie) return <div>Loading movie...</div>;\r\n\r\n    window.scrollTo({ top: 0, behavior: 'smooth' });\r\n\r\n    return (\r\n        <div className={'info-wrapper'}>\r\n            <PosterPreview posterPath={movie.poster_path} title={movie.title} className={'info-img'} />\r\n            <div>\r\n                <h2>{movie.title}</h2>\r\n                <span className={'badges'}>\r\n                    {movie.genres?.map(genre => (\r\n                        <GenreBadge key={genre.id} id={genre.id} label={genre.name} className=\"me-1\" />\r\n                    ))}\r\n                </span>\r\n                <StarsRating rating={movie.vote_average} className={'rating'}/>\r\n                <p className={'description'}><strong>Description:</strong> {movie.overview}</p>\r\n            </div>\r\n        </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/MovieInfo/MovieInfo.tsx b/src/components/MovieInfo/MovieInfo.tsx
+--- a/src/components/MovieInfo/MovieInfo.tsx	(revision 43bdbfc87cb05f8925cc68e4d72684d586b2a92f)
++++ b/src/components/MovieInfo/MovieInfo.tsx	(date 1765193725450)
+@@ -1,18 +1,23 @@
+ import './MovieInfo.css'
+ import {useEffect, useState} from "react";
+ import type {IMovie} from '../../models/IMovie';
+-import {getMovieById} from "../../api/getMovies.ts";
++import {getGenres, getMovieById} from "../../api/getMovies.ts";
+ import {useParams} from "react-router-dom";
+ import {PosterPreview} from "../PosterPreview/PosterPreview.tsx";
+ import {StarsRating} from "../StarsRating/StarsRating.tsx";
+ import {GenreBadge} from "../GenreBadge/GenreBadge.tsx";
++import type {IGenres} from "../../models/IGenres.ts";
+ 
+ export const MovieInfo = () => {
+     let {id} = useParams();
+     const [movie, setMovie] = useState<IMovie | null>(null)
++    const [genres, setGenres] = useState<IGenres[]>([])
+     useEffect(() => {
+         if (id) getMovieById(id).then(setMovie);
+     }, [id])
++    useEffect(() => {
++        getGenres().then(res => setGenres(res.genres))
++    }, []);
+ 
+     if(!movie) return <div>Loading movie...</div>;
+ 
+@@ -25,7 +30,9 @@
+                 <h2>{movie.title}</h2>
+                 <span className={'badges'}>
+                     {movie.genres?.map(genre => (
+-                        <GenreBadge key={genre.id} id={genre.id} label={genre.name} className="me-1" />
++                        <div onClick={() => navigate(`/genres/${genre.id}`)} >
++                        <GenreBadge key={genre.id} id={genre.id} label={genre.name} className="me-1"  />
++                        </div>
+                     ))}
+                 </span>
+                 <StarsRating rating={movie.vote_average} className={'rating'}/>
+Index: src/hooks/UseNavigate.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/hooks/UseNavigate.tsx b/src/hooks/UseNavigate.tsx
+new file mode 100644
+--- /dev/null	(date 1765193725434)
++++ b/src/hooks/UseNavigate.tsx	(date 1765193725434)
+@@ -0,0 +1,6 @@
++import {useNavigate} from "react-router-dom";
++
++export const seNavigate = () => {
++     const navigate = useNavigate();
++
++};
+\ No newline at end of file
+Index: src/components/Header/Header.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './Header.css'\r\nimport {UserInfo} from \"../UserInfo/UserInfo.tsx\";\r\nimport {useEffect, useState} from \"react\";\r\nimport {getGenres} from \"../../api/getMovies.ts\";\r\nimport type {IGenres} from \"../../models/IGenres.ts\";\r\nimport {useNavigate} from \"react-router-dom\";\r\nexport const Header = () => {\r\n    const [showGenres, setShowGenres] = useState(false)\r\n    const [genres, setGenres] = useState<IGenres[]>([])\r\n    useEffect(() => {\r\n        getGenres().then(res => setGenres(res.genres))\r\n    }, []);\r\n    const navigate = useNavigate();\r\n\r\n    return (\r\n        <div className={'header'}>\r\n            <h2>Logo</h2>\r\n            <nav className={'nav'}>\r\n                <button className={'home-page-btn'} onClick={() => navigate('/')}>Home Page</button>\r\n                    <div className={'genres-wrapper'}\r\n                         onMouseEnter={() => setShowGenres(true)}\r\n                         onMouseLeave={() => setShowGenres(false)}\r\n                    >\r\n                        <button>Genres</button>\r\n                        {showGenres && (\r\n                            <ul className={'genres-container'}>\r\n                                {genres.map(g => (\r\n                                    <li className={'genres-list'} key={g.id} onClick={() => navigate(`/genres/${g.id}`)}>\r\n                                        {g.name}</li>\r\n                                ))}\r\n                            </ul>\r\n                        )}\r\n                    </div>\r\n\r\n                        <div className={'search-wrapper'}>\r\n                            <input placeholder={'Search'}></input>\r\n                            <svg width=\"9\" height=\"9\" viewBox=\"0 0 9 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n                            <g clipPath=\"url(#clip0_4_48)\">\r\n                                <path d=\"M7.96163 7.95383L6.29122 6.28718M6.29122 6.28718C6.57695 6.00209 6.8036 5.66365 6.95824 5.29116C7.11288 4.91868 7.19247 4.51945 7.19247 4.11628C7.19247 3.7131 7.11288 3.31388 6.95824 2.94139C6.80361 2.56891 6.57695 2.23046 6.29122 1.94538C6.00549 1.66029 5.66628 1.43414 5.29296 1.27986C4.91964 1.12557 4.51951 1.04616 4.11543 1.04616C3.71135 1.04616 3.31122 1.12557 2.9379 1.27986C2.56457 1.43414 2.22536 1.66029 1.93963 1.94538C1.36258 2.52113 1.03839 3.30203 1.03839 4.11628C1.03839 4.93052 1.36258 5.71142 1.93963 6.28718C2.51669 6.86294 3.29935 7.1864 4.11543 7.1864C4.93151 7.1864 5.71417 6.86294 6.29122 6.28718Z\" stroke=\"#AAB3C0\" strokeWidth=\"1.25\" strokeLinecap=\"round\" strokeLinejoin=\"round\"/>\r\n                            </g>\r\n                            <defs>\r\n                                <clipPath id=\"clip0_4_48\">\r\n                                    <rect width=\"9\" height=\"9\" fill=\"white\"/>\r\n                                </clipPath>\r\n                            </defs>\r\n                            </svg>\r\n                        </div>\r\n            </nav>\r\n            <UserInfo/>\r\n        </div>\r\n    );\r\n};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/Header/Header.tsx b/src/components/Header/Header.tsx
+--- a/src/components/Header/Header.tsx	(revision 43bdbfc87cb05f8925cc68e4d72684d586b2a92f)
++++ b/src/components/Header/Header.tsx	(date 1765193586330)
+@@ -3,14 +3,13 @@
+ import {useEffect, useState} from "react";
+ import {getGenres} from "../../api/getMovies.ts";
+ import type {IGenres} from "../../models/IGenres.ts";
+-import {useNavigate} from "react-router-dom";
++import {navigate} from "../../hooks/useNavigate.ts";
+ export const Header = () => {
+     const [showGenres, setShowGenres] = useState(false)
+     const [genres, setGenres] = useState<IGenres[]>([])
+     useEffect(() => {
+         getGenres().then(res => setGenres(res.genres))
+     }, []);
+-    const navigate = useNavigate();
+ 
+     return (
+         <div className={'header'}>
