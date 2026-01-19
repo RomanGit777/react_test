@@ -89,8 +89,6 @@ Create a `.env` file in the project root with the following variables:
 VITE_API_KEY=your_tmdb_api_key
 VITE_API_URL=https://api.themoviedb.org/3
 
-Do not commit your real API keys.
-
 📱 Responsive Design
 The UI adapts across mobile, tablet, laptop, and large screens using custom CSS breakpoints.
 
